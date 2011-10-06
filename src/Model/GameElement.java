@@ -1,7 +1,7 @@
-package Model;
-import View.Canvas;
-import View.GameBoard;
-import View.Shot;
+package model;
+import view.Canvas;
+import view.GameBoard;
+import view.Shot;
 
 
 /**

@@ -1,9 +1,10 @@
-package View;
+package view;
 
 import java.awt.Graphics;
 
-import Model.GameElement;
-import Model.Position;
+import model.GameElement;
+import model.Position;
+
 
 
 /**

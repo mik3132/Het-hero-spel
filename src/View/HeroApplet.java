@@ -1,7 +1,10 @@
-package View;
-import java.applet.Applet;
+package view;
+
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Graphics;
+
+import javax.swing.*;
 
 /**
  * 
@@ -13,40 +16,94 @@ import java.awt.Graphics;
  * @date 04-10-2011
  *
  */
-public class HeroApplet extends Applet{
-	int size = 50; //px
-	int panelSize = 500; //px
-
-	/**
-	 * Constructor method
-	 */
+public class HeroApplet extends JApplet implements Runnable{
+	
+	/** size of the grid panels */
+	int size = 25;
+	/** size of all the panels */
+	int panelSize = 500;
+	
+	private GridView gridView;
+	
+	 /**
+	 Ê* Constructor method
+	 Ê*/
 	public HeroApplet()
 	{
-		
+		Thread t = new Thread(this);
+		t.start();
 	}
 	
 	/**
-	 * StartButton....
-	 * @param event
+	 * Initialize method for the JApplet
 	 */
-	void startButton_Action(java.awt.event.ActionEvent event)
+	public void init()
 	{
+		setSize(panelSize+1, panelSize+1);
+		setBackground(Color.gray);
 		
+		gridView = new GridView();
+		Container content = getContentPane();
+		content.add(gridView);
 	}
 	
-	public void paint( Graphics g )
+	/**
+	 * Run method for the JApplet
+	 */
+	public void run()
 	{
-		drawGrid(g);
+		System.out.println("Running");
 	}
 	
-	public void drawGrid( Graphics g )
+	/**
+	 * Gridview class inside a panel to draw the grid 
+	 * @author edofre
+	 *
+	 */
+	private class GridView extends JPanel
 	{
-		g.setColor( Color.black );
-	    int lines = (panelSize/size);
-	    for(int i = 0; i < lines; i++)
-	    {
-		 g.drawLine((i*size), 0, (i*size), 500);
-		 g.drawLine(0, (i*size), 500, (i*size));
-	    }
+		/**
+		 * Constructor method for GridView
+		 */
+		public GridView()
+		{
+			
+		}
+		
+		/**
+		 * Method for painting the grid
+		 */
+		public void paint( Graphics g )
+		{
+			drawGrid(g);
+			drawBox(g);
+		}
+		 
+		/**
+		 * Drawing of the grid 
+		 * @param Graphics g
+		 */
+		public void drawGrid( Graphics g )
+		{
+			g.setColor( Color.black );
+			int lines = (panelSize/size);
+			
+			for(int i = 0; i <= lines; i++)
+			{
+				g.drawLine((i*size), 0, (i*size), panelSize);
+				g.drawLine(0, (i*size), panelSize, (i*size));
+			}
+		}
+		
+		/**
+		 * Drawing of the rectangle
+		 * @param g
+		 */
+		public void drawBox(Graphics g)
+		{
+			g.setColor(Color.green);
+			g.fillRect(3,3,20,20);
+		}
 	}
+	
 }

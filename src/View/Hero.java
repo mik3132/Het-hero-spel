@@ -1,6 +1,6 @@
-package View;
-import Model.Direction;
-import Model.Position;
+package view;
+import model.Direction;
+import model.Position;
 
 
 /**
