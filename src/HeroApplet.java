@@ -1,8 +1,6 @@
-import java.applet.Applet;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
 
 import javax.swing.*;
 
@@ -18,8 +16,10 @@ import javax.swing.*;
  */
 public class HeroApplet extends JApplet implements Runnable{
 	
-	int size = 25; //px
-	int panelSize = 500; //px
+	/** size of the grid panels */
+	int size = 25;
+	/** size of all the panels */
+	int panelSize = 500;
 	
 	private GridView gridView;
 	
@@ -28,25 +28,29 @@ public class HeroApplet extends JApplet implements Runnable{
 	 Ê*/
 	public HeroApplet()
 	{
-		JFrame frame = new JFrame();
-		frame.setTitle("Herogame");
-		
-		frame.setSize(750, 750);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		gridView = new GridView();
-		frame.add(gridView);
-		
-		frame.setVisible(true);
+		Thread t = new Thread(this);
+		t.start();
 	}
 	
+	/**
+	 * Initialize method for the JApplet
+	 */
 	public void init()
 	{
-
+		setSize(panelSize+1, panelSize+1);
+		setBackground(Color.gray);
+		
+		gridView = new GridView();
+		Container content = getContentPane();
+		content.add(gridView);
 	}
 	
-	@Override
-	public void run() {
+	/**
+	 * Run method for the JApplet
+	 */
+	public void run()
+	{
+		System.out.println("Running");
 	}
 	
 	/**
@@ -56,17 +60,27 @@ public class HeroApplet extends JApplet implements Runnable{
 	 */
 	private class GridView extends JPanel
 	{
+		/**
+		 * Constructor method for GridView
+		 */
 		public GridView()
 		{
 			
 		}
 		
+		/**
+		 * Method for painting the grid
+		 */
 		public void paint( Graphics g )
 		{
 			drawGrid(g);
 			drawBox(g);
 		}
 		 
+		/**
+		 * Drawing of the grid 
+		 * @param Graphics g
+		 */
 		public void drawGrid( Graphics g )
 		{
 			g.setColor( Color.black );
@@ -79,6 +93,10 @@ public class HeroApplet extends JApplet implements Runnable{
 			}
 		}
 		
+		/**
+		 * Drawing of the rectangle
+		 * @param g
+		 */
 		public void drawBox(Graphics g)
 		{
 			g.setColor(Color.green);
