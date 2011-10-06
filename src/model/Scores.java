@@ -18,7 +18,7 @@ public class Scores {
 	 * Score constructor
 	 * @param max points of the game
 	 */
-	public Scores(int points) 
+	public Scores() //int points
 	{
 		this.points = points;
 		this.actionspoints = new HashMap<String, Integer>();
@@ -106,5 +106,10 @@ public class Scores {
 		}		
 		
 		return allowdActions;
+	}
+
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}	
 }

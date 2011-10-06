@@ -1,5 +1,9 @@
 package view;
 
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
 /**
  * 
  * @author Martijn
@@ -19,12 +23,25 @@ package view;
  */
 public class GameBoard
 {
+	int width, height, squareSize = 50, squaresVertical, squaresHorizontal;
 	/**
 	 * Constructor method
 	 */
-	public GameBoard()
+	public GameBoard( int width, int height)
 	{
-		
+		this.width = width;
+		this.height = height;
+		squaresVertical = (height / squareSize);
+		squaresHorizontal = (width / squareSize);
+	}
+	
+	public void drawGrid(Graphics g)
+	{
+		for(int i = 1; i < this.squaresHorizontal; i++)
+		{
+			g.drawLine(0, (i*this.squareSize), width, (i*this.squareSize));
+			g.drawLine((i*this.squareSize), 0, (i*this.squareSize), height);
+		}
 	}
 	
 	/**
@@ -33,7 +50,7 @@ public class GameBoard
 	 */
 	public Hero getHero()
 	{
-		return new Hero(new GameBoard(), new Position(0,0), Direction.NORTH);
+		return null; //new Hero(new GameBoard(), new Position(0,0), Direction.NORTH);
 	}
 	
 	/**
@@ -68,7 +85,7 @@ public class GameBoard
 	 * @param Position p The Position to check the GameBoard
 	 * @return boolean True if the space is occupied, False if the space is empty
 	 */
-	public boolean isOccupied(Position p)
+	public boolean isOccupied()
 	{
 		return false;
 	}
@@ -78,9 +95,9 @@ public class GameBoard
 	 * @param Position p The position to get the Element from the GameBoard
 	 * @return GameElement The GameElement occupying the given Position
 	 */
-	public GameElement getOccupier(Position p)
+	public void getOccupier()
 	{
-		return new GameElement(new GameBoard(), new Position(0,0));
+		//return new GameElement(new GameBoard(), new Position(0,0));
 	}
 	
 	/**
@@ -88,7 +105,7 @@ public class GameBoard
 	 * @param Position p The Position to be checked
 	 * @return boolean True if the Position is on the GameBoard, False if the Position is not on the GameBoard
 	 */
-	public boolean inBoard(Position p)
+	public boolean inBoard()
 	{
 		return true;
 	}
@@ -98,16 +115,16 @@ public class GameBoard
 	 * @param Position p The Position to be converted into a Point
 	 * @return Point The converted Position into Point
 	 */
-	public Point toPoint(Position p)
+	public void toPoint( )
 	{
-		return new Point();
+		//return new Point();
 	}
 
 	/**
 	 * Removes the given GameElement from the GameBoard
 	 * @param GameElement ge The GameElement to be removed
 	 */
-	public void delete(GameElement ge)
+	public void delete( )
 	{
 		
 	}
@@ -116,7 +133,7 @@ public class GameBoard
 	 * Adds a given GameElement to the GameBoard
 	 * @param GameElement ge The GameElement to be added
 	 */
-	public void add(GameElement ge)
+	public void add( )
 	{
 		
 	}
