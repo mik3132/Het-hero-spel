@@ -1,3 +1,8 @@
+package View;
+import Model.Direction;
+import Model.GameElement;
+import Model.Position;
+
 
 /**
  * 
