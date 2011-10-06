@@ -68,7 +68,7 @@ public class ModelScores {
 			if(!actionspoints.containsKey(action))
 				throw(new Exception("Action does not exist in Scores->actionspoints hashmap"));
 			
-			//Do i have enough points to perfom this action
+			//Do i have enough points to perform this action
 			if(actionspoints.get(action) >= points) {
 				//Remove the points off
 				points -= actionspoints.get(action);
@@ -97,7 +97,7 @@ public class ModelScores {
 			//Loop through the actionpoints hashmap
 			for(String action : actionspoints.keySet())
 			{			
-				//Do i have enough points to perfom this action
+				//Do i have enough points to perform this action
 				if(actionspoints.get(action) >= points) 
 				allowdActions += action + " cost " + actionspoints.get(action) + " points \n";
 			}

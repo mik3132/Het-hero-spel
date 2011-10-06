@@ -1,4 +1,4 @@
-package view;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,6 +27,14 @@ public class HeroApplet extends JFrame {
 	int panelSize = 500;
 	/** the grid */
 	private GridView gridView;
+	/** Menu bar */
+	private JMenuBar menuBar;
+	/** Menus */
+	private JMenu gameMenu, settingsMenu;
+	/** Menu items */
+	public static JMenuItem startAction, pauzeAction, exitAction, difficultyAction, soundAction, mapAction;
+	/** Labels */
+	private JLabel scoreLabel;
 	
 	 /**
 	 * Constructor method
@@ -38,52 +46,107 @@ public class HeroApplet extends JFrame {
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setResizable(false);
 	    
-        JMenuBar menuBar = new JMenuBar();
+	    // Create menu bar
+        menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         
-        JMenu gameMenu = new JMenu("Game");
-        JMenu settingsMenu = new JMenu("Settings");
+        // Create menus
+        gameMenu = new JMenu("Game");
+        settingsMenu = new JMenu("Settings");
+        
+        // Add menus to menu bar
         menuBar.add(gameMenu);
         menuBar.add(settingsMenu);
         
-        JMenuItem startAction = new JMenuItem("Start");
-        JMenuItem pauzeAction = new JMenuItem("Pauze");
-        JMenuItem exitAction = new JMenuItem("Exit");
+        // Create menu items
+        startAction = new JMenuItem("Start");
+        pauzeAction = new JMenuItem("Pauze");
+        exitAction = new JMenuItem("Exit");
+        difficultyAction = new JMenuItem("Difficulty");
+        soundAction = new JMenuItem("Sound");
+        mapAction = new JMenuItem("Map");
         
-        JMenuItem difficultyAction = new JMenuItem("Difficulty");
-        JMenuItem soundAction = new JMenuItem("Sound");
-        JMenuItem mapAction = new JMenuItem("Map");
-        
-        JLabel scoreLabel = new JLabel("Score: ", JLabel.CENTER);
-        
+        // add menu items to menu
         gameMenu.add(startAction);
         gameMenu.add(pauzeAction);
         gameMenu.add(exitAction);
-        
         settingsMenu.add(difficultyAction);
         settingsMenu.add(soundAction);
         settingsMenu.add(mapAction);
         
-        exitAction.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		System.exit(0);
-        	}
-        });
-	    
+        // create the action listeners for the menu items
+        buildActionListeners();
+        
+        // Add score label
+        scoreLabel = new JLabel("Score: ", JLabel.CENTER);
+        
 	    // The actual grid
 	    gridView = new GridView();
 		
+	    // Create the content panel
 		JPanel content = new JPanel();
         content.setLayout(new BorderLayout(1,1));
 
+        // Add all the items to the panel
         content.add(scoreLabel , BorderLayout.SOUTH);
         content.add(gridView, BorderLayout.CENTER);
-		
 		setContentPane(content);
 
 		setVisible(true);
 	}
 	
+	/**
+	 * Method that creates the action listeners for the menu 
+	 */
+	public static void buildActionListeners()
+	{
+		// start 
+		startAction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Start game");
+			}
+		});
+		
+		// pauze
+		pauzeAction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Pauze game");
+			}
+		});
+
+		// exit
+		exitAction.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		System.exit(0);
+        	}
+        });
+		
+		// sound 
+		soundAction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Toggle sound on/off");
+			}
+		});
+		
+		// map
+		mapAction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Change map");
+			}
+		});
+		
+		// difficulty
+		difficultyAction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Change difficulty");
+			}
+		});
+	}
+	
+	/**
+	 * Main method
+	 * @param args
+	 */
 	public static void main(String args[])
 	{
 		new HeroApplet();
