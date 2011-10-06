@@ -1,6 +1,6 @@
-package View;
-import Model.GameElement;
-import Model.Position;
+package view;
+import model.GameElement;
+import model.Position;
 
 
 /**

@@ -1,5 +1,5 @@
-package Model;
-import View.GameBoard;
+package model;
+import view.GameBoard;
 
 
 /**

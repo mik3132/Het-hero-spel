@@ -1,7 +1,7 @@
-package View;
-import Model.Direction;
-import Model.GameElement;
-import Model.Position;
+package view;
+import model.Direction;
+import model.GameElement;
+import model.Position;
 
 
 /**
