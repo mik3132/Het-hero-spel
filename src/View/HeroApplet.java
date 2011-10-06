@@ -1,8 +1,11 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -16,13 +19,13 @@ import javax.swing.*;
  * @date 04-10-2011
  *
  */
-public class HeroApplet extends JApplet implements Runnable{
+public class HeroApplet extends JFrame {
 	
 	/** size of the grid panels */
 	int size = 25;
 	/** size of all the panels */
 	int panelSize = 500;
-	
+	/** the grid */
 	private GridView gridView;
 	
 	 /**
@@ -30,29 +33,60 @@ public class HeroApplet extends JApplet implements Runnable{
 	 Ê*/
 	public HeroApplet()
 	{
-		Thread t = new Thread(this);
-		t.start();
-	}
-	
-	/**
-	 * Initialize method for the JApplet
-	 */
-	public void init()
-	{
-		setSize(panelSize+1, panelSize+1);
-		setBackground(Color.gray);
+	    setTitle("HeroGame");
+	    setSize(600,600);
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    setResizable(false);
+	    
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        
+        JMenu gameMenu = new JMenu("Game");
+        JMenu settingsMenu = new JMenu("Settings");
+        menuBar.add(gameMenu);
+        menuBar.add(settingsMenu);
+        
+        JMenuItem startAction = new JMenuItem("Start");
+        JMenuItem pauzeAction = new JMenuItem("Pauze");
+        JMenuItem exitAction = new JMenuItem("Exit");
+        
+        JMenuItem difficultyAction = new JMenuItem("Difficulty");
+        JMenuItem soundAction = new JMenuItem("Sound");
+        JMenuItem mapAction = new JMenuItem("Map");
+        
+        JLabel scoreLabel = new JLabel("Score: ", JLabel.CENTER);
+        
+        gameMenu.add(startAction);
+        gameMenu.add(pauzeAction);
+        gameMenu.add(exitAction);
+        
+        settingsMenu.add(difficultyAction);
+        settingsMenu.add(soundAction);
+        settingsMenu.add(mapAction);
+        
+        exitAction.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		System.exit(0);
+        	}
+        });
+	    
+	    // The actual grid
+	    gridView = new GridView();
 		
-		gridView = new GridView();
-		Container content = getContentPane();
-		content.add(gridView);
+		JPanel content = new JPanel();
+        content.setLayout(new BorderLayout(1,1));
+
+        content.add(scoreLabel , BorderLayout.SOUTH);
+        content.add(gridView, BorderLayout.CENTER);
+		
+		setContentPane(content);
+
+		setVisible(true);
 	}
 	
-	/**
-	 * Run method for the JApplet
-	 */
-	public void run()
+	public static void main(String args[])
 	{
-		System.out.println("Running");
+		new HeroApplet();
 	}
 	
 	/**
@@ -75,8 +109,8 @@ public class HeroApplet extends JApplet implements Runnable{
 		 */
 		public void paint( Graphics g )
 		{
-			drawGrid(g);
 			drawBox(g);
+			drawGrid(g);
 		}
 		 
 		/**
@@ -101,7 +135,11 @@ public class HeroApplet extends JApplet implements Runnable{
 		 */
 		public void drawBox(Graphics g)
 		{
-			g.setColor(Color.green);
+			g.setColor(Color.white);
+			g.fillRect(0,0,panelSize,panelSize);
+			
+			// Testpanel
+			g.setColor(Color.red);
 			g.fillRect(3,3,20,20);
 		}
 	}
