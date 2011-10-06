@@ -1,3 +1,7 @@
+package View;
+import Model.GameElement;
+import Model.Position;
+
 
 /**
  * Wall class

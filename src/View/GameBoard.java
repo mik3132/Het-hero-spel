@@ -1,10 +1,11 @@
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
+package View;
+
 import java.awt.Point;
 
-import javax.swing.JPanel;
+import Model.Direction;
+import Model.GameElement;
+import Model.Position;
+
 
 /**
  * 
@@ -130,4 +131,5 @@ public class GameBoard {
 	{
 		
 	}
+
 }

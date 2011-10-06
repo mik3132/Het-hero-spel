@@ -1,5 +1,11 @@
+package View;
+
 import java.awt.Color;
 import java.awt.Graphics;
+
+import Model.Direction;
+import Model.GameElement;
+import Model.Position;
 
 /**
  * Actor class

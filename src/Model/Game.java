@@ -1,3 +1,6 @@
+package Model;
+import View.GameBoard;
+
 
 /**
  * 

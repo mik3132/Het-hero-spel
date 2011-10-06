@@ -1,3 +1,8 @@
+package Model;
+import View.Canvas;
+import View.GameBoard;
+import View.Shot;
+
 
 /**
  * GameElement class

@@ -1,3 +1,4 @@
+package Model;
 
 /**
  * Direction class
