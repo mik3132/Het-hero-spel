@@ -26,8 +26,8 @@ public class HeroApplet extends JApplet implements Runnable{
 	private GridView gridView;
 	
 	 /**
-	 Ê* Constructor method
-	 Ê*/
+	 ï¿½* Constructor method
+	 ï¿½*/
 	public HeroApplet()
 	{
 		Thread t = new Thread(this);
