@@ -1,4 +1,4 @@
-import javax.swing.JApplet;
+import javax.swing.*;
 
 /**
  * 
@@ -10,7 +10,7 @@ import javax.swing.JApplet;
  * @date 04-10-2011
  *
  */
-public class HeroApplet extends JApplet{
+public class HeroApplet extends JFrame{
 
 	/**
 	 * Constructor method
@@ -18,6 +18,11 @@ public class HeroApplet extends JApplet{
 	public HeroApplet()
 	{
 		
+	}
+	
+	public static void main(String args[])
+	{
+		System.out.println("asd");
 	}
 	
 	
