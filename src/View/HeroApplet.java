@@ -29,8 +29,8 @@ public class HeroApplet extends JFrame {
 	private GridView gridView;
 	
 	 /**
-	 Ê* Constructor method
-	 Ê*/
+	 * Constructor method
+	 */
 	public HeroApplet()
 	{
 	    setTitle("HeroGame");
