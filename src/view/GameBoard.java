@@ -23,7 +23,10 @@ import javax.swing.JPanel;
  */
 public class GameBoard
 {
-	int width, height, squareSize = 50, squaresVertical, squaresHorizontal;
+	int width, height;
+	public static final int squareSize = 50;
+	int squaresVertical;
+	int squaresHorizontal;
 	/**
 	 * Constructor method
 	 */

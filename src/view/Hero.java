@@ -1,6 +1,9 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
+
+import model.HeroModel;
 
 /**
  * 
@@ -17,16 +20,19 @@ import java.awt.Graphics;
  */
 public class Hero 
 {
-	int ovalSize, x, y;
-	Hero(int width, int height, GameBoard gb)
+	HeroModel hm;
+
+	Hero(HeroModel hm)
 	{
-		this.x = (width/2)-(gb.squareSize/2);
-		this.y = (height/2)-(gb.squareSize/2);
-		this.ovalSize = gb.squareSize;
+		this.hm = hm;
 	}
 
 	public void drawHero( Graphics g )
 	{
-		g.drawOval(x, y, ovalSize, ovalSize);
+		g.setColor(Color.GREEN);
+		g.drawOval(hm.x, hm.y, hm.ovalSize, hm.ovalSize);
+		g.fillOval(hm.x, hm.y, hm.ovalSize, hm.ovalSize);
+		g.setColor(Color.BLACK);
+		g.drawLine(hm.midX, hm.midY, hm.viewX, hm.viewY);
 	}
 }

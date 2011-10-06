@@ -7,6 +7,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.Input;
+
 import view.*;
 
 /**
@@ -20,9 +22,12 @@ import view.*;
 
 public class Main extends JFrame implements Runnable 
 {
-	JPanel controlPanel, playPanel;
+	JPanel playPanel;
+	ControlPanel controlPanel;
 	GameBoardModel gbm;
 	Scores scs;
+	Input in;
+	HeroModel heroModel;
 	
 	boolean run = true;
 	
@@ -30,8 +35,10 @@ public class Main extends JFrame implements Runnable
 	{
 		scs = new Scores();
 		gbm = new GameBoardModel();
+		heroModel = new HeroModel( PlayPanel.width, PlayPanel.height );
 		controlPanel = new ControlPanel( scs );
-		playPanel = new PlayPanel( gbm );
+		playPanel = new PlayPanel( gbm, heroModel );
+		in = new Input( heroModel, gbm, scs, controlPanel );
 		
 		this.setTitle("Het hero spel");
 		this.setLayout(new BorderLayout());
@@ -39,6 +46,7 @@ public class Main extends JFrame implements Runnable
 		this.add(BorderLayout.CENTER, playPanel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize( 1150 ,  890 );
+		this.addKeyListener( in );
 		this.setVisible(true);
 	}
 
