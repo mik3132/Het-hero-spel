@@ -1,4 +1,4 @@
-import java.applet.Applet;
+import javax.swing.JApplet;
 
 /**
  * 
@@ -10,7 +10,7 @@ import java.applet.Applet;
  * @date 04-10-2011
  *
  */
-public class HeroApplet extends Applet{
+public class HeroApplet extends JApplet{
 
 	/**
 	 * Constructor method
@@ -20,13 +20,6 @@ public class HeroApplet extends Applet{
 		
 	}
 	
-	/**
-	 * StartButton....
-	 * @param event
-	 */
-	void startButton_Action(java.awt.event.ActionEvent event)
-	{
-		
-	}
+	
 	
 }
