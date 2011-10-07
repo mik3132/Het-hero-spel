@@ -9,5 +9,13 @@ package model;
  */
 public class SquareGrid 
 {
-
+	int x,y;
+	String item;
+	
+	public SquareGrid(int X, int Y, String command)
+	{
+		this.x = X;
+		this.y = Y;
+		this.item = command;
+	}
 }
