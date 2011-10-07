@@ -27,6 +27,7 @@ public class GameBoard
 	public static final int squareSize = 50;
 	int squaresVertical;
 	int squaresHorizontal;
+	
 	/**
 	 * Constructor method
 	 */

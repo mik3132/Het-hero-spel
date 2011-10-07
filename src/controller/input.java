@@ -37,24 +37,32 @@ public class Input implements KeyListener, MouseListener, ActionListener
 		this.scs = scs;
 		this.cp = cp;
 	}
+	
 	public void mouseClicked(MouseEvent arg0) { }
 	public void mouseEntered(MouseEvent arg0) { }
 	public void mouseExited(MouseEvent arg0) { }
 	public void mousePressed(MouseEvent arg0) { }
 	public void mouseReleased(MouseEvent arg0) { }
+	
 	public void keyPressed(KeyEvent e)
 	{
 		cp.spacer.insert("KeyPressed key:"+e.getKeyCode() + " name:" + e.getKeyText( e.getKeyCode() ) + "\n\r", 0);
 		if(e.getKeyCode() == 38)
-			heroModel.rotateHero( heroModel.VIEWUP);
+			heroModel.rotateHero(heroModel.MOVEUP);
 		if(e.getKeyCode() == 40)
-			heroModel.rotateHero( heroModel.VIEWDOWN);
+			heroModel.rotateHero(heroModel.MOVEDOWN);
 		if(e.getKeyCode() == 37)
-			heroModel.rotateHero( heroModel.VIEWLEFT);
+			heroModel.rotateHero(heroModel.MOVELEFT);
 		if(e.getKeyCode() == 39)
-			heroModel.rotateHero( heroModel.VIEWRIGHT);
+			heroModel.rotateHero(heroModel.MOVERIGHT);
 	}
-	public void keyReleased(KeyEvent arg0) { }
+	
+	public void keyReleased(KeyEvent e) {
+		
+	}
+	
 	public void keyTyped(KeyEvent arg0) { }
+	
 	public void actionPerformed(ActionEvent arg0) {}
+	
 }

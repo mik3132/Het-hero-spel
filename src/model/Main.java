@@ -37,7 +37,7 @@ public class Main extends JFrame implements Runnable
 		gbm = new GameBoardModel();
 		heroModel = new HeroModel( PlayPanel.width, PlayPanel.height );
 		controlPanel = new ControlPanel( scs );
-		playPanel = new PlayPanel( gbm, heroModel );
+		playPanel = new PlayPanel( gbm, heroModel);
 		in = new Input( heroModel, gbm, scs, controlPanel );
 		
 		this.setTitle("Het hero spel");
@@ -70,6 +70,13 @@ public class Main extends JFrame implements Runnable
 			this.update();
 			controlPanel.repaint();
 			playPanel.repaint();
+			
+			
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
