@@ -71,7 +71,6 @@ public class Main extends JFrame implements Runnable
 			controlPanel.repaint();
 			playPanel.repaint();
 			
-			
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {

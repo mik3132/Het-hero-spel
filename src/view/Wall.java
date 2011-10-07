@@ -42,8 +42,16 @@ public class Wall
 	public void drawWallCorner(Graphics g)
 	{
 		g.setColor(Color.PINK);
-		g.drawRect(0, 25/2 + 50, GameBoard.squareSize/2, GameBoard.squareSize/2);
-		g.fillRect(0, 25/2 + 50, GameBoard.squareSize/2, GameBoard.squareSize/2);
+		g.drawRect(25, 25/2 + 50, GameBoard.squareSize/2, GameBoard.squareSize/2);
+		g.fillRect(25, 25/2 + 50, GameBoard.squareSize/2, GameBoard.squareSize/2);
+		
+		g.setColor(Color.RED);
+		g.drawRect(25/2, 50, GameBoard.squareSize/2, GameBoard.squareSize/2);
+		g.fillRect(25/2, 50, GameBoard.squareSize/2, GameBoard.squareSize/2);
+		
+		g.setColor(Color.BLUE);
+		g.drawOval(25/2 + 0, 25/2 + 50, GameBoard.squareSize/2, GameBoard.squareSize/2);
+		g.fillOval(25/2 + 0, 25/2 + 50, GameBoard.squareSize/2, GameBoard.squareSize/2);
 	}
 	
 }
