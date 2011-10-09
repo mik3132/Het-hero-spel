@@ -31,6 +31,7 @@ public class GameBoardModel
 	{
 		this.heroModel = heroModel;
 		this.loadGameArea();
+		heroModel.setSquareGrids( this );
 	}
 	
 	public HeroModel getHeroModel()
@@ -63,7 +64,8 @@ public class GameBoardModel
                 			new SquareGrid(
                 					x, 
                 					y, 
-                					"EMPTY"
+                					"EMPTY",
+                					false
                 					)
                 			);
 			}
@@ -87,6 +89,8 @@ public class GameBoardModel
 	            	Element heroPOS = (Element)hero.item(0);
 	            	heroModel.heroPosX = Integer.parseInt( heroPOS.getAttributes().item(0).getNodeValue() ); //sizeInTileX
 	            	heroModel.heroPosY = Integer.parseInt( heroPOS.getAttributes().item(1).getNodeValue() ); //sizeInTileY
+	            	heroModel.posHeroPosX = Integer.parseInt( heroPOS.getAttributes().item(0).getNodeValue() ); //sizeInTileX
+	            	heroModel.posHeroPosY = Integer.parseInt( heroPOS.getAttributes().item(1).getNodeValue() ); //sizeInTileY
 	            }
 	            NodeList gamearea = doc.getElementsByTagName("gamearea");
 	            if( gamearea.item(0).getNodeType() == Node.ELEMENT_NODE)
@@ -103,7 +107,9 @@ public class GameBoardModel
 	                if(firstPersonNode.getNodeType() == Node.ELEMENT_NODE)
 	                {
 	                    Element tile = (Element)firstPersonNode;
-	                    Node tileX = tile.getAttributes().item(0), tileY = tile.getAttributes().item(1);
+	                    Node tileX = tile.getAttributes().getNamedItem("tileX"), 
+	                    		tileY = tile.getAttributes().getNamedItem("tileY"), 
+	                    		blocking = tile.getAttributes().getNamedItem("blocking");
 	                    if(tileX.getNodeName() == "tileX" &&
 	                    	tileY.getNodeName() == "tileY" &&
 	                    	tile.getFirstChild().getNodeValue() != null )
@@ -112,7 +118,8 @@ public class GameBoardModel
 	                    			new SquareGrid(
 	                    					Integer.parseInt( tileX.getNodeValue() ), 
 	                    					Integer.parseInt( tileY.getNodeValue() ), 
-	                    					tile.getFirstChild().getNodeValue()
+	                    					tile.getFirstChild().getNodeValue(),
+	                    					Boolean.parseBoolean( blocking.getNodeValue() )
 	                    					)
 	                    			);
 	                    }
