@@ -16,7 +16,8 @@ import model.Scores;
  * Knoppen & scores
  *
  */
-public class ControlPanel extends JPanel {
+public class ControlPanel extends JPanel
+{
 	public JTextArea spacer;
 	public ControlPanel( Scores scs )
 	{

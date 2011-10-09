@@ -1,12 +1,11 @@
 package view;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
-import javax.swing.JPanel;
+import model.GameBoardModel;
 
 /**
- * 
- * @author Martijn
  *
  * Waar alle grond titels gevuld zijn, doorloop GrondModel met SquareGrid
  * 
@@ -27,127 +26,55 @@ public class GameBoard
 	public static final int squareSize = 50;
 	int squaresVertical;
 	int squaresHorizontal;
+	GameBoardModel gbm;
+	ArrayList<Enemy> arEnemy = new ArrayList<Enemy>();
 	
 	/**
 	 * Constructor method
 	 */
-	public GameBoard( int width, int height)
+	public GameBoard( int width, int height, GameBoardModel gbm)
 	{
+		this.gbm = gbm;
 		this.width = width;
 		this.height = height;
-		squaresVertical = (height / squareSize);
-		squaresHorizontal = (width / squareSize);
+		squaresVertical = (height / squareSize); //y
+		squaresHorizontal = (width / squareSize); //x
 	}
 	
 	public void drawGrid(Graphics g)
 	{
 		for(int i = 1; i < this.squaresHorizontal; i++)
 		{
-			g.drawLine(0, (i*this.squareSize), width, (i*this.squareSize));
-			g.drawLine((i*this.squareSize), 0, (i*this.squareSize), height);
+			g.drawLine(0, (i*GameBoard.squareSize), width, (i*GameBoard.squareSize));
+			g.drawLine((i*GameBoard.squareSize), 0, (i*GameBoard.squareSize), height);
 		}
 	}
 	
-	/**
-	 * Getter method for the Hero of the games
-	 * @return Hero The Hero object
-	 */
-	public Hero getHero()
+	public void drawGameBoard(Graphics g)
 	{
-		return null; //new Hero(new GameBoard(), new Position(0,0), Direction.NORTH);
-	}
-	
-	/**
-	 * Getter method for the width of a GameElement
-	 * @return int The width of the GameElement
-	 */
-	public int getElementWidth()
-	{
-		return 0;
-	}
-	
-	/**
-	 * Getter method for the length of a GameElement
-	 * @return int The height of the GameElement
-	 */
-	public int getElementHeight()
-	{
-		return 0;
-	}
-	
-	/**
-	 * Getter method for the Enemy count
-	 * @return int The number of Enemies left on the GameBoard
-	 */
-	public int getEnemyCount()
-	{
-		return 0;
-	}
-	
-	/**
-	 * Checks if the GameBoard is clear at a given Position
-	 * @param Position p The Position to check the GameBoard
-	 * @return boolean True if the space is occupied, False if the space is empty
-	 */
-	public boolean isOccupied()
-	{
-		return false;
-	}
-	
-	/**
-	 * Getter for the Element at a given Position 
-	 * @param Position p The position to get the Element from the GameBoard
-	 * @return GameElement The GameElement occupying the given Position
-	 */
-	public void getOccupier()
-	{
-		//return new GameElement(new GameBoard(), new Position(0,0));
-	}
-	
-	/**
-	 * Checks wether or not the given Position is located on the GameBoard
-	 * @param Position p The Position to be checked
-	 * @return boolean True if the Position is on the GameBoard, False if the Position is not on the GameBoard
-	 */
-	public boolean inBoard()
-	{
-		return true;
-	}
-	
-	/**
-	 * Gives the Point representation of the given Position
-	 * @param Position p The Position to be converted into a Point
-	 * @return Point The converted Position into Point
-	 */
-	public void toPoint( )
-	{
-		//return new Point();
+		for(int i = 0; i < gbm.sglist.size(); i++)
+		{
+			int calPosX = (((width/2)-(squareSize/2)) - (gbm.getHeroModel().heroPosX * squareSize));
+			int calPosY = (((height/2)-(squareSize/2)) - (gbm.getHeroModel().heroPosY * squareSize));
+			
+			int x = (gbm.sglist.get(i).x * squareSize) + calPosX; // Iets extra voor het positioneren waar de Hero is
+			int y = (gbm.sglist.get(i).y * squareSize) + calPosY; // Iets extra voor het positioneren waar de Hero is
+			this.drawObject( g, gbm.sglist.get(i).item, x, y );
+		}
 	}
 
-	/**
-	 * Removes the given GameElement from the GameBoard
-	 * @param GameElement ge The GameElement to be removed
-	 */
-	public void delete( )
+	private void drawObject(Graphics g, String command, int x, int y)
 	{
-		
-	}
-	
-	/**
-	 * Adds a given GameElement to the GameBoard
-	 * @param GameElement ge The GameElement to be added
-	 */
-	public void add( )
-	{
-		
-	}
-	
-	/**
-	 * Removes the number of Enemies on the GameBoard
-	 * @param Enemy e The Enemy to be removed
-	 */
-	public void enemyRemoved(Enemy e)
-	{
-		
+		switch(command)
+		{
+			case "EMPTY":
+			break;
+			case "ENEMY":
+				arEnemy.add( new Enemy(x, y, g) );
+			break;
+			case "WALL":
+				new Wall(x, y).drawWall(g);
+			break;
+		}
 	}
 }

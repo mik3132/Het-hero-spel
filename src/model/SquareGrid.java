@@ -9,8 +9,8 @@ package model;
  */
 public class SquareGrid 
 {
-	int x,y;
-	String item;
+	public int x,y;
+	public String item;
 	
 	public SquareGrid(int X, int Y, String command)
 	{

@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<gamearea sizeInTileX="40" sizeInTileY="40">
-	<!-- WALLS-->
-	<tile tileX="3" tileY="4">WALL</tile>
-	<tile tileX="4" tileY="4">WALL</tile>
-	<tile tileX="4" tileY="5">WALL</tile>
-	<tile tileX="2" tileY="5">WALL</tile>
-	
-	<tile tileX="13" tileY="4">WALL</tile>
-	<tile tileX="14" tileY="4">WALL</tile>
-	
-	<tile tileX="3" tileY="14">WALL</tile>
-	<tile tileX="4" tileY="14">WALL</tile>
-	<tile tileX="2" tileY="15">WALL</tile>
-	
-	<tile tileX="33" tileY="24">WALL</tile>
-	<tile tileX="34" tileY="24">WALL</tile>
-	<tile tileX="32" tileY="25">WALL</tile>
-	
-	<tile tileX="23" tileY="34">WALL</tile>
-	<tile tileX="24" tileY="34">WALL</tile>
-	<tile tileX="22" tileY="35">WALL</tile>
-	
-	<!-- ENEMIES-->
-	<tile tileX="7" tileY="7">ENEMY</tile>
-	<tile tileX="2" tileY="1">ENEMY</tile>
-	<tile tileX="10" tileY="11">ENEMY</tile>
-	<tile tileX="15" tileY="22">ENEMY</tile>
-	<tile tileX="32" tileY="38">ENEMY</tile>
-</gamearea>
+<body>
+	<hero x="1" y="1" />
+	<gamearea sizeInTileX="40" sizeInTileY="40">
+		<!-- WALLS-->
+		<tile tileX="3" tileY="4">WALL</tile>
+		<tile tileX="4" tileY="4">WALL</tile>
+		<tile tileX="4" tileY="5">WALL</tile>
+		<tile tileX="2" tileY="5">WALL</tile>
+		<tile tileX="2" tileY="4">WALL</tile>
+		
+		<tile tileX="13" tileY="4">WALL</tile>
+		<tile tileX="14" tileY="4">WALL</tile>
+		
+		<tile tileX="3" tileY="14">WALL</tile>
+		<tile tileX="4" tileY="14">WALL</tile>
+		<tile tileX="2" tileY="15">WALL</tile>
+		
+		<tile tileX="33" tileY="24">WALL</tile>
+		<tile tileX="34" tileY="24">WALL</tile>
+		<tile tileX="32" tileY="25">WALL</tile>
+		
+		<tile tileX="23" tileY="34">WALL</tile>
+		<tile tileX="24" tileY="34">WALL</tile>
+		<tile tileX="22" tileY="35">WALL</tile>
+		
+		<!-- ENEMIES-->
+		<tile tileX="7" tileY="7">ENEMY</tile>
+		<tile tileX="2" tileY="1">ENEMY</tile>
+		<tile tileX="10" tileY="11">ENEMY</tile>
+		<tile tileX="15" tileY="22">ENEMY</tile>
+		<tile tileX="32" tileY="38">ENEMY</tile>
+	</gamearea>
+</body>

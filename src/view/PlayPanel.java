@@ -28,23 +28,22 @@ public class PlayPanel extends JPanel
 	
 	public PlayPanel( GameBoardModel gbm, HeroModel hm)
 	{
-		this.gb = new GameBoard( width, height );
+		this.gb = new GameBoard( width, height, gbm );
 		this.hero = new Hero( hm );
-		this.wall = new Wall();
+		//this.wall = new Wall();
 
 		this.setSize(width, height);
 		this.setBackground( Color.white );
 		this.setVisible(true);
 	}
+	
 
 	public void paint(Graphics g)
 	{
 		super.paint(g);
 		gb.drawGrid(g);
+		gb.drawGameBoard(g);
 		hero.drawHero(g);
-		wall.drawWallHorizontal(g);
-		wall.drawWallCorner(g);
-		wall.drawWallVertical(g);
 	}
 	
 }

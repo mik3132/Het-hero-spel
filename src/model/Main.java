@@ -1,9 +1,6 @@
 package model;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -12,14 +9,16 @@ import controller.Input;
 import view.*;
 
 /**
- * 
- * @author Martijn
  *
  * Hoofdklasse, onder deze klasse vallen alle klasses.
  * Het frame & threadpool.
  *
+ *
+ * @author TeamX
+ * @version 0.1
+ * @date 09-10-2011
+ * 
  */
-
 public class Main extends JFrame implements Runnable 
 {
 	JPanel playPanel;
@@ -30,12 +29,15 @@ public class Main extends JFrame implements Runnable
 	HeroModel heroModel;
 	
 	boolean run = true;
-	
+
+	/**
+	 * Constructor method
+	 */
 	Main()
 	{
 		scs = new Scores();
-		gbm = new GameBoardModel();
 		heroModel = new HeroModel( PlayPanel.width, PlayPanel.height );
+		gbm = new GameBoardModel( heroModel );
 		controlPanel = new ControlPanel( scs );
 		playPanel = new PlayPanel( gbm, heroModel);
 		in = new Input( heroModel, gbm, scs, controlPanel );
@@ -70,6 +72,7 @@ public class Main extends JFrame implements Runnable
 			this.update();
 			controlPanel.repaint();
 			playPanel.repaint();
+			
 			
 			try {
 				Thread.sleep(10);

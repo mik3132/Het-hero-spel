@@ -7,6 +7,10 @@ package model;
  * EnemyModel, de data wat getekend moet worden voor de view klasse.
  *
  */
-public class EnemyModel {
-
+public class EnemyModel
+{
+	protected EnemyModel(int x, int y)
+	{
+		
+	}
 }
