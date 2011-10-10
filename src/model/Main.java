@@ -42,6 +42,7 @@ public class Main extends JFrame implements Runnable
 		playPanel = new PlayPanel( gbm, heroModel);
 		in = new Input( heroModel, gbm, scs, controlPanel );
 		
+		
 		this.setTitle("Het hero spel");
 		this.setLayout(new BorderLayout());
 		this.add(BorderLayout.EAST, controlPanel);
@@ -54,6 +55,8 @@ public class Main extends JFrame implements Runnable
 		this.setSize( 1150 ,  890 );
 		this.addKeyListener( in );
 		this.setVisible(true);
+		
+
 	}
 
 	private void update()
