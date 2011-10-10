@@ -7,8 +7,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JPanel;
-
 import view.ControlPanel;
 
 import model.GameBoardModel;
@@ -46,15 +44,15 @@ public class Input implements KeyListener, MouseListener, ActionListener
 	
 	public void keyPressed(KeyEvent e)
 	{
-		cp.spacer.insert("KeyPressed key:"+e.getKeyCode() + " name:" + e.getKeyText( e.getKeyCode() ) + "\n\r", 0);
+		cp.spacer.insert("KeyPressed key:"+e.getKeyCode() + " name:" + KeyEvent.getKeyText( e.getKeyCode() ) + "\n\r", 0);
 		if(e.getKeyCode() == 38)
-			heroModel.rotateHero(heroModel.MOVEUP);
+			heroModel.rotateHero(HeroModel.VIEWUP);
 		if(e.getKeyCode() == 40)
-			heroModel.rotateHero(heroModel.MOVEDOWN);
+			heroModel.rotateHero(HeroModel.VIEWDOWN);
 		if(e.getKeyCode() == 37)
-			heroModel.rotateHero(heroModel.MOVELEFT);
+			heroModel.rotateHero(HeroModel.VIEWLEFT);
 		if(e.getKeyCode() == 39)
-			heroModel.rotateHero(heroModel.MOVERIGHT);
+			heroModel.rotateHero(HeroModel.VIEWRIGHT);
 	}
 	
 	public void keyReleased(KeyEvent e) {

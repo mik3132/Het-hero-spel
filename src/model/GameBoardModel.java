@@ -13,6 +13,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import view.GameBoard;
+
 /**
  * 
  * @author Martijn
@@ -24,11 +26,19 @@ public class GameBoardModel
 {
 	File file = new File("gamearea.xml");
 	public ArrayList<SquareGrid> sglist = new ArrayList<SquareGrid>();
-	int sizePlayGroundX, sizePlayGroundY;
+	public int sizePlayGroundX, sizePlayGroundY;
+	HeroModel heroModel;
 
-	GameBoardModel()
+	GameBoardModel(HeroModel heroModel)
 	{
+		this.heroModel = heroModel;
 		this.loadGameArea();
+		heroModel.setSquareGrids( this );
+	}
+	
+	public HeroModel getHeroModel()
+	{
+		return heroModel;
 	}
 	
 	public ArrayList<SquareGrid> getGameBoard()
@@ -56,13 +66,11 @@ public class GameBoardModel
                 			new SquareGrid(
                 					x, 
                 					y, 
-                					"EMPTY"
+                					GameBoard.EMPTY,
+                					false
                 					)
                 			);
 			}
-		
-		for(int t = 0; t < sglist.size(); t++)
-			System.out.println("COORDS: "+sglist.get(t).x+" :"+sglist.get(t).y+" :"+sglist.get(t).item );
 	}
 	
 	public void loadGameArea()
@@ -77,6 +85,15 @@ public class GameBoardModel
 	            Document doc = docBuilder.parse ( file );
 	
 	            doc.getDocumentElement ().normalize ();
+	            NodeList hero = doc.getElementsByTagName("hero");
+	            if( hero.item(0).getNodeType() == Node.ELEMENT_NODE )
+	            {
+	            	Element heroPOS = (Element)hero.item(0);
+	            	heroModel.heroPosX = Integer.parseInt( heroPOS.getAttributes().item(0).getNodeValue() ); //sizeInTileX
+	            	heroModel.heroPosY = Integer.parseInt( heroPOS.getAttributes().item(1).getNodeValue() ); //sizeInTileY
+	            	heroModel.posHeroPosX = Integer.parseInt( heroPOS.getAttributes().item(0).getNodeValue() ); //sizeInTileX
+	            	heroModel.posHeroPosY = Integer.parseInt( heroPOS.getAttributes().item(1).getNodeValue() ); //sizeInTileY
+	            }
 	            NodeList gamearea = doc.getElementsByTagName("gamearea");
 	            if( gamearea.item(0).getNodeType() == Node.ELEMENT_NODE)
 	            {
@@ -84,15 +101,17 @@ public class GameBoardModel
 	            	sizePlayGroundX = Integer.parseInt( gaElement.getAttributes().item(0).getNodeValue() ); //sizeInTileX
 	            	sizePlayGroundY = Integer.parseInt( gaElement.getAttributes().item(1).getNodeValue() ); //sizeInTileY
 	            }
+	            
 	            NodeList tileNodes = doc.getElementsByTagName("tile");
 	            int tiles = tileNodes.getLength();
-	
 	            for(int s=0; s < tiles; s++){
 	                Node firstPersonNode = tileNodes.item(s);
 	                if(firstPersonNode.getNodeType() == Node.ELEMENT_NODE)
 	                {
 	                    Element tile = (Element)firstPersonNode;
-	                    Node tileX = tile.getAttributes().item(0), tileY = tile.getAttributes().item(1);
+	                    Node tileX = tile.getAttributes().getNamedItem("tileX"), 
+	                    		tileY = tile.getAttributes().getNamedItem("tileY"), 
+	                    		blocking = tile.getAttributes().getNamedItem("blocking");
 	                    if(tileX.getNodeName() == "tileX" &&
 	                    	tileY.getNodeName() == "tileY" &&
 	                    	tile.getFirstChild().getNodeValue() != null )
@@ -101,7 +120,8 @@ public class GameBoardModel
 	                    			new SquareGrid(
 	                    					Integer.parseInt( tileX.getNodeValue() ), 
 	                    					Integer.parseInt( tileY.getNodeValue() ), 
-	                    					tile.getFirstChild().getNodeValue()
+	                    					Integer.parseInt( tile.getFirstChild().getNodeValue() ),
+	                    					Boolean.parseBoolean( blocking.getNodeValue() )
 	                    					)
 	                    			);
 	                    }

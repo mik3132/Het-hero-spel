@@ -9,13 +9,15 @@ package model;
  */
 public class SquareGrid 
 {
-	int x,y;
-	String item;
+	public int x,y;
+	public int item;
+	public boolean isBlocking;
 	
-	public SquareGrid(int X, int Y, String command)
+	public SquareGrid(int X, int Y, int command, boolean isBlocking)
 	{
 		this.x = X;
 		this.y = Y;
 		this.item = command;
+		this.isBlocking = isBlocking;
 	}
 }

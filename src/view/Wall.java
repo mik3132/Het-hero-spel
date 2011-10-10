@@ -12,11 +12,21 @@ import java.awt.Graphics;
  */
 public class Wall
 {
-
-	Wall()
+	int x, y;
+	Wall( int x, int y )
 	{
-		
+		this.x = x;
+		this.y = y;
 	}
+	public void drawWall( Graphics g )
+	{
+		g.setColor(Color.BLACK);
+		g.drawRect( x, y, GameBoard.squareSize, GameBoard.squareSize);
+		g.fillRect( x, y, GameBoard.squareSize, GameBoard.squareSize);
+	}
+	
+	
+
 	
 	/**
 	 * g.drawRect(25/2 + 0, 0, GameBoard.squareSize/2, GameBoard.squareSize);
@@ -24,7 +34,7 @@ public class Wall
 	 *
 	 * The 25/2 as first parameter ensures the size of the vertical wall, the + 0 and 0 are the positions for the wall
 	 *
-	 */
+	
 	public void drawWallVertical( Graphics g )
 	{
 		g.setColor(Color.PINK);
@@ -53,5 +63,6 @@ public class Wall
 		g.drawOval(25/2 + 0, 25/2 + 50, GameBoard.squareSize/2, GameBoard.squareSize/2);
 		g.fillOval(25/2 + 0, 25/2 + 50, GameBoard.squareSize/2, GameBoard.squareSize/2);
 	}
+	 */
 	
 }

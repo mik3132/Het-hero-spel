@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import view.GameBoard;
 
 /**
@@ -16,12 +18,8 @@ public class HeroModel
 	public static final int VIEWRIGHT = 2;
 	public static final int VIEWDOWN = 3;
 	
-	public static final int MOVEUP = 0;
-	public static final int MOVELEFT = 1;
-	public static final int MOVERIGHT = 2;
-	public static final int MOVEDOWN = 3;
-	
-	public int ovalSize, x, y, viewX, viewY, midX, midY;
+	GameBoardModel gbm;
+	public int ovalSize, x, y, viewX, viewY, midX, midY, posHeroPosX, posHeroPosY, heroPosX, heroPosY, direction, posViewY, posViewX;
 	
 	public HeroModel(int width, int height )
 	{
@@ -41,36 +39,58 @@ public class HeroModel
 			case VIEWUP:
 				viewY = (midY-(GameBoard.squareSize/2));
 				viewX = midX;
-				
-				midY -= 50;
-				viewY -= 50;
-				y -= 50;
+				if(this.direction==direction)
+					posHeroPosY--;
 			break;
 			case VIEWDOWN:
 				viewY = (midY+(GameBoard.squareSize/2));
 				viewX = midX;
-				
-				midY += 50;
-				viewY += 50;
-				y += 50;
+				if(this.direction==direction)
+					posHeroPosY++;
 			break;
 			case VIEWLEFT:
 				viewX = (midX-(GameBoard.squareSize/2));
 				viewY = midY;
-				
-				midX -= 50;
-				viewX -= 50;
-				x -= 50;
+				if(this.direction==direction)
+					posHeroPosX--;
 			break;
 			case VIEWRIGHT:
 				viewX = (midX+(GameBoard.squareSize/2));
 				viewY = midY;
-				
-				midX += 50;
-				viewX += 50;
-				x += 50;
+				if(this.direction==direction)
+					posHeroPosX++;
 			break;
+		}
+		this.direction = direction;		
+		if(this.movePossible( posHeroPosX, posHeroPosY ))
+		{
+			heroPosX = posHeroPosX;
+			heroPosY = posHeroPosY;
+		} else {
+			posHeroPosX = heroPosX;
+			posHeroPosY = heroPosY;
+			System.out.println("Move not possible.");
 		}
 	}
 
+	private boolean movePossible(int x, int y)
+	{
+		if(x < 1 || y < 1 || x > gbm.sizePlayGroundX || y > gbm.sizePlayGroundY)
+			return false;
+		int tileX = posHeroPosX;
+		int tileY = posHeroPosY;
+
+		for(int i = 0; i < gbm.sglist.size(); i++)
+		{
+			SquareGrid check = gbm.sglist.get(i);
+			if(check.x == tileX && check.y == tileY)
+				return !check.isBlocking;
+		}
+		return false;
+	}
+
+	public void setSquareGrids( GameBoardModel gbm)
+	{
+		this.gbm = gbm;
+	}
 }

@@ -9,7 +9,8 @@ import java.util.HashMap;
  * Score data bij houden
  *
  */
-public class Scores {
+public class Scores
+{
 	public int points; //The points that are left for the game.	
 	private int lowestCost; //the lowest number of points that a action can cost
 	private HashMap<String, Integer> actionspoints; //HashMap<String actionname, Integer how many points the action cost>
@@ -20,7 +21,6 @@ public class Scores {
 	 */
 	public Scores() //int points
 	{
-		this.points = points;
 		this.actionspoints = new HashMap<String, Integer>();
 		this.lowestCost = points;
 	}	
