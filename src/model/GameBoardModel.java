@@ -71,6 +71,7 @@ public class GameBoardModel
                 					)
                 			);
 			}
+		
 	}
 	
 	public void loadGameArea()
@@ -94,6 +95,7 @@ public class GameBoardModel
 	            	heroModel.posHeroPosX = Integer.parseInt( heroPOS.getAttributes().item(0).getNodeValue() ); //sizeInTileX
 	            	heroModel.posHeroPosY = Integer.parseInt( heroPOS.getAttributes().item(1).getNodeValue() ); //sizeInTileY
 	            }
+	            
 	            NodeList gamearea = doc.getElementsByTagName("gamearea");
 	            if( gamearea.item(0).getNodeType() == Node.ELEMENT_NODE)
 	            {
@@ -137,6 +139,7 @@ public class GameBoardModel
 	        } catch (Throwable t) {
 	        	t.printStackTrace ();
 	        }
+	        
 		this.updateGameArea();
 	}
 	
