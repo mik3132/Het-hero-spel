@@ -15,19 +15,34 @@ import model.Scores;
 
 /**
  * 
- * @author Martijn
- *
- * Hier worden input events behandeld, ook dit moet threaded zijn.
+ * Input class
+ * 
+ * This class handles all the user input 
+ * 
+ * @author Martijn, Edo
+ * @version 0.1
+ * @date 04-10-2011
  *
  */
-
 public class Input implements KeyListener, MouseListener, ActionListener
 {
+	/** The HeroModel that represents the hero */
 	HeroModel heroModel;
+	/** The GameBoardModel that represents the gameboard */
 	GameBoardModel gbm;
+	/** The Scores model to keep track of the score */
 	Scores scs;
+	/** The ControlPanel that contains the control */
 	ControlPanel cp;
 	
+	/**
+	 * Constructor method
+	 * 
+	 * @param HeroModel heroModel
+	 * @param GameBoardModel gbm
+	 * @param Scores scs
+	 * @param ControlPanel cp
+	 */
 	public Input(HeroModel heroModel, GameBoardModel gbm, Scores scs, ControlPanel cp)
 	{
 		this.heroModel = heroModel;

@@ -17,18 +17,30 @@ import view.GameBoard;
 
 /**
  * 
- * @author Martijn
- *
+ * GameBoardModel class
  * De data van het grond model wat getekend moet worden voor de view klasse.
+ * 
+ * @author Martijn, Edo
+ * @version 0.1
+ * @date 04-10-2011
  *
  */
 public class GameBoardModel
 {
-	File file = new File("gamearea.xml");
+	/** The name of the xml file to parse */
+	File file = new File("level/level2.xml");
+	/** The arraylist containing all the items to be placed on the grid */
 	public ArrayList<SquareGrid> sglist = new ArrayList<SquareGrid>();
+	/** The x and y sizes of the GameBoard */
 	public int sizePlayGroundX, sizePlayGroundY;
+	/** The HeroModel representing the hero */
 	HeroModel heroModel;
 
+	/**
+	 * Constructor method
+	 * 
+	 * @param HeroModel heroModel The HeroModel representing the hero
+	 */
 	GameBoardModel(HeroModel heroModel)
 	{
 		this.heroModel = heroModel;
@@ -36,16 +48,29 @@ public class GameBoardModel
 		heroModel.setSquareGrids( this );
 	}
 	
+	/**
+	 * Getter method for the current HeroModel
+	 * 
+	 * @return HeroModel The current HeroModel
+	 */
 	public HeroModel getHeroModel()
 	{
 		return heroModel;
 	}
 	
+	/**
+	 * Getter method for the list of objects to place on the board
+	 * 
+	 * @return ArrayList<SquareGrid> The list containing the objects
+	 */
 	public ArrayList<SquareGrid> getGameBoard()
 	{
 		return sglist;
 	}
 	
+	/**
+	 * 
+	 */
 	public void updateGameArea()
 	{
 		for(int x = 0; x < sizePlayGroundX; x++)
@@ -74,6 +99,9 @@ public class GameBoardModel
 		
 	}
 	
+	/**
+	 * Loads the GameArea from the xml file
+	 */
 	public void loadGameArea()
 	{
 		if(!file.exists())
@@ -145,6 +173,7 @@ public class GameBoardModel
 	
 	public void update()
 	{
+		
 	}
 
 }

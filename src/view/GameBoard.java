@@ -7,31 +7,36 @@ import model.GameBoardModel;
 
 /**
  *
- * Waar alle grond titels gevuld zijn, doorloop GrondModel met SquareGrid
- * 
  * GameBoard class
  * This class represents the GameBoard that is being played on
  * The GameBoard manages the GameElements and knows where they are positioned
  * The GameBoard places all the GameElements on the board at the beginning
  *
  *
- * @author edofre
+ * @author Edo, Martijn
  * @version 0.1
  * @date 04-10-2011
  *
  */
 public class GameBoard
 {
+	/** The width and height of the GameBoard */
 	int width, height;
-	int squaresVertical;
-	int squaresHorizontal;
-	int drawCounter = 0;
+	/** The number of squares vertical and horizontal */
+	int squaresVertical,  squaresHorizontal;
+	/** The GameBoardModel */
 	GameBoardModel gbm;
+	/** The ArrayList containing the enemies */
 	ArrayList<Enemy> arEnemy = new ArrayList<Enemy>();
 	
+	/** The size of the squares */
 	public static final int squareSize = 50;
+	
+	/** Integer representation for an empty spot */
 	public static final int EMPTY = 0;
+	/** Integer representation for a wall */
 	public static final int WALL = 1;
+	/** Integer representation for an enemy */
 	public static final int ENEMY = 2; 
 	
 	/**
@@ -46,6 +51,11 @@ public class GameBoard
 		squaresHorizontal = (width / squareSize); //x
 	}
 	
+	/**
+	 * Method that draws the grid
+	 * 
+	 * @param Grahpics g The Grapic manager to execute the drawing
+	 */
 	public void drawGrid(Graphics g)
 	{
 		for(int i = 1; i <= this.squaresHorizontal; i++)
@@ -56,10 +66,19 @@ public class GameBoard
 		
 	}
 	
+	/**
+	 * Method that draws the GameBoard
+	 * 
+	 * @param Grahpics g The Grapic manager to execute the drawing
+	 */
 	public void drawGameBoard(Graphics g)
 	{
+		// Calculate the x position based on the hero's movement
 		int calPosX = (((width/2)-(squareSize/2)) - (gbm.getHeroModel().heroPosX * squareSize));
+		// Calculate the y position based on the hero's movement
 		int calPosY = (((height/2)-(squareSize/2)) - (gbm.getHeroModel().heroPosY * squareSize));
+		
+		// Loop through the list of object to add the object
 		for(int i = 0; i < gbm.sglist.size(); i++)
 		{
 			int x = (gbm.sglist.get(i).x * squareSize) + calPosX; // Iets extra voor het positioneren waar de Hero is
@@ -67,29 +86,47 @@ public class GameBoard
 			this.drawObject( g, gbm.sglist.get(i).item, x, y );
 		}
 		
+		// Draw the edge of the GameBoard
 		this.drawGameBoardEdge(calPosX, calPosY, g);
 		
 	}
 	
-	private void drawGameBoardEdge(int calPosX, int calPosY, Graphics g)
+	/**
+	 * Method that draws the edge around the gameboard
+	 * 
+	 * @param int posX The x position calculated based on the hero's movement
+	 * @param int posY The y position calculated based on the hero's movement
+	 * @param Grahpics g The Grapic manager to execute the drawing
+	 */
+	private void drawGameBoardEdge(int posX, int posY, Graphics g)
 	{
+		// Draw the horizontal edges
 		for(int i=0; i <= gbm.sizePlayGroundX; i++)
 		{
-			new Wall(calPosX + (i * squareSize), calPosY).drawWall(g);
-			new Wall(calPosX + (i * squareSize), calPosY + (gbm.sizePlayGroundY * squareSize)).drawWall(g);
+			new Wall(posX + (i * squareSize), posY).drawWall(g);
+			new Wall(posX + (i * squareSize), posY + (gbm.sizePlayGroundY * squareSize)).drawWall(g);
 		}
 		
+		// Draw the vertical edges
 		for(int i=0; i < gbm.sizePlayGroundY; i++)
 		{
-			new Wall(calPosX, calPosY + (i * squareSize)).drawWall(g);
-			new Wall(calPosX + (gbm.sizePlayGroundX * squareSize), calPosY + (i * squareSize)).drawWall(g);
+			new Wall(posX, posY + (i * squareSize)).drawWall(g);
+			new Wall(posX + (gbm.sizePlayGroundX * squareSize), posY + (i * squareSize)).drawWall(g);
 		}
 		
 	}
 
-	private void drawObject(Graphics g, int command, int x, int y)
+	/**
+	 * Method that draws the empty spaces, enemies and walls on the gameboard
+	 * 
+	 * @param Grahpics g The Grapic manager to execute the drawing
+	 * @param int object The object to be added
+	 * @param int x The x position for the object
+	 * @param int y The y position for the object
+	 */
+	private void drawObject(Graphics g, int object, int x, int y)
 	{
-		switch(command)
+		switch(object)
 		{
 			case GameBoard.EMPTY:
 			break;
