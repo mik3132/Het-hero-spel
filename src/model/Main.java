@@ -47,6 +47,10 @@ public class Main extends JFrame implements Runnable
 		this.setLayout(new BorderLayout());
 		this.add(BorderLayout.EAST, controlPanel);
 		this.add(BorderLayout.CENTER, playPanel);
+		
+		// JMENU
+		
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize( 1150 ,  890 );
 		this.addKeyListener( in );

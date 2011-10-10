@@ -2,7 +2,7 @@
 <body>
 	<hero x="1" y="1" />
 	<gamearea sizeInTileX="40" sizeInTileY="40">
-		<!-- WALLS-->
+		<!-- WALLS enter as input 1-->
 		<tile tileX="3" tileY="4" blocking="true">1</tile>
 		<tile tileX="4" tileY="4" blocking="true">1</tile>
 		<tile tileX="4" tileY="5" blocking="true">1</tile>
@@ -24,9 +24,9 @@
 		<tile tileX="24" tileY="34" blocking="true">1</tile>
 		<tile tileX="22" tileY="35" blocking="true">1</tile>
 		
-		<!-- ENEMIES-->
+		<!-- ENEMIES enter as input 2-->
 		<tile tileX="7" tileY="7" blocking="true">2</tile>
-		<tile tileX="2" tileY="1" blocking="true">2</tile>
+		<tile tileX="3" tileY="3" blocking="true">2</tile>
 		<tile tileX="10" tileY="11" blocking="true">2</tile>
 		<tile tileX="15" tileY="22" blocking="true">2</tile>
 		<tile tileX="32" tileY="38" blocking="true">2</tile>

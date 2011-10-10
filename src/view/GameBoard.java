@@ -23,12 +23,13 @@ import model.GameBoardModel;
 public class GameBoard
 {
 	int width, height;
-	public static final int squareSize = 50;
 	int squaresVertical;
 	int squaresHorizontal;
+	int drawCounter = 0;
 	GameBoardModel gbm;
 	ArrayList<Enemy> arEnemy = new ArrayList<Enemy>();
 	
+	public static final int squareSize = 50;
 	public static final int EMPTY = 0;
 	public static final int WALL = 1;
 	public static final int ENEMY = 2; 
@@ -47,11 +48,12 @@ public class GameBoard
 	
 	public void drawGrid(Graphics g)
 	{
-		for(int i = 1; i < this.squaresHorizontal; i++)
+		for(int i = 1; i <= this.squaresHorizontal; i++)
 		{
 			g.drawLine(0, (i*GameBoard.squareSize), width, (i*GameBoard.squareSize));
 			g.drawLine((i*GameBoard.squareSize), 0, (i*GameBoard.squareSize), height);
 		}
+		
 	}
 	
 	public void drawGameBoard(Graphics g)
@@ -64,6 +66,25 @@ public class GameBoard
 			int y = (gbm.sglist.get(i).y * squareSize) + calPosY; // Iets extra voor het positioneren waar de Hero is
 			this.drawObject( g, gbm.sglist.get(i).item, x, y );
 		}
+		
+		this.drawGameBoardEdge(calPosX, calPosY, g);
+		
+	}
+	
+	private void drawGameBoardEdge(int calPosX, int calPosY, Graphics g)
+	{
+		for(int i=0; i <= gbm.sizePlayGroundX; i++)
+		{
+			new Wall(calPosX + (i * squareSize), calPosY).drawWall(g);
+			new Wall(calPosX + (i * squareSize), calPosY + (gbm.sizePlayGroundY * squareSize)).drawWall(g);
+		}
+		
+		for(int i=0; i < gbm.sizePlayGroundY; i++)
+		{
+			new Wall(calPosX, calPosY + (i * squareSize)).drawWall(g);
+			new Wall(calPosX + (gbm.sizePlayGroundX * squareSize), calPosY + (i * squareSize)).drawWall(g);
+		}
+		
 	}
 
 	private void drawObject(Graphics g, int command, int x, int y)

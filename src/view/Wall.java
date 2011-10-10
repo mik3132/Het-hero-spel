@@ -13,20 +13,19 @@ import java.awt.Graphics;
 public class Wall
 {
 	int x, y;
+	
 	Wall( int x, int y )
 	{
 		this.x = x;
 		this.y = y;
 	}
+	
 	public void drawWall( Graphics g )
 	{
 		g.setColor(Color.BLACK);
 		g.drawRect( x, y, GameBoard.squareSize, GameBoard.squareSize);
 		g.fillRect( x, y, GameBoard.squareSize, GameBoard.squareSize);
 	}
-	
-	
-
 	
 	/**
 	 * g.drawRect(25/2 + 0, 0, GameBoard.squareSize/2, GameBoard.squareSize);
