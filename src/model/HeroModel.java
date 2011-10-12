@@ -32,32 +32,32 @@ public class HeroModel
 		this.ovalSize = GameBoard.squareSize;
 	}
 	
-	public void rotateHero(int direction)
+	public void rotateHero(int direction, boolean ctrl)
 	{
 		switch( direction )
 		{
 			case VIEWUP:
 				viewY = (midY-(GameBoard.squareSize/2));
 				viewX = midX;
-				if(this.direction==direction)
+				if(!ctrl)
 					posHeroPosY--;
 			break;
 			case VIEWDOWN:
 				viewY = (midY+(GameBoard.squareSize/2));
 				viewX = midX;
-				if(this.direction==direction)
+				if(!ctrl)
 					posHeroPosY++;
 			break;
 			case VIEWLEFT:
 				viewX = (midX-(GameBoard.squareSize/2));
 				viewY = midY;
-				if(this.direction==direction)
+				if(!ctrl)
 					posHeroPosX--;
 			break;
 			case VIEWRIGHT:
 				viewX = (midX+(GameBoard.squareSize/2));
 				viewY = midY;
-				if(this.direction==direction)
+				if(!ctrl)
 					posHeroPosX++;
 			break;
 		}

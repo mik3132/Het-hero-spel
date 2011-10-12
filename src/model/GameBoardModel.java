@@ -96,6 +96,14 @@ public class GameBoardModel
 		
 	}
 	
+	public SquareGrid getObjectFromPlayGround(int x, int y)
+	{
+		for(int list = 0; list < sglist.size(); list++)
+			if(sglist.get(list).x == x && sglist.get(list).y == y)
+				return sglist.get(list);
+		return null;
+	}
+	
 	/**
 	 * Loads the GameArea from the xml file
 	 */
@@ -171,6 +179,20 @@ public class GameBoardModel
 	public void update()
 	{
 		
+	}
+
+	public int getIndexFromBoard(int x, int y)
+	{
+		for(int list = 0; list < sglist.size(); list++)
+			if(sglist.get(list).x == x && sglist.get(list).y == y)
+				return list;
+		return -1;
+	}
+
+	public void removeFromPlayGround( int indexFromBoard)
+	{
+		this.sglist.remove( indexFromBoard );
+		this.updateGameArea();
 	}
 
 }

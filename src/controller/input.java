@@ -35,6 +35,8 @@ public class Input implements KeyListener, MouseListener, ActionListener
 	ControlPanel cp;
 	PlayPanel playPanel;
 	
+	boolean ctrl = false;
+	
 	/**
 	 * Constructor method
 	 * @param playPanel 
@@ -61,35 +63,39 @@ public class Input implements KeyListener, MouseListener, ActionListener
 	
 	public void keyPressed(KeyEvent e)
 	{
+		if(e.getKeyCode() == KeyEvent.VK_CONTROL)
+			ctrl = true;
+		
 		cp.spacer.insert("KeyPressed key:"+e.getKeyCode() + " name:" + KeyEvent.getKeyText( e.getKeyCode() ) + "\n\r", 0);
 		if(e.getKeyCode() == 38)
-			heroModel.rotateHero(HeroModel.VIEWUP);
+			heroModel.rotateHero(HeroModel.VIEWUP, ctrl);
 		if(e.getKeyCode() == 40)
-			heroModel.rotateHero(HeroModel.VIEWDOWN);
+			heroModel.rotateHero(HeroModel.VIEWDOWN, ctrl);
 		if(e.getKeyCode() == 37)
-			heroModel.rotateHero(HeroModel.VIEWLEFT);
+			heroModel.rotateHero(HeroModel.VIEWLEFT, ctrl);
 		if(e.getKeyCode() == 39)
-			heroModel.rotateHero(HeroModel.VIEWRIGHT);
+			heroModel.rotateHero(HeroModel.VIEWRIGHT, ctrl);
 		if(e.getKeyCode() == 32)
 			playPanel.setNewProjectile();
 	}
 	
 	public void keyReleased(KeyEvent e)
 	{
-		
+		if(e.getKeyCode() == KeyEvent.VK_CONTROL)
+			ctrl = false;
 	}
 	
 	public void keyTyped(KeyEvent arg0) { }
 	
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource() == cp.bUp) 
-			heroModel.rotateHero(HeroModel.VIEWUP);
+			heroModel.rotateHero(HeroModel.VIEWUP, true);
 		if(arg0.getSource() == cp.bDown)
-			heroModel.rotateHero(HeroModel.VIEWDOWN);
+			heroModel.rotateHero(HeroModel.VIEWDOWN, true);
 		if(arg0.getSource() == cp.bLeft)
-			heroModel.rotateHero(HeroModel.VIEWLEFT);
+			heroModel.rotateHero(HeroModel.VIEWLEFT, true);
 		if(arg0.getSource() == cp.bRight)
-			heroModel.rotateHero(HeroModel.VIEWRIGHT);
+			heroModel.rotateHero(HeroModel.VIEWRIGHT, true);
 		if(arg0.getSource() == cp.bShoot)
 			playPanel.setNewProjectile();
 	}

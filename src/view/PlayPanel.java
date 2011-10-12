@@ -11,6 +11,7 @@ import controller.Input;
 
 import model.GameBoardModel;
 import model.HeroModel;
+import model.Timing;
 
 /**
  * 
@@ -27,6 +28,7 @@ public class PlayPanel extends JPanel
 	Hero hero;
 	Wall wall;
 	HeroModel hm;
+	long lastProjectile = 0;
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public final static int width = 850, height = 850; //px
 	
@@ -43,14 +45,19 @@ public class PlayPanel extends JPanel
 	
 	public void setNewProjectile()
 	{
-		projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm ));
+		long timenow = System.currentTimeMillis();
+		if(lastProjectile == 0 || lastProjectile < timenow)
+		{
+			lastProjectile = (timenow+Timing.bulletNext);
+			projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm ));
+		}
 	}
 	
 
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-		//gb.drawGrid(g); //Laat Grid zien
+		gb.drawGrid(g); //Laat Grid zien
 		gb.drawGameBoard(g);
 		hero.drawHero(g);
 		for(int i = 0; i < projectiles.size(); i++)

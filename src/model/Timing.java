@@ -10,7 +10,7 @@ package model;
  */
 public class Timing
 {
-	public static final int bulletTime = 100;//ms
-	public static final int bulletSkip = 5;//skip px
-	
+	public static final int bulletNext = 500;//ms
+	public static final int bulletTime = 4;//ms
+	public static final int bulletSkip = 0;//skip px
 }
