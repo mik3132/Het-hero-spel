@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import view.GameBoard;
+import view.Projectile;
 
 /**
  * 
@@ -27,13 +28,9 @@ import view.GameBoard;
  */
 public class GameBoardModel
 {
-	/** The name of the xml file to parse */
-	File file = new File("level/level2.xml");
-	/** The arraylist containing all the items to be placed on the grid */
+	File file = new File("level/level1.xml");
 	public ArrayList<SquareGrid> sglist = new ArrayList<SquareGrid>();
-	/** The x and y sizes of the GameBoard */
 	public int sizePlayGroundX, sizePlayGroundY;
-	/** The HeroModel representing the hero */
 	HeroModel heroModel;
 
 	/**
