@@ -14,7 +14,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import view.GameBoard;
-import view.Projectile;
 
 /**
  * 
@@ -28,6 +27,7 @@ import view.Projectile;
  */
 public class GameBoardModel
 {
+	/** The level to load at first */
 	File file = new File("level/level1.xml");
 	public ArrayList<SquareGrid> sglist = new ArrayList<SquareGrid>();
 	public int sizePlayGroundX, sizePlayGroundY;
@@ -70,8 +70,10 @@ public class GameBoardModel
 	 */
 	public void updateGameArea()
 	{
-		for(int x = 0; x < sizePlayGroundX; x++)
-			for(int y = 0; y < sizePlayGroundY; y++)
+		// x <= sizePlayGroundX zodat de 40 ook mee in de lijst gaat
+		for(int x = 0; x <= sizePlayGroundX; x++)
+			// zelfde als bij x
+			for(int y = 0; y <= sizePlayGroundY; y++)
 			{
 				boolean found = false;
 				for(int list = 0; list < sglist.size(); list++)

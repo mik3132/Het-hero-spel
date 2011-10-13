@@ -1,8 +1,8 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -39,7 +39,10 @@ public class PlayPanel extends JPanel
 		this.hero = new Hero( hm );
 		this.hm = hm;
 		this.setSize(width, height);
+		this.setMaximumSize(new Dimension(width, height));
+		this.setMinimumSize(new Dimension(width, height));
 		this.setBackground( Color.white );
+		this.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 		this.setVisible(true);
 	}
 	

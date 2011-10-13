@@ -52,6 +52,7 @@ public class Main extends JFrame implements Runnable
 		this.add(BorderLayout.CENTER, playPanel);
 		
 		// JMENU
+		/** 
 		menuBar = new JMenuBar();
 		
 		gameMenu = new JMenu("Game");
@@ -77,9 +78,11 @@ public class Main extends JFrame implements Runnable
 		levelMenu.add(level2Item);
 		
 		this.add(menuBar);
+		*/
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize( 1150 ,  890 );
+		this.setSize( 1124 ,  880 );
+		this.setResizable(false);
 		this.addKeyListener( in );
 		this.setVisible(true);
 	}

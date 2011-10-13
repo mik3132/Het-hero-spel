@@ -2,13 +2,11 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import controller.Input;
 
@@ -23,33 +21,80 @@ import model.Scores;
  */
 public class ControlPanel extends JPanel
 {
-	public JTextArea spacer;
 	public JButton bUp,bDown,bLeft,bRight,bShoot;
+	public JLabel jLabel1, jLabel2;
+	public JTextField jTextField1, jTextField2;
 	
 	public ControlPanel( Scores scs )
 	{
-		bUp = new JButton("UP");
-		bDown = new JButton( "DOWN" );
-		bLeft = new JButton("LEFT");
-		bRight = new JButton("RIGHT");
+		bUp = new JButton("/\\");
+		bDown = new JButton( "\\/" );
+		bLeft = new JButton("<");
+		bRight = new JButton(">");
 		bShoot = new JButton("FIRE");
-		spacer = new JTextArea("Spacer");
-		spacer.setBackground( Color.yellow );
-		spacer.setPreferredSize(new Dimension(272, 250));
-		spacer.enableInputMethods(false);
-		spacer.setEnabled(false);
-		spacer.setLayout(new FlowLayout(FlowLayout.LEFT,25,25));
+        jLabel1 = new JLabel("Score");
+        jLabel2 = new JLabel("Points left");
+        jTextField1 = new JTextField("0");
+        jTextField2 = new JTextField("0");
+        jTextField1.setFocusable(false);
+        jTextField2.setFocusable(false);
+        
 		
 		this.setLayout(new BorderLayout());
-		this.add(BorderLayout.CENTER, spacer);
 		this.setSize(300, 800);
 		this.setBackground(Color.gray);
 		this.setVisible(true);
 		
 		//add Buttons to JPanel
 		JPanel buttons = new JPanel();
-		buttons.setLayout(new BorderLayout());
-		
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(buttons);
+        buttons.setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(26, 26, 26)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(bLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(bDown, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bUp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bShoot, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(bRight, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel1))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))
+                    .addGap(28, 28, 28))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(36, 36, 36)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addComponent(bUp, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bShoot, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bRight, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(bDown, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(29, 29, 29))
+            );
 		//unfocus buttons
 		bUp.setFocusable(false);
 		bDown.setFocusable(false);
@@ -63,7 +108,7 @@ public class ControlPanel extends JPanel
 		buttons.add(BorderLayout.WEST, bLeft);
 		buttons.add(BorderLayout.CENTER, bShoot);
 		
-		this.add(BorderLayout.SOUTH, buttons);
+		this.add(BorderLayout.CENTER, buttons);
 	}
 	
 	public void setInput( Input in )

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import model.GameBoardModel;
 import model.ProjectileModel;
 import model.ProjectileMovement;
-import model.SquareGrid;
 
 /**
  * 

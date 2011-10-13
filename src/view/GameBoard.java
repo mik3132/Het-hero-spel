@@ -31,7 +31,6 @@ public class GameBoard
 	
 	/** The size of the squares */
 	public static final int squareSize = 50;
-	
 	/** Integer representation for an empty spot */
 	public static final int EMPTY = 0;
 	/** Integer representation for a wall */
@@ -103,8 +102,8 @@ public class GameBoard
 		// Draw the horizontal edges
 		for(int i=0; i <= gbm.sizePlayGroundX; i++)
 		{
-			new Wall(posX + (i * squareSize), posY).drawWall(g);
-			new Wall(posX + (i * squareSize), posY + (gbm.sizePlayGroundY * squareSize) + squareSize).drawWall(g);
+			new Wall(posX + (i * squareSize) + squareSize, posY).drawWall(g);
+			new Wall(posX + (i * squareSize) + squareSize, posY + (gbm.sizePlayGroundY * squareSize) + squareSize).drawWall(g);
 		}
 		
 		// Draw the vertical edges
