@@ -49,7 +49,7 @@ public class Input implements KeyListener, MouseListener, ActionListener
 	 * @param Scores scs
 	 * @param ControlPanel cp
 	 */
-	public Input(HeroModel heroModel, GameBoardModel gbm, Scores scs, ControlPanel cp, PlayPanel playPanel)
+	public Input(HeroModel heroModel, GameBoardModel gbm, ControlPanel cp, PlayPanel playPanel)
 	{
 		this.heroModel = heroModel;
 		this.gbm = gbm;

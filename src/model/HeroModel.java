@@ -18,12 +18,20 @@ public class HeroModel
 	public static final int VIEWLEFT = 1;
 	public static final int VIEWRIGHT = 2;
 	public static final int VIEWDOWN = 3;
+	public Scores scs;
 	
 	GameBoardModel gbm;
 	public int ovalSize, x, y, viewX, viewY, midX, midY, posHeroPosX, posHeroPosY, heroPosX, heroPosY, direction, posViewY, posViewX;
 	
-	public HeroModel(int width, int height )
+	public HeroModel(int width, int height, int points )
 	{
+		//Add scores and actions
+		this.scs = new Scores(points);
+		this.scs.addAction("VIEWUP", 10);
+		this.scs.addAction("VIEWDOWN", 10);
+		this.scs.addAction("VIEWLEFT", 10);
+		this.scs.addAction("VIEWRIGHT", 10);
+		
 		this.midX = (width/2);
 		this.midY = (height/2);
 		this.viewX = midX;
@@ -39,30 +47,38 @@ public class HeroModel
 			case VIEWUP:
 				viewY = (midY-(GameBoard.squareSize/2));
 				viewX = midX;
-				if(!ctrl) {
-					posHeroPosY--;
-				}
+				if(!ctrl)
+					if(scs.removeActionPoints("VIEWUP"))						
+						posHeroPosY--;
+					else
+						System.out.println("gameover?");
 			break;
 			case VIEWDOWN:
 				viewY = (midY+(GameBoard.squareSize/2));
 				viewX = midX;
-				if(!ctrl) {
-					posHeroPosY++;
-				}
+				if(!ctrl)
+					if(scs.removeActionPoints("VIEWDOWN"))
+						posHeroPosY++;
+					else
+						System.out.println("gameover?");
 			break;
 			case VIEWLEFT:
 				viewX = (midX-(GameBoard.squareSize/2));
 				viewY = midY;
-				if(!ctrl) {
-					posHeroPosX--;
-				}
+				if(!ctrl)
+					if(scs.removeActionPoints("VIEWLEFT"))
+						posHeroPosX--;
+					else
+						System.out.println("gameover?");
 			break;
 			case VIEWRIGHT:
 				viewX = (midX+(GameBoard.squareSize/2));
 				viewY = midY;
-				if(!ctrl) {
-					posHeroPosX++;
-				}
+				if(!ctrl)
+					if(scs.removeActionPoints("VIEWRIGHT"))
+						posHeroPosX++;
+					else
+						System.out.println("gameover?");
 			break;
 		}
 		

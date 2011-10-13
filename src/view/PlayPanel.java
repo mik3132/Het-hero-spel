@@ -44,15 +44,23 @@ public class PlayPanel extends JPanel
 		this.setBackground( Color.white );
 		this.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 		this.setVisible(true);
+		
+		//add action to Scores
+		hm.scs.addAction("SHOOT", 50);
 	}
 	
 	public void setNewProjectile()
 	{
-		long timenow = System.currentTimeMillis();
-		if(lastProjectile == 0 || lastProjectile < timenow)
+		if( hm.scs.removeActionPoints("SHOOT") )
 		{
-			lastProjectile = (timenow+Timing.bulletNext);
-			projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm ));
+			long timenow = System.currentTimeMillis();
+			if(lastProjectile == 0 || lastProjectile < timenow)
+			{
+				lastProjectile = (timenow+Timing.bulletNext);
+				projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm ));
+			}
+		} else {
+			System.out.println("game over?");
 		}
 	}
 	
