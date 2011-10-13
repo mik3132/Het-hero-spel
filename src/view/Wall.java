@@ -19,11 +19,12 @@ public class Wall
 	int x, y;
 	
 	/**
-	 * Constructor method
+	 * Constructor
+	 * 
 	 * @param int x The x coordinate to create the wall at
 	 * @param int y The y coordinate to create the wall at
 	 */
-	Wall( int x, int y ) 
+	Wall(int x, int y) 
 	{
 		this.x = x;
 		this.y = y;
@@ -31,9 +32,10 @@ public class Wall
 	
 	/**
 	 * Draw method for the Wall
+	 * 
 	 * @param Graphics g The Graphics manager
 	 */
-	public void drawWall( Graphics g )
+	public void drawWall(Graphics g)
 	{
 		g.setColor(Color.BLACK);
 		g.drawRect( x, y, GameBoard.squareSize, GameBoard.squareSize);

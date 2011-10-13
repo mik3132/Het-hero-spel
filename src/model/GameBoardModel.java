@@ -33,6 +33,7 @@ public class GameBoardModel
 	public ArrayList<SquareGrid> sglist = new ArrayList<SquareGrid>();
 	/** Integers for keeping track of the size */
 	public int sizePlayGroundX, sizePlayGroundY;
+	/** The HeroModel representing the current Hero */
 	HeroModel heroModel;
 
 	/**
@@ -68,7 +69,7 @@ public class GameBoardModel
 	}
 	
 	/**
-	 * 
+	 * Method that updates the gamearea based on the hero's movement
 	 */
 	public void updateGameArea()
 	{
@@ -95,10 +96,11 @@ public class GameBoardModel
 	}
 	
 	/**
+	 * Method to get an object at a specified position
 	 * 
-	 * @param x
-	 * @param y
-	 * @return
+	 * @param int x The x position of the object to get 
+	 * @param int y The y position of the object to get
+	 * @return SquareGrid if an object is found and null if no object is found
 	 */
 	public SquareGrid getObjectFromPlayGround(int x, int y)
 	{
@@ -111,7 +113,7 @@ public class GameBoardModel
 	}
 	
 	/**
-	 * Loads the GameArea from the xml file
+	 * Loads the GameArea from the set xml file
 	 */
 	public void loadGameArea()
 	{
@@ -185,7 +187,7 @@ public class GameBoardModel
 	}
 	
 	/**
-	 * 
+	 * Update method
 	 */
 	public void update()
 	{
@@ -193,10 +195,11 @@ public class GameBoardModel
 	}
 
 	/**
+	 * Method to get an index from the board based on given coordinates
 	 * 
 	 * @param int x The x coordinate to get the index 
 	 * @param int y The y coordinate to get the index
-	 * @return
+	 * @return int the index and -1 if no index could be found
 	 */
 	public int getIndexFromBoard(int x, int y)
 	{
@@ -209,8 +212,9 @@ public class GameBoardModel
 	}
 
 	/**
+	 * Function that removes an object from the GameBoard
 	 * 
-	 * @param int indexFromBoard
+	 * @param int indexFromBoard The index number to remove
 	 */
 	public void removeFromPlayGround(int indexFromBoard)
 	{

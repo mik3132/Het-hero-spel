@@ -20,36 +20,45 @@ import view.*;
  */
 public class Main extends JFrame implements Runnable 
 {
+	/** The PlayPanel that shows the GameBoard */
 	PlayPanel playPanel;
+	/** The ControlPanel that shows the buttons and scores */
 	ControlPanel controlPanel;
+	/** The GameBoardModel that manages all the objects */
 	GameBoardModel gbm;
+	/** The Input manager for controlling user input */
 	Input in;
+	/** The HeroModel representing the Hero */
 	HeroModel heroModel;
 	
+	/** The MenuBar */
 	JMenuBar menuBar;
+	/** The MenuBar menus */
     JMenu gameMenu, optionsMenu, levelMenu;
+    /** The MenuBar menu items */
     JMenuItem restartItem, quitItem, soundItem, level1Item, level2Item; 
 	
     /** boolean that checks if the application is running */
 	boolean run = true;
 
 	/**
-	 * Constructor method
+	 * Constructor
 	 */
 	Main()
 	{
-		//create model
+		// Create models
 		heroModel = new HeroModel( PlayPanel.width, PlayPanel.height, 1000 );
 		gbm = new GameBoardModel( heroModel );
 		
-		//create Views
+		// Create views
 		controlPanel = new ControlPanel(heroModel);
 		playPanel = new PlayPanel( gbm, heroModel);
 		
-		//create controller
+		// Create controller
 		in = new Input( heroModel, gbm, controlPanel, playPanel );
 		controlPanel.setInput(in); //SetActionListners
 		
+		// Standard setters for a JFrame
 		this.setTitle("Het hero spel");
 		this.setLayout(new BorderLayout());
 		this.add(BorderLayout.EAST, controlPanel);
@@ -84,10 +93,11 @@ public class Main extends JFrame implements Runnable
 		this.add(menuBar);
 		*/
 		
+		// Standard setters for JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize( 1124 ,  880 );
+		this.setSize(1124, 880);
 		this.setResizable(false);
-		this.addKeyListener( in );
+		this.addKeyListener(in);
 		this.setVisible(true);
 	}
 
@@ -96,17 +106,26 @@ public class Main extends JFrame implements Runnable
 	 */
 	private void update()
 	{
-		// scs.update();
+		// Update the control panel
 		controlPanel.update();
+		// Update the GameBoardModel
 		gbm.update();
 	}
 	
+	/**
+	 * Standard main function for executing the application
+	 * 
+	 * @param String[] args
+	 */
 	public static void main(String[] args)
 	{
 		Thread main = new Thread(new Main());
 		main.start();
 	}
 
+	/**
+	 * The run method
+	 */
 	@Override
 	public void run()
 	{

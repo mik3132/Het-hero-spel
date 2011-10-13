@@ -23,7 +23,8 @@ public class Enemy extends EnemyModel
 	int direction;
 
 	/**
-	 * Constructor method
+	 * Constructor
+	 * 
 	 * @param int x The x position of the enemy
 	 * @param int y The y position of the enemy
 	 * @param Graphics g The graphics manager
@@ -38,6 +39,7 @@ public class Enemy extends EnemyModel
 
 	/**
 	 * Draw method for the enemy
+	 * 
 	 * @param Graphics g The graphics manager
 	 */
 	public void drawEnemy( Graphics g )

@@ -10,18 +10,37 @@ import model.ProjectileMovement;
 
 /**
  * 
- * @author Martijn
- *
- * Teken de vliegende objecten
- *
+ * Projectile class
+ * This class draws the projectiles on the GameBoard
+ * 
+ * @author Martijn, Edo
+ * @version 0.1
+ * @date 04-10-2011
+ * 
  */
 public class Projectile extends ProjectileModel
 {
-	int x,y,direction, xTile, yTile;
+	/** The x and y coordinates of a projectile */
+	int x,y;
+	/** An integer representation of the projectile direction */
+	int direction;
+	/** The x and y coordinates the projectile wants to move */
+	int xTile, yTile;
+	/** The size of a projectile */
 	public final static int projectileSize = 10;
+	/** The GameBoardModel containing all the GameBoard data */
 	GameBoardModel gbm;
+	/** The ArrayList containing the movement of the projectile */
 	ArrayList<ProjectileMovement> pcmv;
 	
+	/**
+	 * Constructor 
+	 * 
+	 * @param int xTile The x position of the projectile
+	 * @param int yTile The y position of the projectile
+	 * @param int direction The direction the projectile is moving in
+	 * @param GameBoardModel gbm The GameBoardModel containing all the GameBoard data
+	 */
 	Projectile( int xTile, int yTile, int direction, GameBoardModel gbm )
 	{
 		super( xTile, yTile, direction, projectileSize, gbm );
@@ -34,6 +53,12 @@ public class Projectile extends ProjectileModel
 		this.pcmv = getProjectileMovement();
 	}
 
+	/**
+	 * The rePaint method
+	 * Makes sure the drawing of the projectile is smooth and flowing
+	 * 
+	 * @param Graphics g The graphics manager
+	 */
 	public void rePaint(Graphics g)
 	{
 		if(pcmv.size() > 0)

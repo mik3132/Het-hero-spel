@@ -36,6 +36,7 @@ public class ControlPanel extends JPanel
 	
 	/**
 	 * Constructor 
+	 * 
 	 * @param HeroModel heroModel The HeroModel of the current Hero
 	 */
 	public ControlPanel(HeroModel heroModel)
@@ -65,6 +66,7 @@ public class ControlPanel extends JPanel
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(buttons);
         buttons.setLayout(layout);
         
+        // TODO zooi opruimen
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -132,6 +134,7 @@ public class ControlPanel extends JPanel
 	
 	/**
 	 * Setter method for the actionListener
+	 * 
 	 * @param Input in The input manager
 	 */
 	public void setInput(Input in)

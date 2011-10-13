@@ -20,7 +20,8 @@ public class SquareGrid
 	public boolean isBlocking;
 	
 	/**
-	 * Constructor method
+	 * Constructor
+	 * 
 	 * @param int X The x position of the SquareGrid
 	 * @param int Y The y position of the SquareGrid
 	 * @param int type The type of SquareGrid

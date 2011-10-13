@@ -17,7 +17,6 @@ import model.Scores;
 /**
  * 
  * Input class
- * 
  * This class handles all the user input 
  * 
  * @author Martijn, Edo
@@ -29,31 +28,29 @@ public class Input implements KeyListener, MouseListener, ActionListener
 {
 	/** The HeroModel representing the current hero */
 	HeroModel heroModel;
-	/** The GameBoardModel representing the current gameboard */
+	/** The GameBoardModel representing the current GameBoard */
 	GameBoardModel gbm;
 	/** The current score */
 	Scores scs;
-	/** The controlpanel for the scores and buttons */
+	/** The ControlPanel for the scores and buttons */
 	ControlPanel cp;
-	/** The playpanel for the playfield */
+	/** The PlayPanel for the playfield */
 	PlayPanel playPanel;
-	/** boolean to check wether or not control is pressed */
+	/** boolean to check whether or not control is pressed */
 	boolean ctrl = false;
 	
 	/**
-	 * Constructor method
-	 * @param playPanel 
+	 * Constructor
 	 * 
-	 * @param HeroModel heroModel
-	 * @param GameBoardModel gbm
-	 * @param Scores scs
-	 * @param ControlPanel cp
+	 * @param HeroModel heroModel The HeroModel representing the current Hero
+	 * @param GameBoardModel gbm The GameBoardModel representing the current GameBoard
+	 * @param ControlPanel cp The ControlPanel containing all the buttons and score fields
+	 * @param PlayPanel playPanel The PlayPanel containing the view of the game
 	 */
 	public Input(HeroModel heroModel, GameBoardModel gbm, ControlPanel cp, PlayPanel playPanel)
 	{
 		this.heroModel = heroModel;
 		this.gbm = gbm;
-		this.scs = scs;
 		this.cp = cp;
 		this.playPanel = playPanel;
 	}
@@ -66,6 +63,8 @@ public class Input implements KeyListener, MouseListener, ActionListener
 	
 	/**
 	 * Listener for the key events
+	 * 
+	 * @param KeyEvent e The key that is pressed
 	 */
 	public void keyPressed(KeyEvent e)
 	{
@@ -94,6 +93,8 @@ public class Input implements KeyListener, MouseListener, ActionListener
 	
 	/**
 	 * Listener for the button released action
+	 * 
+	 * @param KeyEvent e The key that is released
 	 */
 	public void keyReleased(KeyEvent e)
 	{
@@ -106,6 +107,7 @@ public class Input implements KeyListener, MouseListener, ActionListener
 	/**
 	 * Method for handling the button presses
 	 * 
+	 * @param ActionEvent arg0 The ActionEvent being called
 	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource() == cp.bUp) {

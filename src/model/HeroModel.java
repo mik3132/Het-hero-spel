@@ -44,7 +44,8 @@ public class HeroModel
 	public int posViewY, posViewX;
 	 
 	/**
-	 * Constructor method
+	 * Constructor
+	 * 
 	 * @param int width The width of the hero
 	 * @param int height The height of the hero
 	 * @param int points The number of the points the hero has
@@ -70,6 +71,7 @@ public class HeroModel
 	
 	/**
 	 * Rotates the hero in the given direction
+	 * 
 	 * @param int direction Integer representation of the direction
 	 * @param boolean ctrl Boolean whether or not the control button is pressed
 	 */
@@ -129,6 +131,7 @@ public class HeroModel
 
 	/**
 	 * Checks if the move is possible to the given coordinates
+	 * 
 	 * @param int x The x coordinate to move to
 	 * @param int y The y coordinate to move to
 	 * @return boolean True if the move is possible and False when it isn't
@@ -156,6 +159,7 @@ public class HeroModel
 
 	/**
 	 * Setter method for the current GameBoardModel
+	 * 
 	 * @param GameBoardModel gbm The GameBoardModel to set
 	 */
 	public void setSquareGrids( GameBoardModel gbm)

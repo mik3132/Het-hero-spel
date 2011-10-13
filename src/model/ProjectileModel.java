@@ -7,11 +7,13 @@ import view.PlayPanel;
 
 /**
  * 
- * @author Martijn
- *
- * Projectile wat afgevuurd word op een doelwit moet alle coordinaten bevatten waar het getekent moet worden
- * Bijv (X) = x,y tot aan x,y
- * A > B > C enz. zodat je weet waar die projectile heen gaat en kunt zien wanneer het mogelijk inpact heeft
+ * ProjectileModel class
+ * This class contains the data of the projectiles fired, it contains the movement data of the projectile from start till it.
+ * This way you know exactly where the projectile is heading and check when it impacts
+ * 
+ * @author Martijn, Edo
+ * @version 0.1
+ * @date 04-10-2011
  *
  */
 public class ProjectileModel
@@ -20,6 +22,15 @@ public class ProjectileModel
 	ArrayList<ProjectileMovement> pcmv = new ArrayList<ProjectileMovement>();
 	GameBoardModel gbm;
 	
+	/**
+	 * Constructor 
+	 * 
+	 * @param int x The x coordinate from where the projectile was fired 
+	 * @param int y The y coordinate from where the projectile was fired
+	 * @param int direction The integer representation of the direction the projectile is traveling in
+	 * @param int projectileSize The projectile size
+	 * @param GameBoardModel gbm The GameBoardModel representing the current GameBoard
+	 */
 	public ProjectileModel(int x, int y, int direction, int projectileSize, GameBoardModel gbm)
 	{
 		this.x = (GameBoard.squareSize*x)+((GameBoard.squareSize - projectileSize)/2);
@@ -30,6 +41,9 @@ public class ProjectileModel
 		this.calculatePositions();
 	}
 
+	/**
+	 * Method that will calculate the positions the projectile will travel on
+	 */
 	public void calculatePositions()
 	{
 		int totalX = (PlayPanel.width/2)-(projectileSize/2);
@@ -79,6 +93,11 @@ public class ProjectileModel
 			}
 	}
 	
+	/**
+	 * Getter method for the projectileMovement
+	 * 
+	 * @return ArrayList the projectile movement
+	 */
 	public ArrayList<ProjectileMovement> getProjectileMovement()
 	{
 		return pcmv;
