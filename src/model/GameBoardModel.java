@@ -18,7 +18,7 @@ import view.GameBoard;
 /**
  * 
  * GameBoardModel class
- * The data that will have to drawn on the gameboard
+ * The data that will have to drawn on the GameBoard
  * 
  * @author Martijn, Edo
  * @version 0.1
@@ -28,9 +28,12 @@ import view.GameBoard;
 public class GameBoardModel
 {
 	/** The level to load at first */
-	File file = new File("level/level1.xml");
+	File file = new File("level/level3.xml");
+	/** The ArrayList containing the objects on the grid */
 	public ArrayList<SquareGrid> sglist = new ArrayList<SquareGrid>();
+	/** Integers for keeping track of the size */
 	public int sizePlayGroundX, sizePlayGroundY;
+	/** The HeroModel representing the current Hero */
 	HeroModel heroModel;
 
 	/**
@@ -66,13 +69,13 @@ public class GameBoardModel
 	}
 	
 	/**
-	 * 
+	 * Method that updates the gamearea based on the hero's movement
 	 */
 	public void updateGameArea()
 	{
 		// x <= sizePlayGroundX otherwise the largest position won't be accounted for
 		for(int x = 0; x <= sizePlayGroundX; x++) {
-			// same as with x but for y here
+			// y <= sizePlayGroundY otherwise the largest position won't be accounted for
 			for(int y = 0; y <= sizePlayGroundY; y++) {
 				boolean found = false;
 				
@@ -92,6 +95,13 @@ public class GameBoardModel
 		
 	}
 	
+	/**
+	 * Method to get an object at a specified position
+	 * 
+	 * @param int x The x position of the object to get 
+	 * @param int y The y position of the object to get
+	 * @return SquareGrid if an object is found and null if no object is found
+	 */
 	public SquareGrid getObjectFromPlayGround(int x, int y)
 	{
 		for(int list = 0; list < sglist.size(); list++) {
@@ -103,7 +113,7 @@ public class GameBoardModel
 	}
 	
 	/**
-	 * Loads the GameArea from the xml file
+	 * Loads the GameArea from the set xml file
 	 */
 	public void loadGameArea()
 	{
@@ -176,11 +186,21 @@ public class GameBoardModel
 		this.updateGameArea();
 	}
 	
+	/**
+	 * Update method
+	 */
 	public void update()
 	{
 		
 	}
 
+	/**
+	 * Method to get an index from the board based on given coordinates
+	 * 
+	 * @param int x The x coordinate to get the index 
+	 * @param int y The y coordinate to get the index
+	 * @return int the index and -1 if no index could be found
+	 */
 	public int getIndexFromBoard(int x, int y)
 	{
 		for(int list = 0; list < sglist.size(); list++) {
@@ -191,6 +211,11 @@ public class GameBoardModel
 		return -1;
 	}
 
+	/**
+	 * Function that removes an object from the GameBoard
+	 * 
+	 * @param int indexFromBoard The index number to remove
+	 */
 	public void removeFromPlayGround(int indexFromBoard)
 	{
 		this.sglist.remove(indexFromBoard);

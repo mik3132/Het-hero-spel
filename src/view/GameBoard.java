@@ -53,22 +53,20 @@ public class GameBoard
 	/**
 	 * Method that draws the grid
 	 * 
-	 * @param Grahpics g The Grapic manager to execute the drawing
+	 * @param Graphics g The Graphic manager to execute the drawing
 	 */
 	public void drawGrid(Graphics g)
 	{
-		for(int i = 1; i <= this.squaresHorizontal; i++)
-		{
+		for(int i = 1; i <= this.squaresHorizontal; i++) {
 			g.drawLine(0, (i*GameBoard.squareSize), width, (i*GameBoard.squareSize));
 			g.drawLine((i*GameBoard.squareSize), 0, (i*GameBoard.squareSize), height);
 		}
-		
 	}
 	
 	/**
 	 * Method that draws the GameBoard
 	 * 
-	 * @param Grahpics g The Grapic manager to execute the drawing
+	 * @param Graphics g The Graphic manager to execute the drawing
 	 */
 	public void drawGameBoard(Graphics g)
 	{
@@ -96,11 +94,11 @@ public class GameBoard
 	}
 	
 	/**
-	 * Method that draws the edge around the gameboard
+	 * Method that draws the edge around the GameBoard
 	 * 
 	 * @param int posX The x position calculated based on the hero's movement
 	 * @param int posY The y position calculated based on the hero's movement
-	 * @param Grahpics g The Graphic manager to execute the drawing
+	 * @param Graphics g The Graphic manager to execute the drawing
 	 */
 	private void drawGameBoardEdge(int posX, int posY, Graphics g)
 	{
@@ -109,7 +107,7 @@ public class GameBoard
 			// Upper border
 			new Wall(posX + (i * squareSize), posY).drawWall(g);
 			// Lower border
-			new Wall(posX + (i * squareSize), posY + (gbm.sizePlayGroundY * squareSize) + GameBoard.squareSize).drawWall(g);
+			new Wall(posX + (i * squareSize), posY + (gbm.sizePlayGroundY * squareSize) + squareSize).drawWall(g);
 		}
 		
 		// Draw the vertical edges
@@ -117,15 +115,17 @@ public class GameBoard
 			// Left border
 			new Wall(posX, posY + (i * squareSize)).drawWall(g);
 			// Right border
-			new Wall(posX + (gbm.sizePlayGroundX * squareSize) + GameBoard.squareSize, posY + (i * squareSize)).drawWall(g);
+			new Wall(posX + (gbm.sizePlayGroundX * squareSize) + squareSize, posY + (i * squareSize)).drawWall(g);
 		}
 		
+		// Draw the right lower corner wall
+		new Wall(posX + ( gbm.sizePlayGroundX * squareSize ) + squareSize , posY + (gbm.sizePlayGroundY * squareSize) + squareSize).drawWall(g);
 	}
 
 	/**
-	 * Method that draws the empty spaces, enemies and walls on the gameboard
+	 * Method that draws the empty spaces, enemies and walls on the GameBoard
 	 * 
-	 * @param Grahpics g The Grapic manager to execute the drawing
+	 * @param Grahpics g The Graphic manager to execute the drawing
 	 * @param int object The object to be added
 	 * @param int x The x position for the object
 	 * @param int y The y position for the object

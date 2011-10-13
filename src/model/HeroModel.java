@@ -5,32 +5,59 @@ import view.GameBoard;
 /**
  * 
  * HeroModel class
- * 
+ * The HeroModel class represents the hero in the game
  * 
  * @author Martijn, Edo
- *
- * De data van de hero wat getekend moet worden voor de view klasse.
+ * @version 0.1
+ * @date 04-10-2011
  *
  */
 public class HeroModel 
 {
+	/** Static final integer for VIEWUP */
 	public static final int VIEWUP = 0;
+	/** Static final integer for VIEWLEFT */
 	public static final int VIEWLEFT = 1;
+	/** Static final integer for VIEWRIGHT */
 	public static final int VIEWRIGHT = 2;
+	/** Static final integer for VIEWDOWN */
 	public static final int VIEWDOWN = 3;
+	
+	/** The Scores model */
 	public Scores scs;
-	
+	/** The GameBoardModel */
 	GameBoardModel gbm;
-	public int ovalSize, x, y, viewX, viewY, midX, midY, posHeroPosX, posHeroPosY, heroPosX, heroPosY, direction, posViewY, posViewX;
 	
+	/** The size of an oval representing our Hero */
+	public int ovalSize; 
+	/** The position of the Hero */
+	public int x, y; 
+	/** The middle points of the Hero */
+	public int midX, midY, viewX, viewY;
+	/** The position of the Hero */
+	public int heroPosX, heroPosY;
+	/** The position the hero wants to go to */
+	public int posHeroPosX, posHeroPosY; 
+	/** Integer representation of the direction of the Hero */
+	public int direction; 
+	/** The position the Hero is looking at */
+	public int posViewY, posViewX;
+	 
+	/**
+	 * Constructor
+	 * 
+	 * @param int width The width of the hero
+	 * @param int height The height of the hero
+	 * @param int points The number of the points the hero has
+	 */
 	public HeroModel(int width, int height, int points )
 	{
-		//Add scores and actions
+		// Add scores and actions
 		this.scs = new Scores(points);
-		this.scs.addAction("VIEWUP", 10);
-		this.scs.addAction("VIEWDOWN", 10);
-		this.scs.addAction("VIEWLEFT", 10);
-		this.scs.addAction("VIEWRIGHT", 10);
+		this.scs.addAction("VIEWUP", scs.movementCost);
+		this.scs.addAction("VIEWDOWN", scs.movementCost);
+		this.scs.addAction("VIEWLEFT", scs.movementCost);
+		this.scs.addAction("VIEWRIGHT", scs.movementCost);
 		
 		this.midX = (width/2);
 		this.midY = (height/2);
@@ -39,8 +66,15 @@ public class HeroModel
 		this.x = (width/2)-(GameBoard.squareSize/2);
 		this.y = (height/2)-(GameBoard.squareSize/2);
 		this.ovalSize = GameBoard.squareSize;
+		
 	}
 	
+	/**
+	 * Rotates the hero in the given direction
+	 * 
+	 * @param int direction Integer representation of the direction
+	 * @param boolean ctrl Boolean whether or not the control button is pressed
+	 */
 	public void rotateHero(int direction, boolean ctrl)
 	{
 		switch( direction ) {
@@ -84,6 +118,7 @@ public class HeroModel
 		
 		this.direction = direction;		
 		
+		// Check if the move is possible
 		if(this.movePossible( posHeroPosX, posHeroPosY )) {
 			heroPosX = posHeroPosX;
 			heroPosY = posHeroPosY;
@@ -96,6 +131,7 @@ public class HeroModel
 
 	/**
 	 * Checks if the move is possible to the given coordinates
+	 * 
 	 * @param int x The x coordinate to move to
 	 * @param int y The y coordinate to move to
 	 * @return boolean True if the move is possible and False when it isn't
@@ -106,10 +142,11 @@ public class HeroModel
 		if(x < 1 || y < 1 || x > gbm.sizePlayGroundX || y > gbm.sizePlayGroundY) {
 			return false;
 		}
-		
+
 		int tileX = posHeroPosX;
 		int tileY = posHeroPosY;
 
+		// Loop through the GameBoardModel object list checking for objects
 		for(int i = 0; i < gbm.sglist.size(); i++) {
 			SquareGrid check = gbm.sglist.get(i);
 			
@@ -117,13 +154,13 @@ public class HeroModel
 				return !check.isBlocking;
 			}
 		}
-		
 		return false;
 	}
 
 	/**
 	 * Setter method for the current GameBoardModel
-	 * @param GameBoardModel gbm The gameboardmodel to set
+	 * 
+	 * @param GameBoardModel gbm The GameBoardModel to set
 	 */
 	public void setSquareGrids( GameBoardModel gbm)
 	{

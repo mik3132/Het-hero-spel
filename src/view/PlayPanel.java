@@ -15,25 +15,44 @@ import model.Timing;
 
 /**
  * 
- * @author Martijn
- *
- * Hierin word het speelveld getekend incl spelers enemys etc.
- *
+ * PlayPanel class
+ * This class represents the PlayPanel in which the game is played
+ * 
+ * @author Martijn, Edo
+ * @version 0.1
+ * @date 04-10-2011
+ * 
  */
 public class PlayPanel extends JPanel
 {
+	/** The GameBoard to draw s*/
 	GameBoard gb;
+	/** The GameBoardModel containing all the GameBoard data */
 	GameBoardModel gbm;
+	/** The Input manager */
 	Input in;
+	/** The graphical representation of the Hero */
 	Hero hero;
-	Wall wall;
+	/** The HeroModel containing all the data of the Hero */
 	HeroModel hm;
+	/** The Wall objects */
+	Wall wall;
+	/** */
 	long lastProjectile = 0;
+	/** The ArrayList containing all the projectiles */
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+
+	/** The width and height in pixels */	
 	public final static int width = 850, height = 850; //px
 	boolean gameover = false;
 	boolean won = false;
+
 	
+	/**
+	 * Constructor 
+	 * @param GameBoardModel gbm
+	 * @param HeroModel hm
+	 */
 	public PlayPanel( GameBoardModel gbm, HeroModel hm)
 	{
 		this.gbm = gbm;
@@ -46,11 +65,14 @@ public class PlayPanel extends JPanel
 		this.setBackground( Color.white );
 		this.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 		this.setVisible(true);
-		
-		//add action to Scores
-		hm.scs.addAction("SHOOT", 500);
+
+		// add action to Scores
+		hm.scs.addAction("SHOOT", hm.scs.shotCost);
 	}
 	
+	/**
+	 * Places a new projectile on the GameBoard
+	 */
 	public void setNewProjectile()
 	{
 		//Remove the points that the action cost, else check if the player is game over.
@@ -70,7 +92,11 @@ public class PlayPanel extends JPanel
 		}
 	}
 	
-
+	/**
+	 * The paint method
+	 * 
+	 * @paramn Graphics g The graphics manager
+	 */
 	public void paint(Graphics g)
 	{
 		if(gameover) {
