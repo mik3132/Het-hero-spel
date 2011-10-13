@@ -15,7 +15,7 @@ public class Scores
 	private int lowestCost; //the lowest number of points that a action can cost
 	private HashMap<String, Integer> actionspoints; //HashMap<String actionname, Integer how many points the action cost>
 	public int movementCost = 10;
-	
+	public int shotCost = 50;
 	
 	/**
 	 * Score constructor

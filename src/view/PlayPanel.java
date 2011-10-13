@@ -45,8 +45,8 @@ public class PlayPanel extends JPanel
 		this.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 		this.setVisible(true);
 		
-		//add action to Scores
-		hm.scs.addAction("SHOOT", 50);
+		// add action to Scores
+		hm.scs.addAction("SHOOT", hm.scs.shotCost);
 	}
 	
 	public void setNewProjectile()

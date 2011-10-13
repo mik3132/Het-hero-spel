@@ -18,7 +18,7 @@ import view.GameBoard;
 /**
  * 
  * GameBoardModel class
- * The data that will have to drawn on the gameboard
+ * The data that will have to drawn on the GameBoard
  * 
  * @author Martijn, Edo
  * @version 0.1
@@ -29,7 +29,9 @@ public class GameBoardModel
 {
 	/** The level to load at first */
 	File file = new File("level/level3.xml");
+	/** The ArrayList containing the objects on the grid */
 	public ArrayList<SquareGrid> sglist = new ArrayList<SquareGrid>();
+	/** Integers for keeping track of the size */
 	public int sizePlayGroundX, sizePlayGroundY;
 	HeroModel heroModel;
 
@@ -72,7 +74,7 @@ public class GameBoardModel
 	{
 		// x <= sizePlayGroundX otherwise the largest position won't be accounted for
 		for(int x = 0; x <= sizePlayGroundX; x++) {
-			// same as with x but for y here
+			// y <= sizePlayGroundY otherwise the largest position won't be accounted for
 			for(int y = 0; y <= sizePlayGroundY; y++) {
 				boolean found = false;
 				
@@ -92,6 +94,12 @@ public class GameBoardModel
 		
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public SquareGrid getObjectFromPlayGround(int x, int y)
 	{
 		for(int list = 0; list < sglist.size(); list++) {
@@ -176,11 +184,20 @@ public class GameBoardModel
 		this.updateGameArea();
 	}
 	
+	/**
+	 * 
+	 */
 	public void update()
 	{
 		
 	}
 
+	/**
+	 * 
+	 * @param int x The x coordinate to get the index 
+	 * @param int y The y coordinate to get the index
+	 * @return
+	 */
 	public int getIndexFromBoard(int x, int y)
 	{
 		for(int list = 0; list < sglist.size(); list++) {
@@ -191,6 +208,10 @@ public class GameBoardModel
 		return -1;
 	}
 
+	/**
+	 * 
+	 * @param int indexFromBoard
+	 */
 	public void removeFromPlayGround(int indexFromBoard)
 	{
 		this.sglist.remove(indexFromBoard);

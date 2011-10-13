@@ -52,22 +52,20 @@ public class GameBoard
 	/**
 	 * Method that draws the grid
 	 * 
-	 * @param Grahpics g The Grapic manager to execute the drawing
+	 * @param Graphics g The Graphic manager to execute the drawing
 	 */
 	public void drawGrid(Graphics g)
 	{
-		for(int i = 1; i <= this.squaresHorizontal; i++)
-		{
+		for(int i = 1; i <= this.squaresHorizontal; i++) {
 			g.drawLine(0, (i*GameBoard.squareSize), width, (i*GameBoard.squareSize));
 			g.drawLine((i*GameBoard.squareSize), 0, (i*GameBoard.squareSize), height);
 		}
-		
 	}
 	
 	/**
 	 * Method that draws the GameBoard
 	 * 
-	 * @param Grahpics g The Grapic manager to execute the drawing
+	 * @param Graphics g The Graphic manager to execute the drawing
 	 */
 	public void drawGameBoard(Graphics g)
 	{
@@ -116,13 +114,12 @@ public class GameBoard
 		
 		// Draw the right lower corner wall
 		new Wall(posX + ( gbm.sizePlayGroundX * squareSize ) + squareSize , posY + (gbm.sizePlayGroundY * squareSize) + squareSize).drawWall(g);
-		
 	}
 
 	/**
-	 * Method that draws the empty spaces, enemies and walls on the gameboard
+	 * Method that draws the empty spaces, enemies and walls on the GameBoard
 	 * 
-	 * @param Grahpics g The Grapic manager to execute the drawing
+	 * @param Grahpics g The Graphic manager to execute the drawing
 	 * @param int object The object to be added
 	 * @param int x The x position for the object
 	 * @param int y The y position for the object

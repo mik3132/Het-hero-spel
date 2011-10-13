@@ -6,16 +6,28 @@ import java.awt.Graphics;
 import model.EnemyModel;
 
 /**
- * 
- * @author Martijn
- *
- * Circeltje rood ofzo als vijand
- *
- */
+*
+* Enemy class
+* The enemy class represents an enemy on the gameboard, players cannot move through the enemies but they can shoot them
+*
+* @author Edo, Martijn
+* @version 0.1
+* @date 04-10-2011
+*
+*/
 public class Enemy extends EnemyModel
 {
-	int x, y, direction;
+	/** x and y coordinates for the enemy */
+	int x, y; 
+	/** the direction the enemy is facing*/
+	int direction;
 
+	/**
+	 * Constructor method
+	 * @param int x The x position of the enemy
+	 * @param int y The y position of the enemy
+	 * @param Graphics g The graphics manager
+	 */
 	Enemy(int x, int y, Graphics g)
 	{
 		super(x,y);
@@ -24,6 +36,10 @@ public class Enemy extends EnemyModel
 		this.drawEnemy(g);
 	}
 
+	/**
+	 * Draw method for the enemy
+	 * @param Graphics g The graphics manager
+	 */
 	public void drawEnemy( Graphics g )
 	{
 		g.setColor(Color.RED);

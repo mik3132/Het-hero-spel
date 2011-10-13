@@ -14,23 +14,41 @@ import view.GameBoard;
  */
 public class HeroModel 
 {
-	/** static final integer for VIEWUP */
+	/** Static final integer for VIEWUP */
 	public static final int VIEWUP = 0;
-	/** static final integer for VIEWLEFT */
+	/** Static final integer for VIEWLEFT */
 	public static final int VIEWLEFT = 1;
-	/** static final integer for VIEWRIGHT */
+	/** Static final integer for VIEWRIGHT */
 	public static final int VIEWRIGHT = 2;
-	/** static final integer for VIEWDOWN */
+	/** Static final integer for VIEWDOWN */
 	public static final int VIEWDOWN = 3;
 	
 	/** The Scores model */
 	public Scores scs;
-	
 	/** The GameBoardModel */
 	GameBoardModel gbm;
 	
-	public int ovalSize, x, y, viewX, viewY, midX, midY, posHeroPosX, posHeroPosY, heroPosX, heroPosY, direction, posViewY, posViewX;
+	/** The size of an oval representing our Hero */
+	public int ovalSize; 
+	/** The position of the Hero */
+	public int x, y; 
+	/** The middle points of the Hero */
+	public int midX, midY, viewX, viewY;
+	/** The position of the Hero */
+	public int heroPosX, heroPosY;
+	/** The position the hero wants to go to */
+	public int posHeroPosX, posHeroPosY; 
+	/** Integer representation of the direction of the Hero */
+	public int direction; 
+	/** The position the Hero is looking at */
+	public int posViewY, posViewX;
 	 
+	/**
+	 * Constructor method
+	 * @param int width The width of the hero
+	 * @param int height The height of the hero
+	 * @param int points The number of the points the hero has
+	 */
 	public HeroModel(int width, int height, int points )
 	{
 		// Add scores and actions
@@ -47,8 +65,14 @@ public class HeroModel
 		this.x = (width/2)-(GameBoard.squareSize/2);
 		this.y = (height/2)-(GameBoard.squareSize/2);
 		this.ovalSize = GameBoard.squareSize;
+		
 	}
 	
+	/**
+	 * Rotates the hero in the given direction
+	 * @param int direction Integer representation of the direction
+	 * @param boolean ctrl Boolean whether or not the control button is pressed
+	 */
 	public void rotateHero(int direction, boolean ctrl)
 	{
 		switch( direction ) {
@@ -92,6 +116,7 @@ public class HeroModel
 		
 		this.direction = direction;		
 		
+		// Check if the move is possible
 		if(this.movePossible( posHeroPosX, posHeroPosY )) {
 			heroPosX = posHeroPosX;
 			heroPosY = posHeroPosY;
@@ -114,7 +139,7 @@ public class HeroModel
 		if(x < 1 || y < 1 || x > gbm.sizePlayGroundX || y > gbm.sizePlayGroundY) {
 			return false;
 		}
-		
+
 		int tileX = posHeroPosX;
 		int tileY = posHeroPosY;
 

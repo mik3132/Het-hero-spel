@@ -14,19 +14,30 @@ import model.HeroModel;
 import model.Scores;
 
 /**
- * 
- * @author Martijn
- *
- * Knoppen & scores
- *
- */
+*
+* ControlPanel class
+* This class represents the ControlPanel, this displays the Score and Buttons for the movement of the Hero
+*
+* @author Martijn, Edo
+* @version 0.1
+* @date 04-10-2011
+*
+*/
 public class ControlPanel extends JPanel
 {
+	/** Buttons for the control panel */
 	public JButton bUp,bDown,bLeft,bRight,bShoot;
+	/** Labels for the control panel */
 	public JLabel jLabel1, jLabel2;
+	/** TextFields for the control panel */
 	public JTextField jTextField1, jTextField2;
+	/** The HeroModel of the current Hero */
 	private HeroModel heroModel;
 	
+	/**
+	 * Constructor 
+	 * @param HeroModel heroModel The HeroModel of the current Hero
+	 */
 	public ControlPanel(HeroModel heroModel)
 	{
 		this.heroModel = heroModel;
@@ -49,10 +60,11 @@ public class ControlPanel extends JPanel
 		this.setBackground(Color.gray);
 		this.setVisible(true);
 		
-		//add Buttons to JPanel
+		// add Buttons to JPanel
 		JPanel buttons = new JPanel();
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(buttons);
         buttons.setLayout(layout);
+        
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -77,6 +89,7 @@ public class ControlPanel extends JPanel
                                 .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))
                     .addGap(28, 28, 28))
             );
+        
             layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -107,6 +120,7 @@ public class ControlPanel extends JPanel
 		bRight.setFocusable(false);
 		bShoot.setFocusable(false);
 
+		// Add the layout to the buttons
 		buttons.add(BorderLayout.NORTH, bUp);
 		buttons.add(BorderLayout.SOUTH, bDown);
 		buttons.add(BorderLayout.EAST, bRight);
@@ -116,7 +130,11 @@ public class ControlPanel extends JPanel
 		this.add(BorderLayout.CENTER, buttons);
 	}
 	
-	public void setInput( Input in )
+	/**
+	 * Setter method for the actionListener
+	 * @param Input in The input manager
+	 */
+	public void setInput(Input in)
 	{
 		// Add buttons to actionListener
 		bUp.addActionListener(in);
@@ -126,6 +144,9 @@ public class ControlPanel extends JPanel
 		bShoot.addActionListener(in);
 	}
 	
+	/**
+	 * Update method for updating the Scores
+	 */
 	public void update ()
 	{
 		jTextField1.setText(""+heroModel.scs.points);

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<body>
+	<hero x="1" y="1" />
+	<gamearea sizeInTileX="20" sizeInTileY="20">
+		<!-- WALLS enter as input 1-->
+		<tile tileX="3" tileY="4" blocking="true">1</tile>
+		<tile tileX="4" tileY="4" blocking="true">1</tile>
+		<tile tileX="4" tileY="5" blocking="true">1</tile>
+		<tile tileX="2" tileY="5" blocking="true">1</tile>
+		<tile tileX="2" tileY="4" blocking="true">1</tile>
+		
+		<!-- ENEMIES enter as input 2-->
+		<tile tileX="7" tileY="7" blocking="true">2</tile>
+		<tile tileX="3" tileY="3" blocking="true">2</tile>
+	</gamearea>
+</body>
