@@ -31,6 +31,8 @@ public class PlayPanel extends JPanel
 	long lastProjectile = 0;
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public final static int width = 850, height = 850; //px
+	boolean gameover = false;
+	boolean won = false;
 	
 	public PlayPanel( GameBoardModel gbm, HeroModel hm)
 	{
@@ -46,33 +48,49 @@ public class PlayPanel extends JPanel
 		this.setVisible(true);
 		
 		//add action to Scores
-		hm.scs.addAction("SHOOT", 50);
+		hm.scs.addAction("SHOOT", 500);
 	}
 	
 	public void setNewProjectile()
 	{
+		//Remove the points that the action cost, else check if the player is game over.
 		if( hm.scs.removeActionPoints("SHOOT") )
 		{
 			long timenow = System.currentTimeMillis();
-			if(lastProjectile == 0 || lastProjectile < timenow)
-			{
+			if(lastProjectile == 0 || lastProjectile < timenow) {
 				lastProjectile = (timenow+Timing.bulletNext);
 				projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm ));
 			}
 		} else {
-			System.out.println("game over?");
+			String allowdActions = hm.scs.getAllowdActions();
+			if(allowdActions != "")
+				System.out.println("Not enough points left for the actions. You can still do the following moves:\n"+allowdActions);
+			else
+				gameover = true;
 		}
 	}
 	
 
 	public void paint(Graphics g)
 	{
-		super.paint(g);
-		gb.drawGrid(g); //Laat Grid zien
-		gb.drawGameBoard(g);
-		hero.drawHero(g);
-		for(int i = 0; i < projectiles.size(); i++)
-			projectiles.get(i).rePaint( g );
+		if(gameover) {
+			g.clearRect(0, 0, width, height);
+			this.gameOver(g);
+		} else {
+			super.paint(g);
+			gb.drawGrid(g); //Laat Grid zien
+			gb.drawGameBoard(g);
+			hero.drawHero(g);
+			for(int i = 0; i < projectiles.size(); i++)
+			{
+				projectiles.get(i).rePaint( g );
+			}
+		}
+	}
+	
+	public void gameOver(Graphics g)
+	{
+		gb.drawGameOver(g);
 	}
 	
 }

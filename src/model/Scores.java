@@ -98,7 +98,7 @@ public class Scores
 			for(String action : actionspoints.keySet())
 			{			
 				//Do i have enough points to perform this action
-				if(actionspoints.get(action) >= points) 
+				if(actionspoints.get(action) <= points) 
 				allowdActions += action + " cost " + actionspoints.get(action) + " points \n";
 			}
 			

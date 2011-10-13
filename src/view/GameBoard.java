@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -85,8 +86,13 @@ public class GameBoard
 		}
 		
 		// Draw the edge of the GameBoard
-		this.drawGameBoardEdge(calPosX, calPosY, g);
-		
+		this.drawGameBoardEdge(calPosX, calPosY, g);		
+	}
+	
+	public void drawGameOver(Graphics g)
+	{
+		g.setColor(Color.black);
+		g.drawString("Game Over", 400, 400);
 	}
 	
 	/**
