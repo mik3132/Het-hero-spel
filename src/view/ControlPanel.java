@@ -26,7 +26,7 @@ import model.Scores;
 public class ControlPanel extends JPanel
 {
 	/** Buttons for the control panel */
-	public JButton bUp,bDown,bLeft,bRight,bShoot;
+	public JButton bUp,bDown,bLeft,bRight,bShoot, newGame, bexit;
 	/** Labels for the control panel */
 	public JLabel jLabel1, jLabel2;
 	/** TextFields for the control panel */
@@ -48,6 +48,8 @@ public class ControlPanel extends JPanel
 		bLeft = new JButton("<");
 		bRight = new JButton(">");
 		bShoot = new JButton("FIRE");
+		newGame = new JButton("New game");
+		bexit = new JButton("Exit");
         jLabel1 = new JLabel("Enemies left");
         jLabel2 = new JLabel("Points left");
         jTextField1 = new JTextField(""+heroModel.scs.points);
@@ -63,8 +65,10 @@ public class ControlPanel extends JPanel
 		
 		// add Buttons to JPanel
 		JPanel buttons = new JPanel();
+		JPanel pbuttonsNorth = new JPanel();
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(buttons);
         buttons.setLayout(layout);
+        pbuttonsNorth.setLayout(new BorderLayout());
         
         // TODO zooi opruimen
         layout.setHorizontalGroup(
@@ -121,6 +125,8 @@ public class ControlPanel extends JPanel
 		bLeft.setFocusable(false);
 		bRight.setFocusable(false);
 		bShoot.setFocusable(false);
+		newGame.setFocusable(false);
+		bexit.setFocusable(false);
 
 		// Add the layout to the buttons
 		buttons.add(BorderLayout.NORTH, bUp);
@@ -128,7 +134,10 @@ public class ControlPanel extends JPanel
 		buttons.add(BorderLayout.EAST, bRight);
 		buttons.add(BorderLayout.WEST, bLeft);
 		buttons.add(BorderLayout.CENTER, bShoot);
+		pbuttonsNorth.add(BorderLayout.NORTH, newGame);
+		pbuttonsNorth.add(BorderLayout.SOUTH, bexit);
 		
+		this.add(BorderLayout.NORTH, pbuttonsNorth);
 		this.add(BorderLayout.CENTER, buttons);
 	}
 	
@@ -145,6 +154,8 @@ public class ControlPanel extends JPanel
 		bLeft.addActionListener(in);
 		bRight.addActionListener(in);
 		bShoot.addActionListener(in);
+		newGame.addActionListener(in);
+		bexit.addActionListener(in);
 	}
 	
 	/**

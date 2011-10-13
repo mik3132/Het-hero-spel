@@ -28,7 +28,7 @@ import view.GameBoard;
 public class GameBoardModel
 {
 	/** The level to load at first */
-	File file = new File("level/level3.xml");
+	File file = new File("level/level1.xml");
 	/** The ArrayList containing the objects on the grid */
 	public ArrayList<SquareGrid> sglist = new ArrayList<SquareGrid>();
 	/** Integers for keeping track of the size */
@@ -118,6 +118,7 @@ public class GameBoardModel
 	 */
 	public void loadGameArea()
 	{
+		sglist = new ArrayList<SquareGrid>();
 		if(!file.exists()) {
 			System.out.println("file: '"+file.getPath()+"' not found.");
 		} else {

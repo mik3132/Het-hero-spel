@@ -16,6 +16,8 @@ public class Scores
 {
 	/** The points that are left for the game */
 	public int points;
+	/** The points that where given for resetting the game */
+	public int givenpoints;
 	/** The lowest number of points that a action can cost */
 	private int lowestCost;
 	/** HashMap<String actionname, Integer how many points the action cost> */
@@ -36,6 +38,7 @@ public class Scores
 	public Scores(int points)
 	{
 		this.points = points;
+		this.givenpoints = points;
 		this.actionspoints = new HashMap<String, Integer>();
 		this.lowestCost = points;
 	}	
@@ -172,5 +175,15 @@ public class Scores
 	public void removeEnemy() {
 		enemies--;
 		this.setGameStatus();
+	}
+	
+	/**
+	 * reset the won, gameover, enemies and points
+	 */
+	public void resetScores() {
+		won = false;
+		gameover = false;
+		enemies = 0;
+		points = givenpoints;
 	}
 }
