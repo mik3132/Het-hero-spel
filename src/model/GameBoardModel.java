@@ -18,7 +18,7 @@ import view.GameBoard;
 /**
  * 
  * GameBoardModel class
- * De data van het grond model wat getekend moet worden voor de view klasse.
+ * The data that will have to drawn on the gameboard
  * 
  * @author Martijn, Edo
  * @version 0.1
@@ -70,39 +70,35 @@ public class GameBoardModel
 	 */
 	public void updateGameArea()
 	{
-		// x <= sizePlayGroundX zodat de 40 ook mee in de lijst gaat
-		for(int x = 0; x <= sizePlayGroundX; x++)
-			// zelfde als bij x
-			for(int y = 0; y <= sizePlayGroundY; y++)
-			{
+		// x <= sizePlayGroundX otherwise the largest position won't be accounted for
+		for(int x = 0; x <= sizePlayGroundX; x++) {
+			// same as with x but for y here
+			for(int y = 0; y <= sizePlayGroundY; y++) {
 				boolean found = false;
-				for(int list = 0; list < sglist.size(); list++)
-				{
-					if(sglist.get(list).x == x && sglist.get(list).y == y)
-					{
+				
+				for(int list = 0; list < sglist.size(); list++) {
+					if(sglist.get(list).x == x && sglist.get(list).y == y) {
 						found = true;
 						break;
-					} else
+					} else {
 						found = false;
+					}
 				}
-				if(!found)
-					sglist.add(
-                			new SquareGrid(
-                					x, 
-                					y, 
-                					GameBoard.EMPTY,
-                					false
-                					)
-                			);
+				if(!found) {
+					sglist.add(new SquareGrid(x, y, GameBoard.EMPTY, false));
+				}
 			}
+		}
 		
 	}
 	
 	public SquareGrid getObjectFromPlayGround(int x, int y)
 	{
-		for(int list = 0; list < sglist.size(); list++)
-			if(sglist.get(list).x == x && sglist.get(list).y == y)
+		for(int list = 0; list < sglist.size(); list++) {
+			if(sglist.get(list).x == x && sglist.get(list).y == y) {
 				return sglist.get(list);
+			}
+		}
 		return null;
 	}
 	
@@ -111,9 +107,9 @@ public class GameBoardModel
 	 */
 	public void loadGameArea()
 	{
-		if(!file.exists())
+		if(!file.exists()) {
 			System.out.println("file: '"+file.getPath()+"' not found.");
-		else
+		} else {
 			try 
 			{
 	            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -122,8 +118,8 @@ public class GameBoardModel
 	
 	            doc.getDocumentElement ().normalize ();
 	            NodeList hero = doc.getElementsByTagName("hero");
-	            if( hero.item(0).getNodeType() == Node.ELEMENT_NODE )
-	            {
+	            
+	            if( hero.item(0).getNodeType() == Node.ELEMENT_NODE ) {
 	            	Element heroPOS = (Element)hero.item(0);
 	            	heroModel.heroPosX = Integer.parseInt( heroPOS.getAttributes().item(0).getNodeValue() ); //sizeInTileX
 	            	heroModel.heroPosY = Integer.parseInt( heroPOS.getAttributes().item(1).getNodeValue() ); //sizeInTileY
@@ -132,8 +128,8 @@ public class GameBoardModel
 	            }
 	            
 	            NodeList gamearea = doc.getElementsByTagName("gamearea");
-	            if( gamearea.item(0).getNodeType() == Node.ELEMENT_NODE)
-	            {
+	            
+	            if( gamearea.item(0).getNodeType() == Node.ELEMENT_NODE) {
 	            	Element gaElement = (Element)gamearea.item(0);
 	            	sizePlayGroundX = Integer.parseInt( gaElement.getAttributes().item(0).getNodeValue() ); //sizeInTileX
 	            	sizePlayGroundY = Integer.parseInt( gaElement.getAttributes().item(1).getNodeValue() ); //sizeInTileY
@@ -141,10 +137,11 @@ public class GameBoardModel
 	            
 	            NodeList tileNodes = doc.getElementsByTagName("tile");
 	            int tiles = tileNodes.getLength();
-	            for(int s=0; s < tiles; s++){
+	            
+	            for(int s=0; s < tiles; s++) {
 	                Node firstPersonNode = tileNodes.item(s);
-	                if(firstPersonNode.getNodeType() == Node.ELEMENT_NODE)
-	                {
+	                
+	                if(firstPersonNode.getNodeType() == Node.ELEMENT_NODE) {
 	                    Element tile = (Element)firstPersonNode;
 	                    Node tileX = tile.getAttributes().getNamedItem("tileX"), 
 	                    		tileY = tile.getAttributes().getNamedItem("tileY"), 
@@ -174,6 +171,7 @@ public class GameBoardModel
 	        } catch (Throwable t) {
 	        	t.printStackTrace ();
 	        }
+		}
 	        
 		this.updateGameArea();
 	}
@@ -185,15 +183,17 @@ public class GameBoardModel
 
 	public int getIndexFromBoard(int x, int y)
 	{
-		for(int list = 0; list < sglist.size(); list++)
-			if(sglist.get(list).x == x && sglist.get(list).y == y)
+		for(int list = 0; list < sglist.size(); list++) {
+			if(sglist.get(list).x == x && sglist.get(list).y == y) {
 				return list;
+			}
+		}
 		return -1;
 	}
 
-	public void removeFromPlayGround( int indexFromBoard)
+	public void removeFromPlayGround(int indexFromBoard)
 	{
-		this.sglist.remove( indexFromBoard );
+		this.sglist.remove(indexFromBoard);
 		this.updateGameArea();
 	}
 

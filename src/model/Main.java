@@ -9,9 +9,9 @@ import view.*;
 
 /**
  *
- * Hoofdklasse, onder deze klasse vallen alle klasses.
- * Het frame & threadpool.
- *
+ * Main class
+ * The main class controls all the other classes, hence the name main class.
+ * This class also contains a threadpool for executing the application
  *
  * @author TeamX
  * @version 0.1
@@ -31,6 +31,7 @@ public class Main extends JFrame implements Runnable
     JMenu gameMenu, optionsMenu, levelMenu;
     JMenuItem restartItem, quitItem, soundItem, level1Item, level2Item; 
 	
+    /** boolean that checks if the application is running */
 	boolean run = true;
 
 	/**
@@ -87,6 +88,9 @@ public class Main extends JFrame implements Runnable
 		this.setVisible(true);
 	}
 
+	/**
+	 * Method that updates the Scores and GameBoardModel
+	 */
 	private void update()
 	{
 		scs.update();
@@ -102,12 +106,10 @@ public class Main extends JFrame implements Runnable
 	@Override
 	public void run()
 	{
-		while(run)
-		{
+		while(run) {
 			this.update();
 			controlPanel.repaint();
 			playPanel.repaint();
-			
 			
 			try {
 				Thread.sleep(50);

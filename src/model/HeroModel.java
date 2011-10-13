@@ -4,7 +4,10 @@ import view.GameBoard;
 
 /**
  * 
- * @author Martijn
+ * HeroModel class
+ * 
+ * 
+ * @author Martijn, Edo
  *
  * De data van de hero wat getekend moet worden voor de view klasse.
  *
@@ -91,13 +94,8 @@ public class HeroModel
 		int tileX = posHeroPosX;
 		int tileY = posHeroPosY;
 
-		
-		for(int i = 0; i < gbm.sglist.size(); i++)
-		{
+		for(int i = 0; i < gbm.sglist.size(); i++) {
 			SquareGrid check = gbm.sglist.get(i);
-			
-			System.out.println("X: " + check.x + " Y: " + check.y);
-			System.out.println("tileX: " + tileX + " tileY: " + tileY);
 			
 			if(check.x == tileX && check.y == tileY) {
 				return !check.isBlocking;

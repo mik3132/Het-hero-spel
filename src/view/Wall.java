@@ -4,12 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- * 
- * @author Martijn
- *
- * Teken het object in dit geval een muur op het speelveld.
- *
- */
+*
+* Wall class
+* The wall class represents an wall on the gameboard, players cannot move or shoot through the wall
+*
+* @author Edo, Martijn
+* @version 0.1
+* @date 04-10-2011
+*
+*/
 public class Wall
 {
 	int x, y;
