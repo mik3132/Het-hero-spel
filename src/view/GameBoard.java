@@ -75,8 +75,7 @@ public class GameBoard
 		int calPosY = (((height/2)-(squareSize/2)) - (gbm.getHeroModel().heroPosY * squareSize));
 		
 		// Loop through the list of object to add the object
-		for(int i = 0; i < gbm.sglist.size(); i++)
-		{
+		for(int i = 0; i < gbm.sglist.size(); i++) {
 			int x = (gbm.sglist.get(i).x * squareSize) + calPosX; // Iets extra voor het positioneren waar de Hero is
 			int y = (gbm.sglist.get(i).y * squareSize) + calPosY; // Iets extra voor het positioneren waar de Hero is
 			this.drawObject( g, gbm.sglist.get(i).item, x, y );

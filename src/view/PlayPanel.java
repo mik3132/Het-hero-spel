@@ -71,11 +71,9 @@ public class PlayPanel extends JPanel
 	 */
 	public void setNewProjectile()
 	{
-		if( hm.scs.removeActionPoints("SHOOT") )
-		{
+		if( hm.scs.removeActionPoints("SHOOT") ) {
 			long timenow = System.currentTimeMillis();
-			if(lastProjectile == 0 || lastProjectile < timenow)
-			{
+			if(lastProjectile == 0 || lastProjectile < timenow) {
 				lastProjectile = (timenow+Timing.bulletNext);
 				projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm ));
 			}
@@ -87,16 +85,21 @@ public class PlayPanel extends JPanel
 	/**
 	 * The paint method
 	 * 
-	 * @paramn Graphics g The graphics manager
+	 * @param Graphics g The graphics manager
 	 */
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-		gb.drawGrid(g); //Laat Grid zien
+		// Draw the Grid
+		gb.drawGrid(g); 
+		// Draw the GameBoard
 		gb.drawGameBoard(g);
+		// Draw the Hero
 		hero.drawHero(g);
-		for(int i = 0; i < projectiles.size(); i++)
+		
+		for(int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).rePaint( g );
+		}
 	}
 	
 }
