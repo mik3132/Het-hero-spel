@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -10,6 +11,7 @@ import controller.Input;
 
 import model.GameBoardModel;
 import model.HeroModel;
+import model.Timing;
 
 /**
  * 
@@ -21,29 +23,45 @@ import model.HeroModel;
 public class PlayPanel extends JPanel
 {
 	GameBoard gb;
+	GameBoardModel gbm;
 	Input in;
 	Hero hero;
 	Wall wall;
-	public static int width = 850, height = 850; //px
+	HeroModel hm;
+	long lastProjectile = 0;
+	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	public final static int width = 850, height = 850; //px
 	
 	public PlayPanel( GameBoardModel gbm, HeroModel hm)
 	{
+		this.gbm = gbm;
 		this.gb = new GameBoard( width, height, gbm );
 		this.hero = new Hero( hm );
-		//this.wall = new Wall();
-
+		this.hm = hm;
 		this.setSize(width, height);
 		this.setBackground( Color.white );
 		this.setVisible(true);
+	}
+	
+	public void setNewProjectile()
+	{
+		long timenow = System.currentTimeMillis();
+		if(lastProjectile == 0 || lastProjectile < timenow)
+		{
+			lastProjectile = (timenow+Timing.bulletNext);
+			projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm ));
+		}
 	}
 	
 
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-		gb.drawGrid(g);
+		gb.drawGrid(g); //Laat Grid zien
 		gb.drawGameBoard(g);
 		hero.drawHero(g);
+		for(int i = 0; i < projectiles.size(); i++)
+			projectiles.get(i).rePaint( g );
 	}
 	
 }

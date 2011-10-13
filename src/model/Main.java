@@ -20,7 +20,7 @@ import view.*;
  */
 public class Main extends JFrame implements Runnable 
 {
-	JPanel playPanel;
+	PlayPanel playPanel;
 	ControlPanel controlPanel;
 	GameBoardModel gbm;
 	Scores scs;
@@ -43,8 +43,8 @@ public class Main extends JFrame implements Runnable
 		gbm = new GameBoardModel( heroModel );
 		controlPanel = new ControlPanel( scs );
 		playPanel = new PlayPanel( gbm, heroModel);
-		in = new Input( heroModel, gbm, scs, controlPanel );
-		
+		in = new Input( heroModel, gbm, scs, controlPanel, playPanel );
+		controlPanel.setInput(in); //SetActionListners
 		
 		this.setTitle("Het hero spel");
 		this.setLayout(new BorderLayout());
@@ -78,13 +78,10 @@ public class Main extends JFrame implements Runnable
 		
 		this.add(menuBar);
 		
-		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize( 1150 ,  890 );
 		this.addKeyListener( in );
 		this.setVisible(true);
-		
-
 	}
 
 	private void update()
@@ -110,7 +107,7 @@ public class Main extends JFrame implements Runnable
 			
 			
 			try {
-				Thread.sleep(10);
+				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

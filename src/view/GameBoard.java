@@ -96,7 +96,7 @@ public class GameBoard
 	 * 
 	 * @param int posX The x position calculated based on the hero's movement
 	 * @param int posY The y position calculated based on the hero's movement
-	 * @param Grahpics g The Grapic manager to execute the drawing
+	 * @param Grahpics g The Graphic manager to execute the drawing
 	 */
 	private void drawGameBoardEdge(int posX, int posY, Graphics g)
 	{
@@ -104,14 +104,14 @@ public class GameBoard
 		for(int i=0; i <= gbm.sizePlayGroundX; i++)
 		{
 			new Wall(posX + (i * squareSize), posY).drawWall(g);
-			new Wall(posX + (i * squareSize), posY + (gbm.sizePlayGroundY * squareSize)).drawWall(g);
+			new Wall(posX + (i * squareSize), posY + (gbm.sizePlayGroundY * squareSize) + squareSize).drawWall(g);
 		}
 		
 		// Draw the vertical edges
 		for(int i=0; i < gbm.sizePlayGroundY; i++)
 		{
 			new Wall(posX, posY + (i * squareSize)).drawWall(g);
-			new Wall(posX + (gbm.sizePlayGroundX * squareSize), posY + (i * squareSize)).drawWall(g);
+			new Wall(posX + (gbm.sizePlayGroundX * squareSize) + squareSize, posY + (i * squareSize)).drawWall(g);
 		}
 		
 	}
