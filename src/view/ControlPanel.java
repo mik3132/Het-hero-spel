@@ -13,7 +13,6 @@ import javax.swing.LayoutStyle;
 import controller.Input;
 
 import model.HeroModel;
-import model.Scores;
 
 /**
 *
@@ -56,7 +55,6 @@ public class ControlPanel extends JPanel
         jTextField2 = new JTextField(""+heroModel.scs.enemies);
         jTextField1.setFocusable(false);
         jTextField2.setFocusable(false);
-        
 		
 		this.setLayout(new BorderLayout());
 		this.setSize(300, 800);
@@ -65,10 +63,9 @@ public class ControlPanel extends JPanel
 		
 		// add Buttons to JPanel
 		JPanel buttons = new JPanel();
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(buttons);
+        GroupLayout layout = new GroupLayout(buttons);
         buttons.setLayout(layout);
         
-        // TODO zooi opruimen
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()

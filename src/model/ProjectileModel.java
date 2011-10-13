@@ -18,8 +18,15 @@ import view.PlayPanel;
  */
 public class ProjectileModel
 {
-	int x,y,projectileSize, direction;
+	/** The x and y coordinates of the projectile */
+	int x, y;
+	/** The size of the projectile */
+	int projectileSize;
+	/** The direction of the projectile */
+	int direction;
+	/** ArrayList containing the movement of the projectile */
 	ArrayList<ProjectileMovement> pcmv = new ArrayList<ProjectileMovement>();
+	/** The GameBoardModel */
 	GameBoardModel gbm;
 	
 	/**
