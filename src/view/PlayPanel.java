@@ -56,7 +56,7 @@ public class PlayPanel extends JPanel
 	public PlayPanel( GameBoardModel gbm, HeroModel hm)
 	{
 		this.gbm = gbm;
-		this.gb = new GameBoard( width, height, gbm );
+		this.gb = new GameBoard( width, height, gbm, hm );
 		this.hero = new Hero( hm );
 		this.hm = hm;
 		this.setSize(width, height);
@@ -75,7 +75,7 @@ public class PlayPanel extends JPanel
 	 */
 	public void setNewProjectile()
 	{
-		//Remove the points that the action cost, else check if the player is game over.
+		//Remove the points that the action cost, return false if there are not enough points
 		if( hm.scs.removeActionPoints("SHOOT") )
 		{
 			long timenow = System.currentTimeMillis();
@@ -83,13 +83,7 @@ public class PlayPanel extends JPanel
 				lastProjectile = (timenow+Timing.bulletNext);
 				projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm ));
 			}
-		} else {
-			String allowdActions = hm.scs.getAllowdActions();
-			if(allowdActions != "")
-				System.out.println("Not enough points left for the actions. You can still do the following moves:\n"+allowdActions);
-			else
-				gameover = true;
-		}
+		} 
 	}
 	
 	/**
@@ -99,7 +93,7 @@ public class PlayPanel extends JPanel
 	 */
 	public void paint(Graphics g)
 	{
-		if(gameover) {
+		if(hm.scs.gameover) {
 			g.clearRect(0, 0, width, height);
 			this.gameOver(g);
 		} else {

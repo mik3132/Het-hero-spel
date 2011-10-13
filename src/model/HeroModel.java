@@ -82,37 +82,33 @@ public class HeroModel
 				viewY = (midY-(GameBoard.squareSize/2));
 				viewX = midX;
 				if(!ctrl)
+					//Remove the points that the action cost, return false if there are not enough points
 					if(scs.removeActionPoints("VIEWUP"))						
 						posHeroPosY--;
-					else
-						System.out.println("gameover?");
 			break;
 			case VIEWDOWN:
 				viewY = (midY+(GameBoard.squareSize/2));
 				viewX = midX;
 				if(!ctrl)
+					//Remove the points that the action cost, return false if there are not enough points
 					if(scs.removeActionPoints("VIEWDOWN"))
 						posHeroPosY++;
-					else
-						System.out.println("gameover?");
 			break;
 			case VIEWLEFT:
 				viewX = (midX-(GameBoard.squareSize/2));
 				viewY = midY;
 				if(!ctrl)
+					//Remove the points that the action cost, return false if there are not enough points
 					if(scs.removeActionPoints("VIEWLEFT"))
 						posHeroPosX--;
-					else
-						System.out.println("gameover?");
 			break;
 			case VIEWRIGHT:
 				viewX = (midX+(GameBoard.squareSize/2));
 				viewY = midY;
 				if(!ctrl)
+					//Remove the points that the action cost, return false if there are not enough points
 					if(scs.removeActionPoints("VIEWRIGHT"))
 						posHeroPosX++;
-					else
-						System.out.println("gameover?");
 			break;
 		}
 		

@@ -48,10 +48,10 @@ public class ControlPanel extends JPanel
 		bLeft = new JButton("<");
 		bRight = new JButton(">");
 		bShoot = new JButton("FIRE");
-        jLabel1 = new JLabel("Score");
+        jLabel1 = new JLabel("Enemies left");
         jLabel2 = new JLabel("Points left");
         jTextField1 = new JTextField(""+heroModel.scs.points);
-        jTextField2 = new JTextField("0");
+        jTextField2 = new JTextField(""+heroModel.scs.enemies);
         jTextField1.setFocusable(false);
         jTextField2.setFocusable(false);
         
@@ -153,6 +153,7 @@ public class ControlPanel extends JPanel
 	public void update ()
 	{
 		jTextField1.setText(""+heroModel.scs.points);
+		jTextField2.setText(""+heroModel.scs.enemies);
 	}
 	
 

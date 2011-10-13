@@ -78,6 +78,7 @@ public class Projectile extends ProjectileModel
 					if(sg == GameBoard.ENEMY)
 					{
 						gbm.removeFromPlayGround( gbm.getIndexFromBoard(tileX, tileY) );
+						gbm.heroModel.scs.removeEnemy();
 						pcmv.clear();
 						return;
 					} else if(sg == GameBoard.WALL)

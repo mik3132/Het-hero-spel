@@ -34,7 +34,7 @@ public class GameBoardModel
 	/** Integers for keeping track of the size */
 	public int sizePlayGroundX, sizePlayGroundY;
 	/** The HeroModel representing the current Hero */
-	HeroModel heroModel;
+	public HeroModel heroModel;
 
 	/**
 	 * Constructor method
@@ -160,6 +160,9 @@ public class GameBoardModel
 	                    	tileY.getNodeName() == "tileY" &&
 	                    	tile.getFirstChild().getNodeValue() != null )
 	                    {
+	                    	//if enemy add this to the total enemies
+	                    	if( Integer.parseInt(tile.getFirstChild().getNodeValue()) == GameBoard.ENEMY )
+	                    		heroModel.scs.addEnemy();
 	                    	sglist.add(
 	                    			new SquareGrid(
 	                    					Integer.parseInt( tileX.getNodeValue() ), 

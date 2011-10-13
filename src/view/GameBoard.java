@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import model.GameBoardModel;
+import model.HeroModel;
 
 /**
  *
@@ -28,6 +29,8 @@ public class GameBoard
 	GameBoardModel gbm;
 	/** The ArrayList containing the enemies */
 	ArrayList<Enemy> arEnemy = new ArrayList<Enemy>();
+	/** The HeroModel */
+	private HeroModel hm;
 	
 	/** The size of the squares */
 	public static final int squareSize = 50;
@@ -41,9 +44,10 @@ public class GameBoard
 	/**
 	 * Constructor method
 	 */
-	public GameBoard( int width, int height, GameBoardModel gbm)
+	public GameBoard( int width, int height, GameBoardModel gbm, HeroModel hm)
 	{
 		this.gbm = gbm;
+		this.hm = hm;
 		this.width = width;
 		this.height = height;
 		squaresVertical = (height / squareSize); //y
@@ -138,6 +142,7 @@ public class GameBoard
 			break;
 			case GameBoard.ENEMY:
 				arEnemy.add( new Enemy(x, y, g) );
+				
 			break;
 			case GameBoard.WALL:
 				new Wall(x, y).drawWall(g);
