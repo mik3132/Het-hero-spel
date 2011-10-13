@@ -14,12 +14,14 @@ public class Scores
 	public int points; //The points that are left for the game.	
 	private int lowestCost; //the lowest number of points that a action can cost
 	private HashMap<String, Integer> actionspoints; //HashMap<String actionname, Integer how many points the action cost>
+	public int movementCost = 10;
+	
 	
 	/**
 	 * Score constructor
-	 * @param max points of the game
+	 * @param int Max points of the game
 	 */
-	public Scores(int points) //int points
+	public Scores(int points)
 	{
 		this.points = points;
 		this.actionspoints = new HashMap<String, Integer>();

@@ -8,8 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.sun.crypto.provider.HmacMD5;
-
 import controller.Input;
 
 import model.HeroModel;
@@ -101,7 +99,8 @@ public class ControlPanel extends JPanel
                     .addComponent(bDown, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(29, 29, 29))
             );
-		//unfocus buttons
+            
+		// Unfocus buttons
 		bUp.setFocusable(false);
 		bDown.setFocusable(false);
 		bLeft.setFocusable(false);
@@ -119,7 +118,7 @@ public class ControlPanel extends JPanel
 	
 	public void setInput( Input in )
 	{
-		//Add buttons to actionListener
+		// Add buttons to actionListener
 		bUp.addActionListener(in);
 		bDown.addActionListener(in);
 		bLeft.addActionListener(in);

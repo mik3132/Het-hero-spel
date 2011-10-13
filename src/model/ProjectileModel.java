@@ -19,6 +19,7 @@ public class ProjectileModel
 	int x,y,projectileSize, direction;
 	ArrayList<ProjectileMovement> pcmv = new ArrayList<ProjectileMovement>();
 	GameBoardModel gbm;
+	
 	public ProjectileModel(int x, int y, int direction, int projectileSize, GameBoardModel gbm)
 	{
 		this.x = (GameBoard.squareSize*x)+((GameBoard.squareSize - projectileSize)/2);

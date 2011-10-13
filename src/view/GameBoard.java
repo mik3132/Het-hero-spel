@@ -90,11 +90,11 @@ public class GameBoard
 	}
 	
 	/**
-	 * Method that draws the edge around the gameboard
+	 * Method that draws the edge around the GameBoard
 	 * 
 	 * @param int posX The x position calculated based on the hero's movement
 	 * @param int posY The y position calculated based on the hero's movement
-	 * @param Grahpics g The Graphic manager to execute the drawing
+	 * @param Graphics g The Graphic manager to execute the drawing
 	 */
 	private void drawGameBoardEdge(int posX, int posY, Graphics g)
 	{
@@ -103,7 +103,7 @@ public class GameBoard
 			// Upper border
 			new Wall(posX + (i * squareSize), posY).drawWall(g);
 			// Lower border
-			new Wall(posX + (i * squareSize), posY + (gbm.sizePlayGroundY * squareSize) + GameBoard.squareSize).drawWall(g);
+			new Wall(posX + (i * squareSize), posY + (gbm.sizePlayGroundY * squareSize) + squareSize).drawWall(g);
 		}
 		
 		// Draw the vertical edges
@@ -111,8 +111,11 @@ public class GameBoard
 			// Left border
 			new Wall(posX, posY + (i * squareSize)).drawWall(g);
 			// Right border
-			new Wall(posX + (gbm.sizePlayGroundX * squareSize) + GameBoard.squareSize, posY + (i * squareSize)).drawWall(g);
+			new Wall(posX + (gbm.sizePlayGroundX * squareSize) + squareSize, posY + (i * squareSize)).drawWall(g);
 		}
+		
+		// Draw the right lower corner wall
+		new Wall(posX + ( gbm.sizePlayGroundX * squareSize ) + squareSize , posY + (gbm.sizePlayGroundY * squareSize) + squareSize).drawWall(g);
 		
 	}
 

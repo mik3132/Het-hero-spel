@@ -28,7 +28,7 @@ import view.GameBoard;
 public class GameBoardModel
 {
 	/** The level to load at first */
-	File file = new File("level/level1.xml");
+	File file = new File("level/level3.xml");
 	public ArrayList<SquareGrid> sglist = new ArrayList<SquareGrid>();
 	public int sizePlayGroundX, sizePlayGroundY;
 	HeroModel heroModel;

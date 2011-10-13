@@ -5,32 +5,40 @@ import view.GameBoard;
 /**
  * 
  * HeroModel class
- * 
+ * The HeroModel class represents the hero in the game
  * 
  * @author Martijn, Edo
- *
- * De data van de hero wat getekend moet worden voor de view klasse.
+ * @version 0.1
+ * @date 04-10-2011
  *
  */
 public class HeroModel 
 {
+	/** static final integer for VIEWUP */
 	public static final int VIEWUP = 0;
+	/** static final integer for VIEWLEFT */
 	public static final int VIEWLEFT = 1;
+	/** static final integer for VIEWRIGHT */
 	public static final int VIEWRIGHT = 2;
+	/** static final integer for VIEWDOWN */
 	public static final int VIEWDOWN = 3;
+	
+	/** The Scores model */
 	public Scores scs;
 	
+	/** The GameBoardModel */
 	GameBoardModel gbm;
-	public int ovalSize, x, y, viewX, viewY, midX, midY, posHeroPosX, posHeroPosY, heroPosX, heroPosY, direction, posViewY, posViewX;
 	
+	public int ovalSize, x, y, viewX, viewY, midX, midY, posHeroPosX, posHeroPosY, heroPosX, heroPosY, direction, posViewY, posViewX;
+	 
 	public HeroModel(int width, int height, int points )
 	{
-		//Add scores and actions
+		// Add scores and actions
 		this.scs = new Scores(points);
-		this.scs.addAction("VIEWUP", 10);
-		this.scs.addAction("VIEWDOWN", 10);
-		this.scs.addAction("VIEWLEFT", 10);
-		this.scs.addAction("VIEWRIGHT", 10);
+		this.scs.addAction("VIEWUP", scs.movementCost);
+		this.scs.addAction("VIEWDOWN", scs.movementCost);
+		this.scs.addAction("VIEWLEFT", scs.movementCost);
+		this.scs.addAction("VIEWRIGHT", scs.movementCost);
 		
 		this.midX = (width/2);
 		this.midY = (height/2);
@@ -110,6 +118,7 @@ public class HeroModel
 		int tileX = posHeroPosX;
 		int tileY = posHeroPosY;
 
+		// Loop through the GameBoardModel object list checking for objects
 		for(int i = 0; i < gbm.sglist.size(); i++) {
 			SquareGrid check = gbm.sglist.get(i);
 			
@@ -117,13 +126,12 @@ public class HeroModel
 				return !check.isBlocking;
 			}
 		}
-		
 		return false;
 	}
 
 	/**
 	 * Setter method for the current GameBoardModel
-	 * @param GameBoardModel gbm The gameboardmodel to set
+	 * @param GameBoardModel gbm The GameBoardModel to set
 	 */
 	public void setSquareGrids( GameBoardModel gbm)
 	{
