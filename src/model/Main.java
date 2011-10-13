@@ -2,7 +2,6 @@ package model;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import controller.Input;
 
@@ -48,7 +47,8 @@ public class Main extends JFrame implements Runnable
 		this.add(BorderLayout.EAST, controlPanel);
 		this.add(BorderLayout.CENTER, playPanel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize( 1150 ,  890 );
+		this.setSize( 1124 ,  880 );
+		this.setResizable(false);
 		this.addKeyListener( in );
 		this.setVisible(true);
 	}

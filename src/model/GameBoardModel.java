@@ -14,7 +14,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import view.GameBoard;
-import view.Projectile;
 
 /**
  * 

@@ -7,8 +7,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JPanel;
-
 import view.ControlPanel;
 import view.PlayPanel;
 
@@ -65,8 +63,6 @@ public class Input implements KeyListener, MouseListener, ActionListener
 	{
 		if(e.getKeyCode() == KeyEvent.VK_CONTROL)
 			ctrl = true;
-		
-		cp.spacer.insert("KeyPressed key:"+e.getKeyCode() + " name:" + KeyEvent.getKeyText( e.getKeyCode() ) + "\n\r", 0);
 		if(e.getKeyCode() == 38)
 			heroModel.rotateHero(HeroModel.VIEWUP, ctrl);
 		if(e.getKeyCode() == 40)
