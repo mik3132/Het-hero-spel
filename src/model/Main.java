@@ -1,7 +1,7 @@
 package model;
 
 import java.awt.BorderLayout;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import controller.Input;
 
@@ -26,6 +26,10 @@ public class Main extends JFrame implements Runnable
 	Input in;
 	HeroModel heroModel;
 	
+	JMenuBar menuBar;
+    JMenu gameMenu, optionsMenu, levelMenu;
+    JMenuItem restartItem, quitItem, soundItem, level1Item, level2Item; 
+	
 	boolean run = true;
 
 	/**
@@ -49,6 +53,36 @@ public class Main extends JFrame implements Runnable
 		this.setLayout(new BorderLayout());
 		this.add(BorderLayout.EAST, controlPanel);
 		this.add(BorderLayout.CENTER, playPanel);
+		
+		// JMENU
+		/** 
+		menuBar = new JMenuBar();
+		
+		gameMenu = new JMenu("Game");
+		optionsMenu = new JMenu("Options");
+		levelMenu = new JMenu("Level");
+		
+		menuBar.add(gameMenu);
+		menuBar.add(optionsMenu);
+		menuBar.add(levelMenu);
+		
+		restartItem = new JMenuItem("Restart");
+		quitItem = new JMenuItem("Quit");
+		soundItem = new JMenuItem("Sound");
+		level1Item = new JMenuItem("Level 1");
+		level2Item = new JMenuItem("Level 2");
+		
+		gameMenu.add(restartItem);
+		gameMenu.add(quitItem);
+		
+		optionsMenu.add(soundItem);
+		
+		levelMenu.add(level1Item);
+		levelMenu.add(level2Item);
+		
+		this.add(menuBar);
+		*/
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize( 1124 ,  880 );
 		this.setResizable(false);

@@ -40,8 +40,7 @@ public class HeroModel
 	
 	public void rotateHero(int direction, boolean ctrl)
 	{
-		switch( direction )
-		{
+		switch( direction ) {
 			case VIEWUP:
 				viewY = (midY-(GameBoard.squareSize/2));
 				viewX = midX;
@@ -79,9 +78,10 @@ public class HeroModel
 						System.out.println("gameover?");
 			break;
 		}
+		
 		this.direction = direction;		
-		if(this.movePossible( posHeroPosX, posHeroPosY ))
-		{
+		
+		if(this.movePossible( posHeroPosX, posHeroPosY )) {
 			heroPosX = posHeroPosX;
 			heroPosY = posHeroPosY;
 		} else {
@@ -91,22 +91,42 @@ public class HeroModel
 		}
 	}
 
+	/**
+	 * Checks if the move is possible to the given coordinates
+	 * @param int x The x coordinate to move to
+	 * @param int y The y coordinate to move to
+	 * @return boolean True if the move is possible and False when it isn't
+	 */
 	private boolean movePossible(int x, int y)
 	{
-		if(x < 1 || y < 1 || x > gbm.sizePlayGroundX || y > gbm.sizePlayGroundY)
+		//TODO Magic numbers....
+		if(x < 1 || y < 1 || x > gbm.sizePlayGroundX || y > gbm.sizePlayGroundY) {
 			return false;
+		}
+		
 		int tileX = posHeroPosX;
 		int tileY = posHeroPosY;
 
+		
 		for(int i = 0; i < gbm.sglist.size(); i++)
 		{
 			SquareGrid check = gbm.sglist.get(i);
-			if(check.x == tileX && check.y == tileY)
+			
+			System.out.println("X: " + check.x + " Y: " + check.y);
+			System.out.println("tileX: " + tileX + " tileY: " + tileY);
+			
+			if(check.x == tileX && check.y == tileY) {
 				return !check.isBlocking;
+			}
 		}
+		
 		return false;
 	}
 
+	/**
+	 * Setter method for the current GameBoardModel
+	 * @param GameBoardModel gbm The gameboardmodel to set
+	 */
 	public void setSquareGrids( GameBoardModel gbm)
 	{
 		this.gbm = gbm;
