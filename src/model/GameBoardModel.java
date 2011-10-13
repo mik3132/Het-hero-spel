@@ -78,7 +78,7 @@ public class GameBoardModel
 			// y <= sizePlayGroundY otherwise the largest position won't be accounted for
 			for(int y = 0; y <= sizePlayGroundY; y++) {
 				boolean found = false;
-				
+				// Loop through the list of objects
 				for(int list = 0; list < sglist.size(); list++) {
 					if(sglist.get(list).x == x && sglist.get(list).y == y) {
 						found = true;
@@ -88,6 +88,7 @@ public class GameBoardModel
 					}
 				}
 				if(!found) {
+					// If there's no object to place on the GameBoard place and empty field
 					sglist.add(new SquareGrid(x, y, GameBoard.EMPTY, false));
 				}
 			}
@@ -120,15 +121,18 @@ public class GameBoardModel
 		if(!file.exists()) {
 			System.out.println("file: '"+file.getPath()+"' not found.");
 		} else {
-			try 
-			{
+			try {
+				
+				// Create a DocumentBuilderFactory to parse the xml file
 	            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 	            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-	            Document doc = docBuilder.parse ( file );
-	
+	            Document doc = docBuilder.parse (file);
 	            doc.getDocumentElement ().normalize ();
+	            
+	            // Create a nodelist to get the Hero attributes
 	            NodeList hero = doc.getElementsByTagName("hero");
 	            
+	            //  Get all the attributes from the hero
 	            if( hero.item(0).getNodeType() == Node.ELEMENT_NODE ) {
 	            	Element heroPOS = (Element)hero.item(0);
 	            	heroModel.heroPosX = Integer.parseInt( heroPOS.getAttributes().item(0).getNodeValue() ); //sizeInTileX
@@ -137,23 +141,32 @@ public class GameBoardModel
 	            	heroModel.posHeroPosY = Integer.parseInt( heroPOS.getAttributes().item(1).getNodeValue() ); //sizeInTileY
 	            }
 	            
+	            // Create a nodelist to get the gameArea attributes
 	            NodeList gamearea = doc.getElementsByTagName("gamearea");
 	            
+	            //  Get all the attributes from the gameArea
 	            if( gamearea.item(0).getNodeType() == Node.ELEMENT_NODE) {
 	            	Element gaElement = (Element)gamearea.item(0);
 	            	sizePlayGroundX = Integer.parseInt( gaElement.getAttributes().item(0).getNodeValue() ); //sizeInTileX
 	            	sizePlayGroundY = Integer.parseInt( gaElement.getAttributes().item(1).getNodeValue() ); //sizeInTileY
 	            }
 	            
+	            // Create a nodelist to get the tile attributes
 	            NodeList tileNodes = doc.getElementsByTagName("tile");
 	            int tiles = tileNodes.getLength();
 	            
+	            // Get all the attributes from the tiles
 	            for(int s=0; s < tiles; s++) {
-	                Node firstPersonNode = tileNodes.item(s);
-	                
+
+	            	// Create a node to hold all the items
+	            	Node firstPersonNode = tileNodes.item(s);
+	            	
+	            	// If the node needs to be added 
 	                if(firstPersonNode.getNodeType() == Node.ELEMENT_NODE) {
-	                    Element tile = (Element)firstPersonNode;
-	                    Node tileX = tile.getAttributes().getNamedItem("tileX"), 
+	                	Element tile = (Element)firstPersonNode;
+	                   
+	                	// Save all the attributes of a tile
+	                	Node tileX = tile.getAttributes().getNamedItem("tileX"), 
 	                    		tileY = tile.getAttributes().getNamedItem("tileY"), 
 	                    		blocking = tile.getAttributes().getNamedItem("blocking");
 	                    if(tileX.getNodeName() == "tileX" &&
@@ -163,6 +176,8 @@ public class GameBoardModel
 	                    	//if enemy add this to the total enemies
 	                    	if( Integer.parseInt(tile.getFirstChild().getNodeValue()) == GameBoard.ENEMY )
 	                    		heroModel.scs.addEnemy();
+
+	                    	// Add the SquareGrid to the ArrayList
 	                    	sglist.add(
 	                    			new SquareGrid(
 	                    					Integer.parseInt( tileX.getNodeValue() ), 
@@ -175,8 +190,7 @@ public class GameBoardModel
 	                }
 	            }
 	        } catch (SAXParseException err) {
-		        System.out.println ("** Parsing error" + ", line " 
-		             + err.getLineNumber () + ", uri " + err.getSystemId ());
+		        System.out.println ("** Parsing error" + ", line " + err.getLineNumber () + ", uri " + err.getSystemId ());
 		        System.out.println(" " + err.getMessage ());
 	        } catch (SAXException e) {
 		        Exception x = e.getException ();
@@ -185,7 +199,8 @@ public class GameBoardModel
 	        	t.printStackTrace ();
 	        }
 		}
-	        
+	    
+		// Update the gameArea with the above information
 		this.updateGameArea();
 	}
 	

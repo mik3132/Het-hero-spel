@@ -171,5 +171,6 @@ public class Scores
 	 */
 	public void removeEnemy() {
 		enemies--;
+		this.setGameStatus();
 	}
 }

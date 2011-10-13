@@ -89,28 +89,30 @@ public class PlayPanel extends JPanel
 	/**
 	 * The paint method
 	 * 
-	 * @paramn Graphics g The graphics manager
+	 * @param Graphics g The graphics manager
 	 */
 	public void paint(Graphics g)
 	{
 		if(hm.scs.gameover) {
 			g.clearRect(0, 0, width, height);
-			this.gameOver(g);
+			gb.drawGameOver(g);
+		} else if(hm.scs.won) { 
+			g.clearRect(0, 0, width, height);
+			gb.drawWon(g);
 		} else {
 			super.paint(g);
-			gb.drawGrid(g); //Laat Grid zien
+			// Draw the Grid
+			gb.drawGrid(g); 
+			// Draw the GameBoard
 			gb.drawGameBoard(g);
+			// Draw the Hero
 			hero.drawHero(g);
-			for(int i = 0; i < projectiles.size(); i++)
-			{
+			
+			for(int i = 0; i < projectiles.size(); i++) {
 				projectiles.get(i).rePaint( g );
 			}
 		}
 	}
 	
-	public void gameOver(Graphics g)
-	{
-		gb.drawGameOver(g);
-	}
 	
 }
