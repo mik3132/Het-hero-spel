@@ -26,8 +26,11 @@ public class Scores
 	public int movementCost = 10;
 	/** The cost of shooting */
 	public int shotCost = 50;
+	/** Boolean to check if the game is won */
 	public boolean won = false;
+	/** Boolean to check if the game is over */
 	public boolean gameover = false;
+	/** Count of the number of enemies */
 	public int enemies;
 	
 	/**
@@ -98,10 +101,12 @@ public class Scores
 				points -= actionspoints.get(action);
 				return true;
 			}
-			//There where not enough points, show the allowd actions
+			
+			//There where not enough points, show the allowed actions
 			String allowdActions = this.getAllowdActions();
-			if(allowdActions != "")
+			if(allowdActions != "") {
 				System.out.println("Not enough points left for the actions. You can still do the following moves:\n"+allowdActions);
+			}
 			this.setGameStatus();
 		} catch(Exception e) {
 			System.out.println(e);
@@ -147,11 +152,14 @@ public class Scores
 	private void setGameStatus()
 	{
 		//if there are no more enemies left the game is won
-		if(enemies <= 0)
+		if(enemies <= 0) {
 			won = true;
+		}
+		
 		//If there are no more allowed moves are left.
-		if(this.getAllowdActions() == "")
+		if(this.getAllowdActions() == "") {
 			gameover = true;
+		}
 	}
 	
 	/**

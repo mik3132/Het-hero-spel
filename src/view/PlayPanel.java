@@ -43,10 +43,7 @@ public class PlayPanel extends JPanel
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
 	/** The width and height in pixels */	
-	public final static int width = 850, height = 850; //px
-	boolean gameover = false;
-	boolean won = false;
-
+	public final static int width = 850, height = 850;
 	
 	/**
 	 * Constructor 
