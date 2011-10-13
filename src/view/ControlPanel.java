@@ -8,8 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.sun.crypto.provider.HmacMD5;
+
 import controller.Input;
 
+import model.HeroModel;
 import model.Scores;
 
 /**
@@ -24,9 +27,12 @@ public class ControlPanel extends JPanel
 	public JButton bUp,bDown,bLeft,bRight,bShoot;
 	public JLabel jLabel1, jLabel2;
 	public JTextField jTextField1, jTextField2;
+	private HeroModel heroModel;
 	
-	public ControlPanel( Scores scs )
+	public ControlPanel(HeroModel heroModel)
 	{
+		this.heroModel = heroModel;
+		
 		bUp = new JButton("/\\");
 		bDown = new JButton( "\\/" );
 		bLeft = new JButton("<");
@@ -34,7 +40,7 @@ public class ControlPanel extends JPanel
 		bShoot = new JButton("FIRE");
         jLabel1 = new JLabel("Score");
         jLabel2 = new JLabel("Points left");
-        jTextField1 = new JTextField("0");
+        jTextField1 = new JTextField(""+heroModel.scs.points);
         jTextField2 = new JTextField("0");
         jTextField1.setFocusable(false);
         jTextField2.setFocusable(false);
@@ -120,4 +126,11 @@ public class ControlPanel extends JPanel
 		bRight.addActionListener(in);
 		bShoot.addActionListener(in);
 	}
+	
+	public void update ()
+	{
+		jTextField1.setText(""+heroModel.scs.points);
+	}
+	
+
 }

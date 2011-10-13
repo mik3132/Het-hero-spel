@@ -23,7 +23,6 @@ public class Main extends JFrame implements Runnable
 	PlayPanel playPanel;
 	ControlPanel controlPanel;
 	GameBoardModel gbm;
-	Scores scs;
 	Input in;
 	HeroModel heroModel;
 	
@@ -34,12 +33,16 @@ public class Main extends JFrame implements Runnable
 	 */
 	Main()
 	{
-		scs = new Scores();
-		heroModel = new HeroModel( PlayPanel.width, PlayPanel.height );
+		//create model
+		heroModel = new HeroModel( PlayPanel.width, PlayPanel.height, 1000 );
 		gbm = new GameBoardModel( heroModel );
-		controlPanel = new ControlPanel( scs );
+		
+		//create Views
+		controlPanel = new ControlPanel(heroModel);
 		playPanel = new PlayPanel( gbm, heroModel);
-		in = new Input( heroModel, gbm, scs, controlPanel, playPanel );
+		
+		//create controller
+		in = new Input( heroModel, gbm, controlPanel, playPanel );
 		controlPanel.setInput(in); //SetActionListners
 		
 		this.setTitle("Het hero spel");
@@ -55,7 +58,8 @@ public class Main extends JFrame implements Runnable
 
 	private void update()
 	{
-		scs.update();
+		// scs.update();
+		controlPanel.update();
 		gbm.update();
 	}
 	

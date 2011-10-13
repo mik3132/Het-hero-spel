@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * 
- * @author Martijn
+ * @author Michael / Martijn
  *
  * Score data bij houden
  *
@@ -19,8 +19,9 @@ public class Scores
 	 * Score constructor
 	 * @param max points of the game
 	 */
-	public Scores() //int points
+	public Scores(int points) //int points
 	{
+		this.points = points;
 		this.actionspoints = new HashMap<String, Integer>();
 		this.lowestCost = points;
 	}	
@@ -68,7 +69,7 @@ public class Scores
 				throw(new Exception("Action does not exist in Scores->actionspoints hashmap"));
 			
 			//Do i have enough points to perform this action
-			if(actionspoints.get(action) >= points) {
+			if(actionspoints.get(action) <= points) {
 				//Remove the points off
 				points -= actionspoints.get(action);
 				return true;
