@@ -30,15 +30,8 @@ public class Main extends JFrame implements Runnable
 	Input in;
 	/** The HeroModel representing the Hero */
 	HeroModel heroModel;
-	
-	/** The MenuBar */
-	JMenuBar menuBar;
-	/** The MenuBar menus */
-    JMenu gameMenu, optionsMenu, levelMenu;
-    /** The MenuBar menu items */
-    JMenuItem restartItem, quitItem, soundItem, level1Item, level2Item; 
-	
-    /** boolean that checks if the application is running */
+
+	/** boolean that checks if the application is running */
 	boolean run = true;
 
 	/**
@@ -63,35 +56,6 @@ public class Main extends JFrame implements Runnable
 		this.setLayout(new BorderLayout());
 		this.add(BorderLayout.EAST, controlPanel);
 		this.add(BorderLayout.CENTER, playPanel);
-		
-		// JMENU
-		/** 
-		menuBar = new JMenuBar();
-		
-		gameMenu = new JMenu("Game");
-		optionsMenu = new JMenu("Options");
-		levelMenu = new JMenu("Level");
-		
-		menuBar.add(gameMenu);
-		menuBar.add(optionsMenu);
-		menuBar.add(levelMenu);
-		
-		restartItem = new JMenuItem("Restart");
-		quitItem = new JMenuItem("Quit");
-		soundItem = new JMenuItem("Sound");
-		level1Item = new JMenuItem("Level 1");
-		level2Item = new JMenuItem("Level 2");
-		
-		gameMenu.add(restartItem);
-		gameMenu.add(quitItem);
-		
-		optionsMenu.add(soundItem);
-		
-		levelMenu.add(level1Item);
-		levelMenu.add(level2Item);
-		
-		this.add(menuBar);
-		*/
 		
 		// Standard setters for JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
