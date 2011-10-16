@@ -90,14 +90,14 @@ public class PlayPanel extends JPanel
 	 */
 	public void paint(Graphics g)
 	{
+		super.paint(g);
 		if(hm.scs.gameover) {
-			//g.clearRect(0, 0, width, height);
+			g.clearRect(0, 0, width, height);
 			gb.drawGameOver(g);
 		} else if(hm.scs.won) { 
 			g.clearRect(0, 0, width, height);
 			gb.drawWon(g);
 		} else {
-			super.paint(g);
 			// Draw the Grid
 			gb.drawGrid(g); 
 			// Draw the GameBoard
