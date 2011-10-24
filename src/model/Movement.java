@@ -1,5 +1,7 @@
 package model;
 
+import view.GameBoard;
+
 /**
  * 
  * @author Martijn
@@ -22,12 +24,9 @@ package model;
  */
 public class Movement
 {
-	/**
-	 * Constructor
-	 */
+	
 	public Movement()
-	{
-		
-	}
+	{			
 
+	}
 }

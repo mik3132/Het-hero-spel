@@ -104,6 +104,7 @@ public class PlayPanel extends JPanel
 			gb.drawGameBoard(g);
 			// Draw the Hero
 			hero.drawHero(g);
+			// Draw the enemies
 			
 			for(int i = 0; i < projectiles.size(); i++) {
 				projectiles.get(i).rePaint( g );

@@ -145,9 +145,8 @@ public class GameBoard
 		{
 			case GameBoard.EMPTY:
 			break;
-			case GameBoard.ENEMY:
-				arEnemy.add( new Enemy(x, y, g) );
-				
+			case GameBoard.ENEMY:				
+				gbm.addEnemy( new Enemy(x, y, g) );				
 			break;
 			case GameBoard.WALL:
 				new Wall(x, y).drawWall(g);

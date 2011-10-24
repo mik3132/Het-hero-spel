@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import model.EnemyModel;
 
@@ -21,6 +23,7 @@ public class Enemy extends EnemyModel
 	int x, y; 
 	/** the direction the enemy is facing*/
 	int direction;
+	
 
 	/**
 	 * Constructor
@@ -34,7 +37,12 @@ public class Enemy extends EnemyModel
 		super(x,y);
 		this.x = x;
 		this.y = y;
-		this.drawEnemy(g);
+		this.drawEnemy(g);			
+	}
+	
+	public void update()
+	{
+
 	}
 
 	/**
@@ -45,9 +53,11 @@ public class Enemy extends EnemyModel
 	public void drawEnemy( Graphics g )
 	{
 		g.setColor(Color.RED);
-		g.drawOval(x, y, GameBoard.squareSize, GameBoard.squareSize);
-		g.fillOval(x, y, GameBoard.squareSize, GameBoard.squareSize);
+		g.drawOval(super.x, super.y, GameBoard.squareSize, GameBoard.squareSize);
+		g.fillOval(super.x, super.y, GameBoard.squareSize, GameBoard.squareSize);
 		g.setColor(Color.BLACK);
 		//g.drawLine(hm.midX, hm.midY, hm.viewX, hm.viewY);
 	}
+	
+	
 }

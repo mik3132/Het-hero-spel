@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import view.GameBoard;
+import view.Enemy;
 
 /**
  * 
@@ -35,6 +36,8 @@ public class GameBoardModel
 	public int sizePlayGroundX, sizePlayGroundY;
 	/** The HeroModel representing the current Hero */
 	public HeroModel heroModel;
+	/** The Enemy's representing the enemy's */
+	public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 	/**
 	 * Constructor method
@@ -175,8 +178,10 @@ public class GameBoardModel
 	                    	tile.getFirstChild().getNodeValue() != null )
 	                    {
 	                    	//if enemy add this to the total enemies
-	                    	if( Integer.parseInt(tile.getFirstChild().getNodeValue()) == GameBoard.ENEMY )
+	                    	if( Integer.parseInt(tile.getFirstChild().getNodeValue()) == GameBoard.ENEMY ) {
 	                    		heroModel.scs.addEnemy();
+	                    		
+	                    	}
 
 	                    	// Add the SquareGrid to the ArrayList
 	                    	sglist.add(
@@ -210,7 +215,10 @@ public class GameBoardModel
 	 */
 	public void update()
 	{
-		
+		for(Enemy enemy :enemies)
+		{
+			enemy.moveEnemy();
+		}
 	}
 
 	/**
@@ -239,6 +247,12 @@ public class GameBoardModel
 	{
 		this.sglist.remove(indexFromBoard);
 		this.updateGameArea();
+	}
+	
+	public void addEnemy(Enemy enemy)
+	{
+		enemy.setSquareGrids(this);
+		enemies.add(enemy);
 	}
 
 }
