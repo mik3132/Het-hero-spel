@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import model.GameBoardModel;
 import model.ProjectileModel;
 import model.ProjectileMovement;
+import model.SquareGrid;
 
 /**
  * 
@@ -73,13 +74,14 @@ public class Projectile extends ProjectileModel
 				int tileY = ((Ynew/GameBoard.squareSize+gbm.getHeroModel().heroPosY)-Yless);
 				
 				try {
-					int sg = gbm.getObjectFromPlayGround(tileX, tileY).item;
-					if(sg == GameBoard.ENEMY) {
-						gbm.removeFromPlayGround( gbm.getIndexFromBoard(tileX, tileY) );
+					SquareGrid sg = gbm.getObjectFromPlayGround(tileX, tileY);
+					if(sg instanceof Enemy) {
+						gbm.removeFromPlayGround( gbm.getIndexFromBoard(tileX, tileY), "+ 200" );
+						gbm.heroModel.scs.points += 200;
 						gbm.heroModel.scs.removeEnemy();
-						pcmv.clear();
+						//pcmv.clear();
 						return;
-					} else if(sg == GameBoard.WALL) {
+					} else if(sg instanceof Wall) {
 						pcmv.clear();
 						return;
 					}

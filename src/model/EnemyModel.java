@@ -1,7 +1,7 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import view.GameBoard;
+import view.PlayPanel;
 
 /**
  * 
@@ -28,14 +28,13 @@ public class EnemyModel
 	GameBoardModel gbm;
 	
 	/** The position in px */
-	public int x, y; 
-	/** The future position in px */
-	public int fx, fy;
+	public int x, y;
 	
 	/** the path the enemy is walking*/
-	Integer[] walkway;
+	Integer[] walkway = new Integer[]{VIEWRIGHT, VIEWUP, VIEWLEFT, VIEWDOWN};
 	/** the current place on the path	 */
 	int place = 0;
+	public int midX, midY, viewX, viewY;
 	
 	/**
 	 * Constructor 
@@ -43,17 +42,18 @@ public class EnemyModel
 	 * @param int x The x coordinate of the enemy
 	 * @param int y The y coordinate of the enemy
 	 */
-	public EnemyModel(int x, int y)
+	protected EnemyModel(int x, int y, GameBoardModel gbm)
 	{
-		//walkway of the enemy, walk right, up, left and down.
-		this.walkway = new Integer[]{VIEWRIGHT, VIEWUP, VIEWLEFT, VIEWDOWN};
 		this.x = x;
 		this.y = y;
-		this.fx = x;
-		this.fy = y;
+		this.midX = (GameBoard.squareSize*x);
+		this.midY = (GameBoard.squareSize*y);
+		this.viewX = midX;
+		this.viewY = midY;
+		this.gbm = gbm;
 	}
 	
-	public void moveEnemy()
+	protected void moveEnemy()
 	{		
 		this.rotate(walkway[place]);
 		
@@ -65,29 +65,26 @@ public class EnemyModel
 	
 	private void rotate(int direction)
 	{
+		int tempX = x,tempY = y;
+		
 		switch( direction ) {
-			case VIEWUP:				
-				fy -= gbm.squareSize;
+			case VIEWUP:			
+				tempY--;
 			break;
 			case VIEWDOWN:
-				fy += gbm.squareSize;
+				tempY++;
 			break;
 			case VIEWLEFT:
-				fx -= gbm.squareSize;
+				tempX--;
 			break;
 			case VIEWRIGHT:
-				fx += gbm.squareSize;
+				tempX++;
 			break;
 		}
-		
-		// Check if the move is possible
-		if(this.movePossible( (x/gbm.squareSize), (y/gbm.squareSize) )) {
-			x = fx;
-			y = fy;
-			System.out.println("Move possible.");
-		} else {
-			fy = y;
-			fx = x;
+
+		if(this.movePossible( tempX, tempY )) {
+			this.x = tempX;
+			this.y = tempY;
 		}
 	}
 	
@@ -101,32 +98,43 @@ public class EnemyModel
 	private boolean movePossible(int x, int y)
 	{
 		//TODO Magic numbers....
-		if(x < 1 || y < 1 || x > gbm.sizePlayGroundX || y > gbm.sizePlayGroundY) {
+		if(x < 1 || 
+			y < 1 || 
+			x > gbm.sizePlayGroundX || 
+			y > gbm.sizePlayGroundY || 
+			(gbm.heroModel.heroPosX == x && gbm.heroModel.heroPosY == y))
 			return false;
-		}
-
-		int tileX = x;
-		int tileY = y;
-
+		
 		// Loop through the GameBoardModel object list checking for objects
 		for(int i = 0; i < gbm.sglist.size(); i++) {
 			SquareGrid check = gbm.sglist.get(i);
-			
-			if(check.x == tileX && check.y == tileY) {
-				return !check.isBlocking;
-			}
+			if(check.getX() == x && check.getY() == y)
+				return !check.isBlocking();
 		}
 		return false;
 	}
-	
-	/**
-	 * Setter method for the current GameBoardModel
-	 * 
-	 * @param GameBoardModel gbm The GameBoardModel to set
-	 */
-	public void setSquareGrids( GameBoardModel gbm)
+
+	public void followHero(int newX, int newY)
 	{
-		this.gbm = gbm;
+		this.midX = newX+(GameBoard.squareSize/2);
+		this.midY = newY+(GameBoard.squareSize/2);
+		this.viewX = midX;
+		this.viewY = midY;
+		
+		//System.out.println(""+midX+" : "+midY+" : "+viewX+" : "+viewY+"");
+		int heroTilePosX = gbm.heroModel.heroPosX;
+		int heroTilePosY = gbm.heroModel.heroPosY;
+		
+		if(heroTilePosX == x)
+			if(heroTilePosY < y)
+				this.viewY -= (GameBoard.squareSize/2);
+			else
+				this.viewY += (GameBoard.squareSize/2);
+		if(heroTilePosY == y)
+			if(heroTilePosX < x)
+				this.viewX -= (GameBoard.squareSize/2);
+			else
+				this.viewX += (GameBoard.squareSize/2);
 	}
 	
 }

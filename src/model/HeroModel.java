@@ -146,8 +146,8 @@ public class HeroModel
 		for(int i = 0; i < gbm.sglist.size(); i++) {
 			SquareGrid check = gbm.sglist.get(i);
 			
-			if(check.x == tileX && check.y == tileY) {
-				return !check.isBlocking;
+			if(check.getX() == tileX && check.getY() == tileY) {
+				return !check.isBlocking();
 			}
 		}
 		return false;

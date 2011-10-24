@@ -53,7 +53,7 @@ public class PlayPanel extends JPanel
 	public PlayPanel( GameBoardModel gbm, HeroModel hm)
 	{
 		this.gbm = gbm;
-		this.gb = new GameBoard( width, height, gbm, hm );
+		this.gb = new GameBoard( width, height, gbm );
 		this.hero = new Hero( hm );
 		this.hm = hm;
 		this.setSize(width, height);
@@ -91,24 +91,18 @@ public class PlayPanel extends JPanel
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-		if(hm.scs.gameover) {
-			g.clearRect(0, 0, width, height);
+		if(hm.scs.gameover)
 			gb.drawGameOver(g);
-		} else if(hm.scs.won) { 
-			g.clearRect(0, 0, width, height);
+		else if(hm.scs.won)
 			gb.drawWon(g);
-		} else {
-			// Draw the Grid
-			gb.drawGrid(g); 
-			// Draw the GameBoard
-			gb.drawGameBoard(g);
-			// Draw the Hero
-			hero.drawHero(g);
-			// Draw the enemies
+		else {
+			gb.drawGrid(g); // Draw the Grid
+			gb.drawGameBoard(g); // Draw the GameBoard
+			hero.drawHero(g); // Draw the Hero
+			gb.drawMessages(g);	// Draw hero messages	
 			
-			for(int i = 0; i < projectiles.size(); i++) {
+			for(int i = 0; i < projectiles.size(); i++)
 				projectiles.get(i).rePaint( g );
-			}
 		}
 	}
 	

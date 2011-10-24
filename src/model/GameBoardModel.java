@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,8 +14,11 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import view.EmptySlot;
 import view.GameBoard;
 import view.Enemy;
+import view.PlayerMessage;
+import view.Wall;
 
 /**
  * 
@@ -36,10 +40,10 @@ public class GameBoardModel
 	public int sizePlayGroundX, sizePlayGroundY;
 	/** The HeroModel representing the current Hero */
 	public HeroModel heroModel;
-	/** The Enemy's representing the enemy's */
-	public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	/** the squire size */
 	public int squareSize;
+	public Random random = new Random();
+	public ArrayList<PlayerMessage> arrpm = new ArrayList<PlayerMessage>();
 	
 
 	/**
@@ -86,7 +90,7 @@ public class GameBoardModel
 				boolean found = false;
 				// Loop through the list of objects
 				for(int list = 0; list < sglist.size(); list++) {
-					if(sglist.get(list).x == x && sglist.get(list).y == y) {
+					if(sglist.get(list).getX() == x && sglist.get(list).getY() == y) {
 						found = true;
 						break;
 					} else {
@@ -95,11 +99,11 @@ public class GameBoardModel
 				}
 				if(!found) {
 					// If there's no object to place on the GameBoard place and empty field
-					sglist.add(new SquareGrid(x, y, GameBoard.EMPTY, false));
+					sglist.add( new EmptySlot(x,y) );
 				}
 			}
 		}
-		
+		drawGameBoardEdge();
 	}
 	
 	/**
@@ -112,7 +116,7 @@ public class GameBoardModel
 	public SquareGrid getObjectFromPlayGround(int x, int y)
 	{
 		for(int list = 0; list < sglist.size(); list++) {
-			if(sglist.get(list).x == x && sglist.get(list).y == y) {
+			if(sglist.get(list).getX() == x && sglist.get(list).getY() == y) {
 				return sglist.get(list);
 			}
 		}
@@ -174,28 +178,17 @@ public class GameBoardModel
 	                   
 	                	// Save all the attributes of a tile
 	                	Node tileX = tile.getAttributes().getNamedItem("tileX"), 
-	                    		tileY = tile.getAttributes().getNamedItem("tileY"), 
-	                    		blocking = tile.getAttributes().getNamedItem("blocking");
+	                    		tileY = tile.getAttributes().getNamedItem("tileY");
 	                    if(tileX.getNodeName() == "tileX" &&
 	                    	tileY.getNodeName() == "tileY" &&
 	                    	tile.getFirstChild().getNodeValue() != null )
 	                    {
-	                    	//if enemy add this to the total enemies
-	                    	if( Integer.parseInt(tile.getFirstChild().getNodeValue()) == GameBoard.ENEMY ) {
-	                    		heroModel.scs.addEnemy();
-	                    		
-	                    		
-	                    	}
-
 	                    	// Add the SquareGrid to the ArrayList
-	                    	sglist.add(
-	                    			new SquareGrid(
-	                    					Integer.parseInt( tileX.getNodeValue() ), 
-	                    					Integer.parseInt( tileY.getNodeValue() ), 
-	                    					Integer.parseInt( tile.getFirstChild().getNodeValue() ),
-	                    					Boolean.parseBoolean( blocking.getNodeValue() )
-	                    					)
-	                    			);
+	                    	if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.ENEMY) {
+	                    		heroModel.scs.addEnemy();
+	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random) );
+	                    	} else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.WALL)
+	                    		sglist.add( new Wall( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() )) );
 	                    }
 	                }
 	            }
@@ -212,6 +205,24 @@ public class GameBoardModel
 	    
 		// Update the gameArea with the above information
 		this.updateGameArea();
+	}	
+	
+	/**
+	 * Method that draws the edge around the GameBoard
+	 * 
+	 * @param int posX The x position calculated based on the hero's movement
+	 * @param int posY The y position calculated based on the hero's movement
+	 * @param Graphics g The Graphic manager to execute the drawing
+	 */
+	private void drawGameBoardEdge()
+	{
+		for(int i=0; i <= sizePlayGroundX; i++) {
+			sglist.add( new Wall(i, 0) );
+			sglist.add( new Wall(i, sizePlayGroundY+1) );
+			sglist.add( new Wall(0, i) );
+			sglist.add( new Wall(sizePlayGroundX+1, i ));
+		}
+		sglist.add( new Wall( sizePlayGroundX+1, sizePlayGroundX+1 ));
 	}
 	
 	/**
@@ -219,10 +230,6 @@ public class GameBoardModel
 	 */
 	public void update()
 	{
-		for(Enemy enemy :enemies)
-		{
-			enemy.moveEnemy();
-		}
 	}
 
 	/**
@@ -235,7 +242,7 @@ public class GameBoardModel
 	public int getIndexFromBoard(int x, int y)
 	{
 		for(int list = 0; list < sglist.size(); list++) {
-			if(sglist.get(list).x == x && sglist.get(list).y == y) {
+			if(sglist.get(list).getX() == x && sglist.get(list).getY() == y) {
 				return list;
 			}
 		}
@@ -247,16 +254,11 @@ public class GameBoardModel
 	 * 
 	 * @param int indexFromBoard The index number to remove
 	 */
-	public void removeFromPlayGround(int indexFromBoard)
+	public void removeFromPlayGround(int indexFromBoard, String message)
 	{
+		arrpm.add( new PlayerMessage( message ) );
 		this.sglist.remove(indexFromBoard);
 		this.updateGameArea();
-	}
-	
-	public void addEnemy(Enemy enemy)
-	{
-		enemy.setSquareGrids(this);
-		enemies.add(enemy);
 	}
 	
 	public void setSquereSize(int squereSize)
