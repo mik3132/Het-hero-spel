@@ -38,6 +38,9 @@ public class GameBoardModel
 	public HeroModel heroModel;
 	/** The Enemy's representing the enemy's */
 	public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	/** the squire size */
+	public int squareSize;
+	
 
 	/**
 	 * Constructor method
@@ -181,6 +184,7 @@ public class GameBoardModel
 	                    	if( Integer.parseInt(tile.getFirstChild().getNodeValue()) == GameBoard.ENEMY ) {
 	                    		heroModel.scs.addEnemy();
 	                    		
+	                    		
 	                    	}
 
 	                    	// Add the SquareGrid to the ArrayList
@@ -253,6 +257,11 @@ public class GameBoardModel
 	{
 		enemy.setSquareGrids(this);
 		enemies.add(enemy);
+	}
+	
+	public void setSquereSize(int squereSize)
+	{
+		this.squareSize = squereSize;
 	}
 
 }

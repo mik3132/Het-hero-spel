@@ -67,21 +67,21 @@ public class EnemyModel
 	{
 		switch( direction ) {
 			case VIEWUP:				
-				fy -= 50;
+				fy -= gbm.squareSize;
 			break;
 			case VIEWDOWN:
-				fy += 50;
+				fy += gbm.squareSize;
 			break;
 			case VIEWLEFT:
-				fx -= 50;
+				fx -= gbm.squareSize;
 			break;
 			case VIEWRIGHT:
-				fx += 50;
+				fx += gbm.squareSize;
 			break;
 		}
 		
 		// Check if the move is possible
-		if(this.movePossible( (x/50), (y/50) )) {
+		if(this.movePossible( (x/gbm.squareSize), (y/gbm.squareSize) )) {
 			x = fx;
 			y = fy;
 			System.out.println("Move possible.");

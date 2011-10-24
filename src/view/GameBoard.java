@@ -52,6 +52,7 @@ public class GameBoard
 		this.height = height;
 		squaresVertical = (height / squareSize); //y
 		squaresHorizontal = (width / squareSize); //x
+		gbm.setSquereSize(squareSize);
 	}
 	
 	/**
