@@ -2,7 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
+import view.Enemy;
 import view.GameBoard;
+import view.Hero;
 import view.PlayPanel;
 
 /**
@@ -19,7 +21,7 @@ import view.PlayPanel;
 public class ProjectileModel
 {
 	/** The x and y coordinates of the projectile */
-	int x, y;
+	int x, y, tileX, tileY;
 	/** The size of the projectile */
 	int projectileSize;
 	/** The direction of the projectile */
@@ -28,6 +30,7 @@ public class ProjectileModel
 	ArrayList<ProjectileMovement> pcmv = new ArrayList<ProjectileMovement>();
 	/** The GameBoardModel */
 	GameBoardModel gbm;
+	int firedBy;
 	
 	/**
 	 * Constructor 
@@ -38,14 +41,72 @@ public class ProjectileModel
 	 * @param int projectileSize The projectile size
 	 * @param GameBoardModel gbm The GameBoardModel representing the current GameBoard
 	 */
-	public ProjectileModel(int x, int y, int direction, int projectileSize, GameBoardModel gbm)
+	public ProjectileModel(int x, int y, int direction, int projectileSize, GameBoardModel gbm, int firedBy)
 	{
+		this.tileX = x;
+		this.tileY = y;
 		this.x = (GameBoard.squareSize*x)+((GameBoard.squareSize - projectileSize)/2);
 		this.y = (GameBoard.squareSize*y)+((GameBoard.squareSize - projectileSize)/2);
 		this.projectileSize = projectileSize;
 		this.direction = direction;
 		this.gbm =gbm;
-		this.calculatePositions();
+		this.firedBy = firedBy;
+		if(firedBy == Hero.fireBy)
+			this.calculatePositions();
+		if(firedBy == Enemy.fireBy)
+			this.calculateEnemyPositions();
+	}
+	
+	/**
+	 * Method that will calculate the positions the projectile will travel on
+	 */
+	public void calculateEnemyPositions()
+	{
+		int totalX = (PlayPanel.width/2)-(projectileSize/2);
+		int totalY = (PlayPanel.height/2)-(projectileSize/2);
+
+		int calPosX = (((PlayPanel.width/2)-(projectileSize/2)) - (gbm.getHeroModel().heroPosX * GameBoard.squareSize));
+		int calPosY = (((PlayPanel.height/2)-(projectileSize/2)) - (gbm.getHeroModel().heroPosY * GameBoard.squareSize));
+		int xRedraw = (tileX * GameBoard.squareSize) + calPosX; // Iets extra voor het positioneren waar de Hero is
+		int yRedraw = (tileY * GameBoard.squareSize) + calPosY; // Iets extra voor het positioneren waar de Hero is
+		
+		long systime = System.currentTimeMillis();
+		if(direction == HeroModel.VIEWUP)
+			for(int i = 0; i < totalY; i++)
+			{
+				pcmv.add( new ProjectileMovement(
+						xRedraw, yRedraw-i, (systime+Timing.bulletTime)
+						) );
+				systime = (systime+Timing.bulletTime);
+				i = Timing.bulletSkip+i;
+			}
+		else if(direction == HeroModel.VIEWDOWN)
+			for(int i = 0; i < totalY; i++)
+			{
+				pcmv.add( new ProjectileMovement(
+						xRedraw, yRedraw+i, (systime+Timing.bulletTime)
+						) );
+				systime = (systime+Timing.bulletTime);
+				i = Timing.bulletSkip+i;
+			}
+		else if(direction == HeroModel.VIEWLEFT)
+			for(int i = 0; i < totalX; i++)
+			{
+				pcmv.add( new ProjectileMovement(
+						xRedraw-i, yRedraw, (systime+Timing.bulletTime)
+						) );
+				systime = (systime+Timing.bulletTime);
+				i = Timing.bulletSkip+i;
+			}
+		else if(direction == HeroModel.VIEWRIGHT)
+			for(int i = 0; i < totalX; i++)
+			{
+				pcmv.add( new ProjectileMovement(
+						xRedraw+i, yRedraw, (systime+Timing.bulletTime)
+						) );
+				systime = (systime+Timing.bulletTime);
+				i = Timing.bulletSkip+i;
+			}
 	}
 
 	/**

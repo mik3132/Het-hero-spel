@@ -21,6 +21,7 @@ public class Hero implements SquareGrid
 {
 	/** The HeroModel containing all the Hero data */
 	HeroModel hm;
+	public static final int fireBy = 0;
 
 	/**
 	 * Constructor

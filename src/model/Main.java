@@ -46,6 +46,7 @@ public class Main extends JFrame implements Runnable
 		// Create views
 		controlPanel = new ControlPanel(heroModel);
 		playPanel = new PlayPanel( gbm, heroModel);
+		gbm.setPlayPanel( playPanel );
 		
 		// Create controller
 		in = new Input( heroModel, gbm, controlPanel, playPanel );

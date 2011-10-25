@@ -17,6 +17,7 @@ import org.xml.sax.SAXParseException;
 import view.EmptySlot;
 import view.GameBoard;
 import view.Enemy;
+import view.PlayPanel;
 import view.PlayerMessage;
 import view.Wall;
 
@@ -44,6 +45,7 @@ public class GameBoardModel
 	public int squareSize;
 	public Random random = new Random();
 	public ArrayList<PlayerMessage> arrpm = new ArrayList<PlayerMessage>();
+	public PlayPanel playPanel;
 	
 
 	/**
@@ -54,8 +56,6 @@ public class GameBoardModel
 	GameBoardModel(HeroModel heroModel)
 	{
 		this.heroModel = heroModel;
-		this.loadGameArea();
-		heroModel.setSquareGrids( this );
 	}
 	
 	/**
@@ -186,7 +186,7 @@ public class GameBoardModel
 	                    	// Add the SquareGrid to the ArrayList
 	                    	if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.ENEMY) {
 	                    		heroModel.scs.addEnemy();
-	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random) );
+	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random, playPanel) );
 	                    	} else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.WALL)
 	                    		sglist.add( new Wall( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() )) );
 	                    }
@@ -264,6 +264,13 @@ public class GameBoardModel
 	public void setSquereSize(int squereSize)
 	{
 		this.squareSize = squereSize;
+	}
+
+	public void setPlayPanel(PlayPanel playPanel)
+	{
+		this.playPanel = playPanel;
+		this.loadGameArea();
+		heroModel.setSquareGrids( this );
 	}
 
 }

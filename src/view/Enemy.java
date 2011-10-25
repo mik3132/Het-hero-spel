@@ -28,6 +28,7 @@ public class Enemy extends EnemyModel implements SquareGrid
 	long lasttime = System.nanoTime(); // timenow
 	int timeout = 1000000000; //nanoseconde
 	Random rdm;
+	public static final int fireBy = 1;
 
 	/**
 	 * Constructor
@@ -36,9 +37,9 @@ public class Enemy extends EnemyModel implements SquareGrid
 	 * @param int y The y position of the enemy
 	 * @param Graphics g The graphics manager
 	 */
-	public Enemy( int x, int y, GameBoardModel gbm, Random rdm )
+	public Enemy( int x, int y, GameBoardModel gbm, Random rdm, PlayPanel playPanel )
 	{
-		super(x,y, gbm);
+		super(x,y, gbm, playPanel);
 		this.rdm = rdm;
 		this.x = x;
 		this.y = y;			
@@ -64,8 +65,6 @@ public class Enemy extends EnemyModel implements SquareGrid
 		g.drawOval(newX, newY, GameBoard.squareSize, GameBoard.squareSize);
 		g.fillOval(newX, newY, GameBoard.squareSize, GameBoard.squareSize);
 		g.setColor(Color.BLACK);
-		
-		//System.out.println(""+midX+" : "+midY+" : "+viewX+" : "+viewY+"");
 		g.drawLine(super.midX, super.midY, super.viewX, super.viewY);
 	}
 

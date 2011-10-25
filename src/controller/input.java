@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import view.ControlPanel;
+import view.Hero;
 import view.PlayPanel;
 
 import model.GameBoardModel;
@@ -84,7 +85,7 @@ public class Input implements KeyListener, MouseListener, ActionListener
 			heroModel.rotateHero(HeroModel.VIEWRIGHT, ctrl);
 		}
 		if(e.getKeyCode() == 32) {
-			playPanel.setNewProjectile();
+			playPanel.setNewProjectile( Hero.fireBy );
 		}
 		if(e.getKeyCode() == KeyEvent.VK_P) { 
 			System.out.println("X: " + heroModel.heroPosX + " Y: " + heroModel.heroPosY);
@@ -123,7 +124,7 @@ public class Input implements KeyListener, MouseListener, ActionListener
 			heroModel.rotateHero(HeroModel.VIEWRIGHT, true);
 		}
 		if(arg0.getSource() == cp.bShoot) {
-			playPanel.setNewProjectile();
+			playPanel.setNewProjectile( Hero.fireBy );
 		}
 		if(arg0.getSource() == cp.newGame) {
 			heroModel.scs.resetScores(); //!! always reset the scores first before loading the game data
