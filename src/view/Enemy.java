@@ -39,7 +39,7 @@ public class Enemy extends EnemyModel implements SquareGrid
 	 */
 	public Enemy( int x, int y, GameBoardModel gbm, Random rdm, PlayPanel playPanel )
 	{
-		super(x,y, gbm, playPanel);
+		super(x,y, gbm, playPanel, rdm);
 		this.rdm = rdm;
 		this.x = x;
 		this.y = y;			

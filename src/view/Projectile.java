@@ -5,35 +5,23 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import model.GameBoardModel;
-import model.ProjectileModel;
+import model.HeroModel;
 import model.ProjectileMovement;
 import model.SquareGrid;
+import model.Timing;
 
-/**
- * 
- * Projectile class
- * This class draws the projectiles on the GameBoard
- * 
- * @author Martijn, Edo
- * @version 0.1
- * @date 04-10-2011
- * 
- */
-public class Projectile extends ProjectileModel
+public class Projectile
 {
-	/** The x and y coordinates of a projectile */
-	int x,y;
-	/** An integer representation of the projectile direction */
 	int direction;
-	/** The x and y coordinates the projectile wants to move */
 	int xTile, yTile;
-	/** The size of a projectile */
-	public final static int projectileSize = 10;
-	/** The GameBoardModel containing all the GameBoard data */
-	GameBoardModel gbm;
-	/** The ArrayList containing the movement of the projectile */
-	ArrayList<ProjectileMovement> pcmv;
 	int firedBy;
+	public int px, py;
+
+	public final static int projectileSize = 10;
+	public final static int projectileTileLenght = 5;
+	
+	GameBoardModel gbm;
+	ArrayList<ProjectileMovement> pcmv = new ArrayList<ProjectileMovement>();
 	
 	/**
 	 * Constructor 
@@ -43,20 +31,29 @@ public class Projectile extends ProjectileModel
 	 * @param int direction The direction the projectile is moving in
 	 * @param GameBoardModel gbm The GameBoardModel containing all the GameBoard data
 	 */
-	Projectile( int xTile, int yTile, int direction, GameBoardModel gbm, int firedBy )
+	public Projectile( int xTile, int yTile, int direction, GameBoardModel gbm, int firedBy )
 	{
-		super( xTile, yTile, direction, projectileSize, gbm, firedBy );
-		//System.out.println( xTile +" : "+ yTile + " : "+direction);
-		this.firedBy = firedBy;
+		this.direction = direction;
 		this.xTile = xTile;
 		this.yTile = yTile;
-		this.x = (GameBoard.squareSize*xTile);
-		this.y = (GameBoard.squareSize*yTile);
-		this.direction = direction;
 		this.gbm = gbm;
-		this.pcmv = getProjectileMovement();
+		this.firedBy = firedBy;
+		this.createProjectileMovements();
 	}
-
+	
+	public void createProjectileMovements()
+	{
+		int totalPixels = (GameBoard.squareSize*projectileTileLenght);
+		
+		long systime = System.currentTimeMillis();
+		for(int i = 0; i < totalPixels; i++)
+		{
+			pcmv.add( new ProjectileMovement( direction, i, (systime+Timing.bulletTime) ) );
+			systime = (systime+Timing.bulletTime);
+			i = Timing.bulletSkip+i;
+		}
+	}
+	
 	/**
 	 * The rePaint method
 	 * Makes sure the drawing of the projectile is smooth and flowing
@@ -69,21 +66,40 @@ public class Projectile extends ProjectileModel
 		if(pcmv.size() > 0) {
 			long systime = System.currentTimeMillis();
 			if(pcmv.get(0).time >= systime) {
-				int Xless = (((PlayPanel.width-GameBoard.squareSize)/2)/GameBoard.squareSize);
-				int Yless = (((PlayPanel.height-GameBoard.squareSize)/2)/GameBoard.squareSize);
-				int Xnew = x+pcmv.get(0).x - (gbm.getHeroModel().heroPosX * GameBoard.squareSize);
-				int Ynew = y+pcmv.get(0).y - (gbm.getHeroModel().heroPosY * GameBoard.squareSize);
-				int tileX = ((Xnew/GameBoard.squareSize+gbm.getHeroModel().heroPosX)-Xless);
-				int tileY = ((Ynew/GameBoard.squareSize+gbm.getHeroModel().heroPosY)-Yless);
+
+				int direction = pcmv.get(0).direction;
+				int pixels = pcmv.get(0).pixel;
 				
-				System.out.println( pcmv.get(0).x );
+				int x = (((xTile - gbm.heroModel.heroPosX)*50)+(PlayPanel.width/2))-(projectileSize/2);
+				int y = (((yTile - gbm.heroModel.heroPosY)*50)+(PlayPanel.height/2))-(projectileSize/2);
+				int tileXfromX = xTile;
+				int tileYfromY = yTile;
 				
+				if(direction == HeroModel.VIEWUP){
+					y = (y-pixels);
+					tileYfromY -= (pixels/GameBoard.squareSize);
+				} else if(direction == HeroModel.VIEWDOWN){
+					y = (y+pixels);
+					tileYfromY += (pixels/GameBoard.squareSize);
+				} else if(direction == HeroModel.VIEWLEFT){
+					x = (x-pixels);
+					tileXfromX -= (pixels/GameBoard.squareSize);
+				} else if(direction == HeroModel.VIEWRIGHT){
+					x = (x+pixels);
+					tileXfromX += (pixels/GameBoard.squareSize);
+				}
+
 				try {
-					if(this.firedBy == Enemy.fireBy && gbm.getHeroModel().heroPosX == tileX && gbm.getHeroModel().heroPosY == tileY)
+					if(this.firedBy == Enemy.fireBy && gbm.getHeroModel().heroPosX == tileXfromX && gbm.getHeroModel().heroPosY == tileYfromY)
+					{
 						System.out.println("Hero verliest leven.");
-					SquareGrid sg = gbm.getObjectFromPlayGround(tileX, tileY);
+						pcmv.clear();
+						return;
+					}
+					
+					SquareGrid sg = gbm.getObjectFromPlayGround(tileXfromX, tileYfromY);
 					if(sg instanceof Enemy && this.firedBy == Hero.fireBy) {
-						gbm.removeFromPlayGround( gbm.getIndexFromBoard(tileX, tileY), "+ 200" );
+						gbm.removeFromPlayGround( gbm.getIndexFromBoard(tileXfromX, tileYfromY), "+ 200" );
 						gbm.heroModel.scs.points += 200;
 						gbm.heroModel.scs.removeEnemy();
 						return;
@@ -95,18 +111,18 @@ public class Projectile extends ProjectileModel
 					System.out.println("Errormessage: " + e);
 				}
 				
-				if(tileX < 1 || tileY < 1 || gbm.sizePlayGroundX < tileX || gbm.sizePlayGroundY < tileY) {
+				if(tileXfromX < 1 || tileYfromY < 1 || gbm.sizePlayGroundX < tileXfromX || gbm.sizePlayGroundY < tileYfromY) {
 					pcmv.clear();
 					return;
 				} else {
+					px = x;
+					py = y;
+
 					g.setColor( Color.BLUE );
-					g.fillOval( Xnew, Ynew, projectileSize, projectileSize);
+					g.fillOval( x, y, projectileSize, projectileSize);
 				}
-				
 			} else if(pcmv.get(0).time < systime) {
-				
 				pcmv.remove(0);
-				
 				if(pcmv.size() > 0) {
 					rePaint(g);
 				}

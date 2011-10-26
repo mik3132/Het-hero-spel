@@ -83,7 +83,12 @@ public class Scores
 	 * @return Boolean True if the action was successful.
 	 */
 	public boolean removeActionPoints (String action) 
-	{		
+	{
+		if(points < shotCost)
+		{
+			gameover = true;
+			return false;
+		}
 		try {
 			//Do we have any action set?
 			if(actionspoints.isEmpty()) {
