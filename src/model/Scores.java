@@ -15,9 +15,12 @@ import java.util.HashMap;
 public class Scores
 {
 	/** The points that are left for the game */
-	public int points;
-	/** The points that where given for resetting the game */
-	public int givenpoints;
+	public int movementPoints;
+	public int givenMovementPoints;	
+	/** The points that are left for shooting */
+	public int shootPoints;
+	public int givenShootpoints;
+
 	/** The lowest number of points that a action can cost */
 	private int lowestCost;
 	/** HashMap<String actionname, Integer how many points the action cost> */
@@ -38,12 +41,14 @@ public class Scores
 	 * 
 	 * @param int Max points of the game
 	 */
-	public Scores(int points)
+	public Scores(int movementPoints, int shootPoints)
 	{
-		this.points = points;
-		this.givenpoints = points;
+		this.movementPoints = movementPoints;
+		this.shootPoints = shootPoints;
+		this.givenShootpoints = shootPoints;
+		this.givenMovementPoints = movementPoints;
 		this.actionspoints = new HashMap<String, Integer>();
-		this.lowestCost = points;
+		this.lowestCost = shootPoints;
 	}	
 	
 	/**
@@ -192,6 +197,6 @@ public class Scores
 		won = false;
 		gameover = false;
 		enemies = 0;
-		points = givenpoints;
+		points = givenShootpoints;
 	}
 }

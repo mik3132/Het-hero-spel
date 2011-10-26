@@ -53,7 +53,7 @@ public class HeroModel
 	public HeroModel(int width, int height, int points )
 	{
 		// Add scores and actions
-		this.scs = new Scores(points);
+		this.scs = new Scores(500, 1000);
 		this.scs.addAction("VIEWUP", scs.movementCost);
 		this.scs.addAction("VIEWDOWN", scs.movementCost);
 		this.scs.addAction("VIEWLEFT", scs.movementCost);
