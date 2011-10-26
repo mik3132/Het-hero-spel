@@ -32,8 +32,12 @@ public class GameBoard
 	public static final int EMPTY = 0;
 	/** Integer representation for a wall */
 	public static final int WALL = 1;
+	/** Integer representation for a window */
+	public static final int WINDOW = 2;
 	/** Integer representation for an enemy */
-	public static final int ENEMY = 2; 
+	public static final int ENEMY = 3;
+	/** Integer representation for an enemy */
+	public static final int SPECIALENEMY = 4; 
 	
 	/**
 	 * Constructor method

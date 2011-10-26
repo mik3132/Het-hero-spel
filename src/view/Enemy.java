@@ -21,7 +21,7 @@ import model.SquareGrid;
 public class Enemy extends EnemyModel implements SquareGrid
 {
 	/** x and y coordinates for the enemy (tile format) */
-	int x, y; 
+	int x, y, bullets; 
 	/** the direction the enemy is facing*/
 	int direction;
 	
@@ -37,12 +37,13 @@ public class Enemy extends EnemyModel implements SquareGrid
 	 * @param int y The y position of the enemy
 	 * @param Graphics g The graphics manager
 	 */
-	public Enemy( int x, int y, GameBoardModel gbm, Random rdm, PlayPanel playPanel )
+	public Enemy( int x, int y, GameBoardModel gbm, Random rdm, PlayPanel playPanel, int bullets )
 	{
 		super(x,y, gbm, playPanel, rdm);
 		this.rdm = rdm;
 		this.x = x;
-		this.y = y;			
+		this.y = y;
+		this.bullets = bullets;
 	}
 	
 	public void update()
@@ -61,9 +62,18 @@ public class Enemy extends EnemyModel implements SquareGrid
 	public void drawObject(Graphics g, int newX, int newY)
 	{
 		super.followHero(newX, newY);
-		g.setColor(Color.RED);
-		g.drawOval(newX, newY, GameBoard.squareSize, GameBoard.squareSize);
-		g.fillOval(newX, newY, GameBoard.squareSize, GameBoard.squareSize);
+		
+		// Special Forces Sign
+		if (this.bullets > 1)
+		{
+			g.setColor(Color.GRAY);
+			g.drawOval(newX + 10, newY + 10, GameBoard.squareSize -20, GameBoard.squareSize -20);
+			g.fillOval(newX + 10, newY + 10, GameBoard.squareSize -20, GameBoard.squareSize -20);
+		} else {
+			g.setColor(Color.RED);
+			g.drawOval(newX, newY, GameBoard.squareSize, GameBoard.squareSize);
+			g.fillOval(newX, newY, GameBoard.squareSize, GameBoard.squareSize);
+		}
 		g.setColor(Color.BLACK);
 		g.drawLine(super.midX, super.midY, super.viewX, super.viewY);
 	}

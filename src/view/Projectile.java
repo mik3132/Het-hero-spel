@@ -103,6 +103,10 @@ public class Projectile
 						gbm.heroModel.scs.points += 200;
 						gbm.heroModel.scs.removeEnemy();
 						return;
+					} else if(sg instanceof Window && this.firedBy == Hero.fireBy) {
+						gbm.removeFromPlayGround( gbm.getIndexFromBoard(tileXfromX, tileYfromY), "" );
+						pcmv.clear();
+						return;
 					} else if(sg instanceof Wall) {
 						pcmv.clear();
 						return;

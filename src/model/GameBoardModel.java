@@ -20,6 +20,7 @@ import view.Enemy;
 import view.PlayPanel;
 import view.PlayerMessage;
 import view.Wall;
+import view.Window;
 
 /**
  * 
@@ -178,7 +179,9 @@ public class GameBoardModel
 	                   
 	                	// Save all the attributes of a tile
 	                	Node tileX = tile.getAttributes().getNamedItem("tileX"), 
-	                    		tileY = tile.getAttributes().getNamedItem("tileY");
+	                    		tileY = tile.getAttributes().getNamedItem("tileY"),
+	                    		vertical = tile.getAttributes().getNamedItem("vertical"),
+	                    		bullets = tile.getAttributes().getNamedItem("bullets");
 	                    if(tileX.getNodeName() == "tileX" &&
 	                    	tileY.getNodeName() == "tileY" &&
 	                    	tile.getFirstChild().getNodeValue() != null )
@@ -186,9 +189,15 @@ public class GameBoardModel
 	                    	// Add the SquareGrid to the ArrayList
 	                    	if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.ENEMY) {
 	                    		heroModel.scs.addEnemy();
-	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random, playPanel) );
-	                    	} else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.WALL)
+	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random, playPanel, 1) );
+	                    	} else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.SPECIALENEMY) {
+	                    		heroModel.scs.addEnemy();
+	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random, playPanel, Integer.parseInt( tileY.getNodeValue() )) );
+	                    	}  
+	                    	else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.WALL)
 	                    		sglist.add( new Wall( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() )) );
+	                    		else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.WINDOW)
+	                    		sglist.add( new Window( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), Integer.parseInt( vertical.getNodeValue() )) );
 	                    }
 	                }
 	            }
