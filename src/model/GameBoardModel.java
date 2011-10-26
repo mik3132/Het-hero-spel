@@ -42,10 +42,13 @@ public class GameBoardModel
 	public int sizePlayGroundX, sizePlayGroundY;
 	/** The HeroModel representing the current Hero */
 	public HeroModel heroModel;
-	/** the squire size */
+	/** the square size */
 	public int squareSize;
+	/** The random generator */
 	public Random random = new Random();
+	/** The ArrayList containing the player messages */
 	public ArrayList<PlayerMessage> arrpm = new ArrayList<PlayerMessage>();
+	/** The PlayPanel */
 	public PlayPanel playPanel;
 	
 

@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <body>
-	<hero x="25" y="25" />
-	<gamearea sizeInTileX="40" sizeInTileY="40">
-		<!-- WALLS enter as input 1-->
+	<hero x="1" y="1" />
+	<gamearea sizeInTileX="20" sizeInTileY="20">
 	
-		<tile tileX="24" tileY="24" blocking="true">1</tile>
-		<tile tileX="25" tileY="24" blocking="true">1</tile>
-		<tile tileX="24" tileY="25" blocking="true">1</tile>
+		<!-- WALLS enter as input 1-->
+		<tile tileX="3" tileY="4" blocking="true">1</tile>
+		<tile tileX="4" tileY="4" blocking="true">1</tile>
+		<tile tileX="4" tileY="5" blocking="true">1</tile>
+		<tile tileX="2" tileY="5" blocking="true">1</tile>
+		<tile tileX="2" tileY="4" blocking="true">1</tile>
 		
-		<tile tileX="26" tileY="24" blocking="true">1</tile>
-		<tile tileX="26" tileY="25" blocking="true">1</tile>
+		<tile tileX="13" tileY="4" blocking="true">1</tile>
+		<tile tileX="14" tileY="4" blocking="true">1</tile>
 		
+		<tile tileX="3" tileY="14" blocking="true">1</tile>
+		<tile tileX="4" tileY="14" blocking="true">1</tile>
+		<tile tileX="2" tileY="15" blocking="true">1</tile>
 		
 		<!-- ENEMIES enter as input 2-->
-		<tile tileX="23" tileY="23" blocking="true">2</tile>
-		<tile tileX="27" tileY="23" blocking="true">2</tile>
-		<tile tileX="39" tileY="39" blocking="true">2</tile>
-
+		<tile tileX="7" tileY="7" blocking="true">2</tile>
+		<tile tileX="3" tileY="3" blocking="true">2</tile>
+		<tile tileX="10" tileY="11" blocking="true">2</tile>
+		<tile tileX="15" tileY="19" blocking="true">2</tile>
+		
 	</gamearea>
 </body>
