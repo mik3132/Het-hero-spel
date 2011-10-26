@@ -27,15 +27,17 @@ import view.GameBoard;
  */
 public class GameBoardModel
 {
-	/** The level to load at first */
-	File file = new File("level/level1.xml");
 	/** The ArrayList containing the objects on the grid */
 	public ArrayList<SquareGrid> sglist = new ArrayList<SquareGrid>();
 	/** Integers for keeping track of the size */
 	public int sizePlayGroundX, sizePlayGroundY;
 	/** The HeroModel representing the current Hero */
 	public HeroModel heroModel;
-
+	/** Counter for the number of levels */
+	public int levelCount;
+	/** Keeps track of the current level */
+	public int currentLevel;
+	
 	/**
 	 * Constructor method
 	 * 
@@ -44,7 +46,8 @@ public class GameBoardModel
 	GameBoardModel(HeroModel heroModel)
 	{
 		this.heroModel = heroModel;
-		this.loadGameArea();
+		// Load the first level 
+		this.loadGameArea("level/level1.xml");
 		heroModel.setSquareGrids( this );
 	}
 	
@@ -66,6 +69,18 @@ public class GameBoardModel
 	public ArrayList<SquareGrid> getGameBoard()
 	{
 		return sglist;
+	}
+	
+	/**
+	 * Method that will load in the next level and start at 1 when the last level is played
+	 * 
+	 * @return Int the next level
+	 */
+	public int getNextLevel()
+	{
+		
+		
+		return -1;
 	}
 	
 	/**
@@ -116,8 +131,10 @@ public class GameBoardModel
 	/**
 	 * Loads the GameArea from the set xml file
 	 */
-	public void loadGameArea()
+	public void loadGameArea(String level)
 	{
+		File file = new File(level);
+		
 		sglist = new ArrayList<SquareGrid>();
 		if(!file.exists()) {
 			System.out.println("file: '"+file.getPath()+"' not found.");

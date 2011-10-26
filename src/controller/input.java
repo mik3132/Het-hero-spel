@@ -127,7 +127,8 @@ public class Input implements KeyListener, MouseListener, ActionListener
 		}
 		if(arg0.getSource() == cp.newGame) {
 			heroModel.scs.resetScores(); //!! always reset the scores first before loading the game data
-			gbm.loadGameArea();
+			
+			gbm.loadGameArea("level/level3.xml");
 		}
 		if(arg0.getSource() == cp.bexit) {
 			System.exit(0);
