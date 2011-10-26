@@ -15,7 +15,7 @@ public class ProjectileMovement
 	/** The time the projectile travels */
 	public long time;
 	/** The x and y coordinates of the projectile */
-	public int x, y;
+	public int direction, pixel;
 	
 	/**
 	 * Constructor
@@ -24,10 +24,10 @@ public class ProjectileMovement
 	 * @param int y The y coordinate of the projectile
 	 * @param long time The time a projectile travels
 	 */
-	public ProjectileMovement( int x, int y, long time)
+	public ProjectileMovement( int direction, int pixel, long time)
 	{
-		this.x = x;
-		this.y = y;
+		this.direction = direction;
+		this.pixel = pixel;
 		this.time = time;
 	}
 }

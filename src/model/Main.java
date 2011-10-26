@@ -74,6 +74,7 @@ public class Main extends JFrame implements Runnable
 		controlPanel.update();
 		// Update the GameBoardModel
 		gbm.update();
+		playPanel.update();
 	}
 	
 	/**

@@ -95,6 +95,21 @@ public class PlayPanel extends JPanel
 		}
 	}
 	
+	public void update()
+	{
+		for(int f = 0; f < projectiles.size(); f++)
+		{
+			for(int s = 0; s < projectiles.size(); s++)
+				if(s!=f && projectiles.get(f).px == projectiles.get(s).px && projectiles.get(f).py == projectiles.get(s).py)
+				{
+					projectiles.get(f).pcmv.clear();
+					projectiles.get(s).pcmv.clear();
+				}
+			if(projectiles.get(f).pcmv.size() < 1)
+				projectiles.remove(f);
+		}
+	}
+	
 	/**
 	 * The paint method
 	 * 
