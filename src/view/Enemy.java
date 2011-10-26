@@ -24,10 +24,15 @@ public class Enemy extends EnemyModel implements SquareGrid
 	int x, y; 
 	/** the direction the enemy is facing*/
 	int direction;
-	
+	/** The color of the enemy */
+	private static final Color ENEMY_COLOR = Color.GRAY;
+	/** The current time in nano seconds */
 	long lasttime = System.nanoTime(); // timenow
-	int timeout = 1000000000; //nanoseconde
+	/** The timout time in nano seconds */
+	int timeout = 1000000000;
+	/** Random generator for the enemy AI*/
 	Random rdm;
+	/** Timing int for the rate of fire by enemies*/
 	public static final int fireBy = 1;
 
 	/**
@@ -61,7 +66,7 @@ public class Enemy extends EnemyModel implements SquareGrid
 	public void drawObject(Graphics g, int newX, int newY)
 	{
 		super.followHero(newX, newY);
-		g.setColor(Color.RED);
+		g.setColor(ENEMY_COLOR);
 		g.drawOval(newX, newY, GameBoard.squareSize, GameBoard.squareSize);
 		g.fillOval(newX, newY, GameBoard.squareSize, GameBoard.squareSize);
 		g.setColor(Color.BLACK);

@@ -30,7 +30,6 @@ public class Main extends JFrame implements Runnable
 	Input in;
 	/** The HeroModel representing the Hero */
 	HeroModel heroModel;
-
 	/** boolean that checks if the application is running */
 	boolean run = true;
 
