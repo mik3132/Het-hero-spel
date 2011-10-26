@@ -80,34 +80,34 @@ public class HeroModel
 		switch( direction ) {
 			case VIEWUP:
 				viewY = (midY-(GameBoard.squareSize/2));
+				//Remove the points that the action cost, return false if there are not enough points	
 				viewX = midX;
-				if(!ctrl)
-					//Remove the points that the action cost, return false if there are not enough points
-					if(scs.removeActionPoints("VIEWUP"))						
+				if(scs.removeActionPoints("VIEWUP"))	
+					if(!ctrl)									
 						posHeroPosY--;
 			break;
 			case VIEWDOWN:
 				viewY = (midY+(GameBoard.squareSize/2));
 				viewX = midX;
-				if(!ctrl)
-					//Remove the points that the action cost, return false if there are not enough points
-					if(scs.removeActionPoints("VIEWDOWN"))
+				//Remove the points that the action cost, return false if there are not enough points
+				if(scs.removeActionPoints("VIEWDOWN"))
+					if(!ctrl)					
 						posHeroPosY++;
 			break;
 			case VIEWLEFT:
 				viewX = (midX-(GameBoard.squareSize/2));
 				viewY = midY;
-				if(!ctrl)
-					//Remove the points that the action cost, return false if there are not enough points
-					if(scs.removeActionPoints("VIEWLEFT"))
+				//Remove the points that the action cost, return false if there are not enough points
+				if(scs.removeActionPoints("VIEWLEFT"))
+					if(!ctrl)
 						posHeroPosX--;
 			break;
 			case VIEWRIGHT:
 				viewX = (midX+(GameBoard.squareSize/2));
 				viewY = midY;
-				if(!ctrl)
-					//Remove the points that the action cost, return false if there are not enough points
-					if(scs.removeActionPoints("VIEWRIGHT"))
+				//Remove the points that the action cost, return false if there are not enough points
+				if(scs.removeActionPoints("VIEWRIGHT"))
+					if(!ctrl)					
 						posHeroPosX++;
 			break;
 		}
@@ -146,8 +146,8 @@ public class HeroModel
 		for(int i = 0; i < gbm.sglist.size(); i++) {
 			SquareGrid check = gbm.sglist.get(i);
 			
-			if(check.x == tileX && check.y == tileY) {
-				return !check.isBlocking;
+			if(check.getX() == tileX && check.getY() == tileY) {
+				return !check.isBlocking();
 			}
 		}
 		return false;

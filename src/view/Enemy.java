@@ -2,8 +2,11 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 import model.EnemyModel;
+import model.GameBoardModel;
+import model.SquareGrid;
 
 /**
 *
@@ -15,12 +18,17 @@ import model.EnemyModel;
 * @date 04-10-2011
 *
 */
-public class Enemy extends EnemyModel
+public class Enemy extends EnemyModel implements SquareGrid
 {
-	/** x and y coordinates for the enemy */
+	/** x and y coordinates for the enemy (tile format) */
 	int x, y; 
 	/** the direction the enemy is facing*/
 	int direction;
+	
+	long lasttime = System.nanoTime(); // timenow
+	int timeout = 1000000000; //nanoseconde
+	Random rdm;
+	public static final int fireBy = 1;
 
 	/**
 	 * Constructor
@@ -29,25 +37,50 @@ public class Enemy extends EnemyModel
 	 * @param int y The y position of the enemy
 	 * @param Graphics g The graphics manager
 	 */
-	Enemy(int x, int y, Graphics g)
+	public Enemy( int x, int y, GameBoardModel gbm, Random rdm, PlayPanel playPanel )
 	{
-		super(x,y);
+		super(x,y, gbm, playPanel);
+		this.rdm = rdm;
 		this.x = x;
-		this.y = y;
-		this.drawEnemy(g);
+		this.y = y;			
+	}
+	
+	public void update()
+	{
+		int prediction = 1;
+		int sizeprediction = 20;
+		if((lasttime+timeout) < System.nanoTime() && (prediction == rdm.nextInt( sizeprediction )))
+		{
+			super.moveEnemy();
+			lasttime = System.nanoTime();
+		}
+		this.x = super.x;
+		this.y = super.y;
 	}
 
-	/**
-	 * Draw method for the enemy
-	 * 
-	 * @param Graphics g The graphics manager
-	 */
-	public void drawEnemy( Graphics g )
+	public void drawObject(Graphics g, int newX, int newY)
 	{
+		super.followHero(newX, newY);
 		g.setColor(Color.RED);
-		g.drawOval(x, y, GameBoard.squareSize, GameBoard.squareSize);
-		g.fillOval(x, y, GameBoard.squareSize, GameBoard.squareSize);
+		g.drawOval(newX, newY, GameBoard.squareSize, GameBoard.squareSize);
+		g.fillOval(newX, newY, GameBoard.squareSize, GameBoard.squareSize);
 		g.setColor(Color.BLACK);
-		//g.drawLine(hm.midX, hm.midY, hm.viewX, hm.viewY);
+		g.drawLine(super.midX, super.midY, super.viewX, super.viewY);
+	}
+
+	public int getX()
+	{
+		return x;
+	}
+
+	public int getY()
+	{
+		return y;
+	}
+
+	@Override
+	public boolean isBlocking()
+	{
+		return true;
 	}
 }

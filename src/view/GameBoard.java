@@ -2,10 +2,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 import model.GameBoardModel;
-import model.HeroModel;
 
 /**
  *
@@ -27,10 +25,6 @@ public class GameBoard
 	int squaresVertical,  squaresHorizontal;
 	/** The GameBoardModel */
 	GameBoardModel gbm;
-	/** The ArrayList containing the enemies */
-	ArrayList<Enemy> arEnemy = new ArrayList<Enemy>();
-	/** The HeroModel */
-	private HeroModel hm;
 	
 	/** The size of the squares */
 	public static final int squareSize = 50;
@@ -44,14 +38,23 @@ public class GameBoard
 	/**
 	 * Constructor method
 	 */
-	public GameBoard( int width, int height, GameBoardModel gbm, HeroModel hm)
+	public GameBoard( int width, int height, GameBoardModel gbm)
 	{
 		this.gbm = gbm;
-		this.hm = hm;
 		this.width = width;
 		this.height = height;
 		squaresVertical = (height / squareSize); //y
 		squaresHorizontal = (width / squareSize); //x
+		gbm.setSquereSize(squareSize);
+	}
+	
+	public void drawMessages(Graphics g)
+	{
+		for(int i =0; i < gbm.arrpm.size(); i++)
+			if(gbm.arrpm.get(i).hasStoped())
+				gbm.arrpm.remove(i);
+			else
+				gbm.arrpm.get(i).drawMessage(g);
 	}
 	
 	/**
@@ -78,80 +81,29 @@ public class GameBoard
 		int calPosX = (((width/2)-(squareSize/2)) - (gbm.getHeroModel().heroPosX * squareSize));
 		// Calculate the y position based on the hero's movement
 		int calPosY = (((height/2)-(squareSize/2)) - (gbm.getHeroModel().heroPosY * squareSize));
+		// Draw the edge of the GameBoard
 		
 		// Loop through the list of object to add the object
 		for(int i = 0; i < gbm.sglist.size(); i++) {
-			int x = (gbm.sglist.get(i).x * squareSize) + calPosX; // Iets extra voor het positioneren waar de Hero is
-			int y = (gbm.sglist.get(i).y * squareSize) + calPosY; // Iets extra voor het positioneren waar de Hero is
-			this.drawObject( g, gbm.sglist.get(i).item, x, y );
+			gbm.sglist.get(i).update();
+			int x = (gbm.sglist.get(i).getX() * squareSize) + calPosX; // Iets extra voor het positioneren waar de Hero is
+			int y = (gbm.sglist.get(i).getY() * squareSize) + calPosY; // Iets extra voor het positioneren waar de Hero is
+			gbm.sglist.get(i).drawObject(g, x, y);
 		}
-		
-		// Draw the edge of the GameBoard
-		this.drawGameBoardEdge(calPosX, calPosY, g);		
+				
 	}
 	
 	public void drawGameOver(Graphics g)
 	{
+		g.clearRect(0, 0, width, height);
 		g.setColor(Color.black);
 		g.drawString("Game Over", 400, 400);
 	}
 	
 	public void drawWon(Graphics g)
 	{
+		g.clearRect(0, 0, width, height);
 		g.setColor(Color.black);
 		g.drawString("You have won!!!", 400, 400);
-	}
-	
-	/**
-	 * Method that draws the edge around the GameBoard
-	 * 
-	 * @param int posX The x position calculated based on the hero's movement
-	 * @param int posY The y position calculated based on the hero's movement
-	 * @param Graphics g The Graphic manager to execute the drawing
-	 */
-	private void drawGameBoardEdge(int posX, int posY, Graphics g)
-	{
-		// Draw the horizontal edges
-		for(int i=0; i <= gbm.sizePlayGroundX; i++) {
-			// Upper border
-			new Wall(posX + (i * squareSize), posY).drawWall(g);
-			// Lower border
-			new Wall(posX + (i * squareSize), posY + (gbm.sizePlayGroundY * squareSize) + squareSize).drawWall(g);
-		}
-		
-		// Draw the vertical edges
-		for(int i=0; i <= gbm.sizePlayGroundY; i++) {
-			// Left border
-			new Wall(posX, posY + (i * squareSize)).drawWall(g);
-			// Right border
-			new Wall(posX + (gbm.sizePlayGroundX * squareSize) + squareSize, posY + (i * squareSize)).drawWall(g);
-		}
-		
-		// Draw the right lower corner wall
-		new Wall(posX + ( gbm.sizePlayGroundX * squareSize ) + squareSize , posY + (gbm.sizePlayGroundY * squareSize) + squareSize).drawWall(g);
-	}
-
-	/**
-	 * Method that draws the empty spaces, enemies and walls on the GameBoard
-	 * 
-	 * @param Grahpics g The Graphic manager to execute the drawing
-	 * @param int object The object to be added
-	 * @param int x The x position for the object
-	 * @param int y The y position for the object
-	 */
-	private void drawObject(Graphics g, int object, int x, int y)
-	{
-		switch(object)
-		{
-			case GameBoard.EMPTY:
-			break;
-			case GameBoard.ENEMY:
-				arEnemy.add( new Enemy(x, y, g) );
-				
-			break;
-			case GameBoard.WALL:
-				new Wall(x, y).drawWall(g);
-			break;
-		}
 	}
 }

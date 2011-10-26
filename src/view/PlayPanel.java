@@ -38,7 +38,7 @@ public class PlayPanel extends JPanel
 	/** The Wall objects */
 	Wall wall;
 	/** */
-	long lastProjectile = 0;
+	long lastProjectile = 0, lastProjectileEnemy = 0;
 	/** The ArrayList containing all the projectiles */
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
@@ -53,7 +53,7 @@ public class PlayPanel extends JPanel
 	public PlayPanel( GameBoardModel gbm, HeroModel hm)
 	{
 		this.gbm = gbm;
-		this.gb = new GameBoard( width, height, gbm, hm );
+		this.gb = new GameBoard( width, height, gbm );
 		this.hero = new Hero( hm );
 		this.hm = hm;
 		this.setSize(width, height);
@@ -70,7 +70,7 @@ public class PlayPanel extends JPanel
 	/**
 	 * Places a new projectile on the GameBoard
 	 */
-	public void setNewProjectile()
+	public void setNewProjectile(int firedBy)
 	{
 		//Remove the points that the action cost, return false if there are not enough points
 		if( hm.scs.removeActionPoints("SHOOT") )
@@ -78,9 +78,21 @@ public class PlayPanel extends JPanel
 			long timenow = System.currentTimeMillis();
 			if(lastProjectile == 0 || lastProjectile < timenow) {
 				lastProjectile = (timenow+Timing.bulletNext);
-				projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm ));
+				projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm, firedBy ));
 			}
 		} 
+	}
+	
+	/**
+	 * Places a new projectile on the GameBoard
+	 */
+	public void setNewProjectile( int x,int y, int direction, int firedBy)
+	{
+		long timenow = System.currentTimeMillis();
+		if(lastProjectileEnemy == 0 || lastProjectileEnemy < timenow) {
+			lastProjectileEnemy = (timenow+Timing.bulletNext);
+			projectiles.add(new Projectile( x, y, direction, gbm, firedBy));
+		}
 	}
 	
 	/**
@@ -90,24 +102,19 @@ public class PlayPanel extends JPanel
 	 */
 	public void paint(Graphics g)
 	{
-		if(hm.scs.gameover) {
-			//g.clearRect(0, 0, width, height);
+		super.paint(g);
+		if(hm.scs.gameover)
 			gb.drawGameOver(g);
-		} else if(hm.scs.won) { 
-			g.clearRect(0, 0, width, height);
+		else if(hm.scs.won)
 			gb.drawWon(g);
-		} else {
-			super.paint(g);
-			// Draw the Grid
-			gb.drawGrid(g); 
-			// Draw the GameBoard
-			gb.drawGameBoard(g);
-			// Draw the Hero
-			hero.drawHero(g);
+		else {
+			gb.drawGrid(g); // Draw the Grid
+			gb.drawGameBoard(g); // Draw the GameBoard
+			hero.drawHero(g); // Draw the Hero
+			gb.drawMessages(g);	// Draw hero messages	
 			
-			for(int i = 0; i < projectiles.size(); i++) {
+			for(int i = 0; i < projectiles.size(); i++)
 				projectiles.get(i).rePaint( g );
-			}
 		}
 	}
 	

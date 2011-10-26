@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import model.GameBoardModel;
 import model.ProjectileModel;
 import model.ProjectileMovement;
+import model.SquareGrid;
 
 /**
  * 
@@ -32,6 +33,7 @@ public class Projectile extends ProjectileModel
 	GameBoardModel gbm;
 	/** The ArrayList containing the movement of the projectile */
 	ArrayList<ProjectileMovement> pcmv;
+	int firedBy;
 	
 	/**
 	 * Constructor 
@@ -41,9 +43,11 @@ public class Projectile extends ProjectileModel
 	 * @param int direction The direction the projectile is moving in
 	 * @param GameBoardModel gbm The GameBoardModel containing all the GameBoard data
 	 */
-	Projectile( int xTile, int yTile, int direction, GameBoardModel gbm )
+	Projectile( int xTile, int yTile, int direction, GameBoardModel gbm, int firedBy )
 	{
-		super( xTile, yTile, direction, projectileSize, gbm );
+		super( xTile, yTile, direction, projectileSize, gbm, firedBy );
+		//System.out.println( xTile +" : "+ yTile + " : "+direction);
+		this.firedBy = firedBy;
 		this.xTile = xTile;
 		this.yTile = yTile;
 		this.x = (GameBoard.squareSize*xTile);
@@ -72,14 +76,18 @@ public class Projectile extends ProjectileModel
 				int tileX = ((Xnew/GameBoard.squareSize+gbm.getHeroModel().heroPosX)-Xless);
 				int tileY = ((Ynew/GameBoard.squareSize+gbm.getHeroModel().heroPosY)-Yless);
 				
+				System.out.println( pcmv.get(0).x );
+				
 				try {
-					int sg = gbm.getObjectFromPlayGround(tileX, tileY).item;
-					if(sg == GameBoard.ENEMY) {
-						gbm.removeFromPlayGround( gbm.getIndexFromBoard(tileX, tileY) );
+					if(this.firedBy == Enemy.fireBy && gbm.getHeroModel().heroPosX == tileX && gbm.getHeroModel().heroPosY == tileY)
+						System.out.println("Hero verliest leven.");
+					SquareGrid sg = gbm.getObjectFromPlayGround(tileX, tileY);
+					if(sg instanceof Enemy && this.firedBy == Hero.fireBy) {
+						gbm.removeFromPlayGround( gbm.getIndexFromBoard(tileX, tileY), "+ 200" );
+						gbm.heroModel.scs.points += 200;
 						gbm.heroModel.scs.removeEnemy();
-						pcmv.clear();
 						return;
-					} else if(sg == GameBoard.WALL) {
+					} else if(sg instanceof Wall) {
 						pcmv.clear();
 						return;
 					}
