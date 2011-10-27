@@ -110,12 +110,6 @@ public class Scores
 	public boolean removeActionPoints (String action) 
 	{
 		
-		/*
-		if(movementPoints < 50)
-		{
-			gameover = true;
-			return false;
-		}*/
 		try {
 			//Do we have any points set?
 			if(points.isEmpty()) {
