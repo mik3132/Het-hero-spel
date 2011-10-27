@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -31,9 +32,13 @@ public class ControlPanel extends JPanel
 	/** Labels for the control panel */
 	public JLabel jLabel1, jLabel2;
 	/** TextFields for the control panel */
-	public JTextField jTextField1, jTextField2;
+	public JTextField  jTextField2;
+	
+	public ScoresView jTextField1;
 	/** The HeroModel of the current Hero */
 	private HeroModel heroModel;
+	/** the Points */
+	private ArrayList<JTextField> scoreFields;
 	
 	/**
 	 * Constructor 
@@ -52,9 +57,14 @@ public class ControlPanel extends JPanel
 		newGame = new JButton("New game");
 		bexit = new JButton("Exit");
         jLabel1 = new JLabel("Enemies left");
+        
+        //add scores
+        scoreFields = new ArrayList<JTextField>(); 
+        
         jLabel2 = new JLabel("Points left");
-        jTextField1 = new JTextField(""+heroModel.scs.points);
-        jTextField2 = new JTextField(""+heroModel.scs.enemies);
+        //jTextField1 = new JTextField(""+500);
+        jTextField1 = new ScoresView(heroModel.scs);
+        jTextField2 = new JTextField("");
         jTextField1.setFocusable(false);
         jTextField2.setFocusable(false);
 		
@@ -164,8 +174,9 @@ public class ControlPanel extends JPanel
 	 */
 	public void update ()
 	{
-		jTextField1.setText(""+heroModel.scs.points);
-		jTextField2.setText(""+heroModel.scs.enemies);
+		//jTextField1.setText(""+500);
+		jTextField1.update();
+		jTextField2.setText(""); // kan weg
 	}
 	
 
