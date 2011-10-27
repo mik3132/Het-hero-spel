@@ -292,6 +292,7 @@ public class GameBoardModel
 			{
 				heroModel.scs.addGamePoints("Stappen", 200);
 				heroModel.scs.removeActionPoints("ENEMY");
+
 				this.sglist.remove( this.getIndexFromBoard(x, y));
 				arrpm.add( new PlayerMessage( message ) );
 				this.updateGameArea();

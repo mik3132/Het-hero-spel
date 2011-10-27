@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import model.GameBoardModel;
@@ -20,6 +21,8 @@ public class Projectile
 	public final static int projectileSize = 10;
 	public final static int projectileTileLenght = 5;
 	
+	public Rectangle rct;
+	
 	GameBoardModel gbm;
 	ArrayList<ProjectileMovement> pcmv = new ArrayList<ProjectileMovement>();
 	
@@ -36,6 +39,9 @@ public class Projectile
 		this.direction = direction;
 		this.xTile = xTile;
 		this.yTile = yTile;
+		
+		rct = new Rectangle( 0, 0);
+		
 		this.gbm = gbm;
 		this.firedBy = firedBy;
 		this.createProjectileMovements();
@@ -92,15 +98,13 @@ public class Projectile
 				try {
 					if(this.firedBy == Enemy.fireBy && gbm.getHeroModel().heroPosX == tileXfromX && gbm.getHeroModel().heroPosY == tileYfromY)
 					{
-						//Hero verliest leven
-						gbm.heroModel.scs.removeActionPoints("HEROHIT");
+						gbm.getHeroModel().scs.removeActionPoints("HEROHIT");
 						pcmv.clear();
 						return;
 					}
 					
 					SquareGrid sg = gbm.getObjectFromPlayGround(tileXfromX, tileYfromY);
 					if(sg instanceof Enemy && this.firedBy == Hero.fireBy) {
-
 						if(((Enemy)sg).bullets > 1)
 							pcmv.clear();
 						gbm.removeFromPlayGround( tileXfromX, tileYfromY, "+ 200" );
@@ -123,6 +127,8 @@ public class Projectile
 				} else {
 					px = x;
 					py = y;
+					
+					rct = new Rectangle(x,y, projectileSize, projectileSize);
 
 					g.setColor( Color.BLUE );
 					g.fillOval( x, y, projectileSize, projectileSize);
