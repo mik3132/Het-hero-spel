@@ -77,4 +77,5 @@ public class Hero implements SquareGrid
 		// TODO Auto-generated method stub
 		
 	}
+
 }

@@ -9,6 +9,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -20,6 +21,7 @@ import view.Enemy;
 import view.PlayPanel;
 import view.PlayerMessage;
 import view.Wall;
+import view.Window;
 
 /**
  * 
@@ -41,10 +43,13 @@ public class GameBoardModel
 	public int sizePlayGroundX, sizePlayGroundY;
 	/** The HeroModel representing the current Hero */
 	public HeroModel heroModel;
-	/** the squire size */
+	/** the square size */
 	public int squareSize;
+	/** The random generator */
 	public Random random = new Random();
+	/** The ArrayList containing the player messages */
 	public ArrayList<PlayerMessage> arrpm = new ArrayList<PlayerMessage>();
+	/** The PlayPanel */
 	public PlayPanel playPanel;
 	
 
@@ -168,17 +173,17 @@ public class GameBoardModel
 	            
 	            // Get all the attributes from the tiles
 	            for(int s=0; s < tiles; s++) {
-
-	            	// Create a node to hold all the items
 	            	Node firstPersonNode = tileNodes.item(s);
-	            	
-	            	// If the node needs to be added 
-	                if(firstPersonNode.getNodeType() == Node.ELEMENT_NODE) {
+	                if(firstPersonNode.getNodeType() == Node.ELEMENT_NODE)
+	                {
+	                	NamedNodeMap attrs = firstPersonNode.getAttributes();
 	                	Element tile = (Element)firstPersonNode;
-	                   
 	                	// Save all the attributes of a tile
-	                	Node tileX = tile.getAttributes().getNamedItem("tileX"), 
-	                    		tileY = tile.getAttributes().getNamedItem("tileY");
+	                	//NodeList ndlist = tile.getChildNodes();
+	                	Node tileX = attrs.getNamedItem("tileX"), 
+	                    		tileY = attrs.getNamedItem("tileY"),
+	                    		vertical = attrs.getNamedItem("vertical"),
+	                    		bullets = attrs.getNamedItem("bullets");
 	                    if(tileX.getNodeName() == "tileX" &&
 	                    	tileY.getNodeName() == "tileY" &&
 	                    	tile.getFirstChild().getNodeValue() != null )
@@ -186,9 +191,15 @@ public class GameBoardModel
 	                    	// Add the SquareGrid to the ArrayList
 	                    	if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.ENEMY) {
 	                    		heroModel.scs.addEnemy();
-	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random, playPanel) );
-	                    	} else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.WALL)
+	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random, playPanel, 1) );
+	                    	} else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.SPECIALENEMY && bullets.getNodeValue() != null) {
+	                    		heroModel.scs.addEnemy();
+	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random, playPanel, Integer.parseInt( bullets.getNodeValue() )) );
+	                    	}  
+	                    	else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.WALL)
 	                    		sglist.add( new Wall( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() )) );
+	                    	else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.WINDOW && vertical.getNodeValue() != null )
+	                    		sglist.add( new Window( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), Integer.parseInt( vertical.getNodeValue() )) );
 	                    }
 	                }
 	            }
@@ -248,17 +259,48 @@ public class GameBoardModel
 		}
 		return -1;
 	}
+	
+	/**
+	 * Method to get an index from the board based on given coordinates
+	 * 
+	 * @param int x The x coordinate to get the index 
+	 * @param int y The y coordinate to get the index
+	 * @return int the index and -1 if no index could be found
+	 */
+	public SquareGrid getSquareGridFromBoard(int x, int y)
+	{
+		for(int list = 0; list < sglist.size(); list++) {
+			if(sglist.get(list).getX() == x && sglist.get(list).getY() == y) {
+				return sglist.get(list);
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * Function that removes an object from the GameBoard
 	 * 
 	 * @param int indexFromBoard The index number to remove
 	 */
-	public void removeFromPlayGround(int indexFromBoard, String message)
+	public void removeFromPlayGround(int x, int y, String message)
 	{
-		arrpm.add( new PlayerMessage( message ) );
-		this.sglist.remove(indexFromBoard);
-		this.updateGameArea();
+		SquareGrid sq = this.getSquareGridFromBoard(x, y);
+		if(sq instanceof Enemy)
+		{
+			((Enemy)sq).bullets--;
+			if( ((Enemy)sq).bullets <= 0)
+			{
+				heroModel.scs.addGamePoints("Stappen", 200);
+				heroModel.scs.removeEnemy();
+				this.sglist.remove( this.getIndexFromBoard(x, y));
+				arrpm.add( new PlayerMessage( message ) );
+				this.updateGameArea();
+			}
+		} else {
+			this.sglist.remove( this.getIndexFromBoard(x, y) );
+			arrpm.add( new PlayerMessage( message ) );
+			this.updateGameArea();
+		}
 	}
 	
 	public void setSquereSize(int squereSize)
