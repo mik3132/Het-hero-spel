@@ -1,11 +1,7 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-
-import view.ScoresView;
 
 /**
  * 
@@ -31,9 +27,6 @@ public class Scores
 	public boolean won = false;
 	/** Boolean to check if the game is over */
 	public boolean gameover = false;
-	
-	/**the view of Scores() */
-	ScoresView scoresView;
 	
 	/**
 	 * Constructor
@@ -82,14 +75,14 @@ public class Scores
 				
 		} catch(Exception e) {
 			System.out.println(e);
-			System.out.println(Arrays.asList(points).toString());
 		}
 	}
 	
 	/**
-	 * adds extra points to the point
+	 * Add game points to the given pointsName
+	 * @param pointsName the key of points
+	 * @param gamePoints the points that needs to be added
 	 */
-	
 	public void addGamePoints(String pointsName, int gamePoints )
 	{		
 		try {
@@ -106,16 +99,6 @@ public class Scores
 			System.out.println(e);
 		}
 	}
-	/**
-	 * Removes the mapping for the specified action from this map if present. 
-	 * 
-	 * @param String actionName The string representation of the action taken
-	 */
-	public void removeAction(String actionName)
-	{
-		//actionspoints.remove(actionName);
-		//TODO reset the lowestCost if lowestCost is removed
-	}
 	
 	/**
 	 * Trying to do the specified action. When there are enough points it will remove the needed points
@@ -127,12 +110,6 @@ public class Scores
 	public boolean removeActionPoints (String action) 
 	{
 		
-		/*
-		if(movementPoints < 50)
-		{
-			gameover = true;
-			return false;
-		}*/
 		try {
 			//Do we have any points set?
 			if(points.isEmpty()) {
@@ -237,14 +214,6 @@ public class Scores
 	}
 	
 	/**
-	 * Update method
-	 */
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	/**
 	 * reset the won, gameover, enemies and points
 	 */
 	public void resetScores() {
@@ -254,14 +223,6 @@ public class Scores
 		{
 			points.get(pointName).resetPoint();
 		}
-	}
-	
-	/**
-	 * Set the view
-	 */
-	public void setView(ScoresView scoresView)
-	{
-		this.scoresView = scoresView;
 	}
 	
 }

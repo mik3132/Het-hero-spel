@@ -1,9 +1,5 @@
 package view;
-
-import java.awt.ComponentOrientation;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.TextField;
 import java.util.HashMap;
 
 import javax.swing.JLabel;
@@ -13,10 +9,12 @@ import javax.swing.JTextField;
 import model.Point;
 import model.Scores;
 
+/**
+ * 
+ * @author M_Vonck
+ *
+ */
 public class ScoresView extends JPanel{
-	
-	/** weet ik zelf ook nog niet, hiermee gaat een warning weg in m'n eclipse */
-	private static final long serialVersionUID = 1L;
 	/** The scores Model */
 	public Scores scoresModel;
 	/** the jTextFields */
@@ -25,7 +23,6 @@ public class ScoresView extends JPanel{
 	public ScoresView(Scores scoresModel)
 	{
 		this.scoresModel = scoresModel;
-		scoresModel.setView(this);
 		
 		this.textFields = new HashMap<String, JTextField>();
 		
