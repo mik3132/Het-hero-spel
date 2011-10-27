@@ -172,7 +172,7 @@ public class Scores
 					}
 				}
 			}
-			//this.setGameStatus();
+			this.setGameStatus();
 			return true;
 		} catch(Exception e) {
 			System.out.println(e);
@@ -223,7 +223,7 @@ public class Scores
 	private void setGameStatus()
 	{		
 		//check for won
-		for(String pointName : gameoverTerms)
+		for(String pointName : wonTerms)
 		{
 			Point point = points.get(pointName);
 			if(point.pointsLeft <= 0) 
