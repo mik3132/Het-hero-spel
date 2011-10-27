@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 
@@ -11,6 +12,7 @@ import controller.Input;
 
 import model.GameBoardModel;
 import model.HeroModel;
+import model.Point;
 import model.Timing;
 
 /**
@@ -63,8 +65,6 @@ public class PlayPanel extends JPanel
 		this.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 		this.setVisible(true);
 
-		// add action to Scores
-		hm.scs.addAction("SHOOT", hm.scs.shotCost);
 	}
 	
 	/**
@@ -104,6 +104,7 @@ public class PlayPanel extends JPanel
 				{
 					projectiles.get(f).pcmv.clear();
 					projectiles.get(s).pcmv.clear();
+					System.out.println("hoi");
 				}
 			if(projectiles.get(f).pcmv.size() < 1)
 				projectiles.remove(f);

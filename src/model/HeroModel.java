@@ -1,5 +1,7 @@
 package model;
 
+import java.util.HashMap;
+
 import view.GameBoard;
 
 /**
@@ -52,13 +54,29 @@ public class HeroModel
 	 */
 	public HeroModel(int width, int height, int points )
 	{
-		// Add scores and actions
-		this.scs = new Scores(points);
-		this.scs.addAction("VIEWUP", scs.movementCost);
-		this.scs.addAction("VIEWDOWN", scs.movementCost);
-		this.scs.addAction("VIEWLEFT", scs.movementCost);
-		this.scs.addAction("VIEWRIGHT", scs.movementCost);
+		// Add scores and move actions
+		this.scs = new Scores();
+		HashMap<String, Integer> actions = new HashMap<String, Integer>();
+		actions.put("VIEWUP", 10);
+		actions.put("VIEWDOWN", 10);
+		actions.put("VIEWLEFT", 10);
+		actions.put("VIEWRIGHT", 10);
+		Point point = new Point ("Stappen", actions, 500);
+		this.scs.addAction("Stappen", point);
+		this.scs.setIfAction("Stappen", false);
 		
+		// add shoot actions to scs
+		actions = new HashMap<String, Integer>();
+		actions.put("SHOOT", 50);		
+		this.scs.addAction("Ammo", new Point("Ammo", actions, 500));
+		this.scs.setIfAction("Ammo", false);
+		
+		// add lives
+		actions = new HashMap<String, Integer>();
+		actions.put("HEROHIT", 1);
+		this.scs.addAction("Levens", new Point("Levens", actions, 5));
+		this.scs.setIfAction("Levens", false);
+
 		this.midX = (width/2);
 		this.midY = (height/2);
 		this.viewX = midX;

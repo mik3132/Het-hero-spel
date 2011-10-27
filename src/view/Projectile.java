@@ -98,13 +98,15 @@ public class Projectile
 				try {
 					if(this.firedBy == Enemy.fireBy && gbm.getHeroModel().heroPosX == tileXfromX && gbm.getHeroModel().heroPosY == tileYfromY)
 					{
-						System.out.println("Hero verliest leven.");
+						//Hero verliest leven
+						gbm.heroModel.scs.removeActionPoints("HEROHIT");
 						pcmv.clear();
 						return;
 					}
 					
 					SquareGrid sg = gbm.getObjectFromPlayGround(tileXfromX, tileYfromY);
 					if(sg instanceof Enemy && this.firedBy == Hero.fireBy) {
+
 						if(((Enemy)sg).bullets > 1)
 							pcmv.clear();
 						gbm.removeFromPlayGround( tileXfromX, tileYfromY, "+ 200" );

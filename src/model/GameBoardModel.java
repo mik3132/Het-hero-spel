@@ -290,7 +290,7 @@ public class GameBoardModel
 			((Enemy)sq).bullets--;
 			if( ((Enemy)sq).bullets <= 0)
 			{
-				heroModel.scs.points += 200;
+				heroModel.scs.addGamePoints("Stappen", 200);
 				heroModel.scs.removeEnemy();
 				this.sglist.remove( this.getIndexFromBoard(x, y));
 				arrpm.add( new PlayerMessage( message ) );
