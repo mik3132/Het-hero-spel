@@ -6,14 +6,12 @@
 		<!-- WALLS enter as input 1-->
 		<tile tileX="2" tileY="1" blocking="true">1</tile>
 		<tile tileX="2" tileY="2" blocking="true">1</tile>
-		<tile tileX="1" tileY="4" blocking="true">1</tile>
 		<tile tileX="2" tileY="4" blocking="true">1</tile>
 		<tile tileX="7" tileY="1" blocking="true">1</tile>
 		<tile tileX="7" tileY="2" blocking="true">1</tile>
 		<tile tileX="6" tileY="2" blocking="true">1</tile>
 		<tile tileX="5" tileY="2" blocking="true">1</tile>
 		<tile tileX="7" tileY="3" blocking="true">1</tile>
-		<tile tileX="7" tileY="4" blocking="true">1</tile>
 		<tile tileX="7" tileY="5" blocking="true">1</tile>
 		<tile tileX="9" tileY="5" blocking="true">1</tile>
 		<tile tileX="8" tileY="5" blocking="true">1</tile>
@@ -25,7 +23,6 @@
 		<tile tileX="2" tileY="5" blocking="true">1</tile>
 		<tile tileX="2" tileY="6" blocking="true">1</tile>
 		<tile tileX="20" tileY="4" blocking="true">1</tile>
-		<tile tileX="18" tileY="4" blocking="true">1</tile>
 		<tile tileX="19" tileY="4" blocking="true">1</tile>
 		<tile tileX="17" tileY="4" blocking="true">1</tile>
 		<tile tileX="16" tileY="4" blocking="true">1</tile>
@@ -38,7 +35,6 @@
 		<tile tileX="8" tileY="9" blocking="true">1</tile>
 		<tile tileX="8" tileY="10" blocking="true">1</tile>
 		<tile tileX="8" tileY="11" blocking="true">1</tile>
-		<tile tileX="8" tileY="12" blocking="true">1</tile>
 		<tile tileX="8" tileY="13" blocking="true">1</tile>
 		<tile tileX="6" tileY="11" blocking="true">1</tile>
 		<tile tileX="7" tileY="11" blocking="true">1</tile>
@@ -46,7 +42,6 @@
 		<tile tileX="10" tileY="11" blocking="true">1</tile>
 		<tile tileX="20" tileY="9" blocking="true">1</tile>
 		<tile tileX="19" tileY="9" blocking="true">1</tile>
-		<tile tileX="18" tileY="9" blocking="true">1</tile>
 		<tile tileX="17" tileY="9" blocking="true">1</tile>
 		<tile tileX="17" tileY="10" blocking="true">1</tile>
 		<tile tileX="17" tileY="11" blocking="true">1</tile>
@@ -57,7 +52,6 @@
 		<tile tileX="15" tileY="11" blocking="true">1</tile>
 		<tile tileX="20" tileY="16" blocking="true">1</tile>
 		<tile tileX="19" tileY="16" blocking="true">1</tile>
-		<tile tileX="18" tileY="16" blocking="true">1</tile>
 		<tile tileX="17" tileY="16" blocking="true">1</tile>
 		<tile tileX="16" tileY="16" blocking="true">1</tile>
 		<tile tileX="15" tileY="16" blocking="true">1</tile>
@@ -65,7 +59,6 @@
 		<tile tileX="16" tileY="17" blocking="true">1</tile>
 		<tile tileX="16" tileY="18" blocking="true">1</tile>
 		<tile tileX="7" tileY="20" blocking="true">1</tile>
-		<tile tileX="7" tileY="19" blocking="true">1</tile>
 		<tile tileX="7" tileY="18" blocking="true">1</tile>
 		<tile tileX="7" tileY="17" blocking="true">1</tile>
 		<tile tileX="6" tileY="17" blocking="true">1</tile>
@@ -80,23 +73,30 @@
 		<tile tileX="1" tileY="10" blocking="true">1</tile>
 		<tile tileX="2" tileY="10" blocking="true">1</tile>
 		<tile tileX="3" tileY="10" blocking="true">1</tile>
-		<tile tileX="3" tileY="9" blocking="true">1</tile>
 		<tile tileX="3" tileY="8" blocking="true">1</tile>
 		<tile tileX="9" tileY="13" blocking="true">1</tile>
 		<tile tileX="13" tileY="7" blocking="true">1</tile>
 		<tile tileX="13" tileY="8" blocking="true">1</tile>
 		<tile tileX="14" tileY="8" blocking="true">1</tile>
 		<tile tileX="14" tileY="7" blocking="true">1</tile>
-		<tile tileX="14" tileY="15" blocking="true">1</tile>
 		<tile tileX="14" tileY="14" blocking="true">1</tile>
-		<tile tileX="8" tileY="18" blocking="true">1</tile>
 		<tile tileX="9" tileY="18" blocking="true">1</tile>
 		<tile tileX="10" tileY="18" blocking="true">1</tile>
 		<tile tileX="10" tileY="17" blocking="true">1</tile>
 		<tile tileX="10" tileY="16" blocking="true">1</tile>
 		
 		<!-- WINDOW enter as input 2 -->
+		<tile tileX="18" tileY="16" vertical="1">2</tile>
+		<tile tileX="1" tileY="4" vertical="1">2</tile>
+		<tile tileX="8" tileY="18" vertical="1">2</tile>
+		<tile tileX="18" tileY="4" vertical="1">2</tile>
+		<tile tileX="18" tileY="9" vertical="1">2</tile>
 		
+		<tile tileX="3" tileY="9" vertical="0">2</tile>
+		<tile tileX="8" tileY="12" vertical="0">2</tile>
+		<tile tileX="7" tileY="19" vertical="0">2</tile>
+		<tile tileX="7" tileY="4" vertical="0">2</tile>
+		<tile tileX="14" tileY="15" vertical="0">2</tile>
 		
 		<!-- ENEMY enter as input 3-->
 		<tile tileX="7" tileY="7">3</tile>
