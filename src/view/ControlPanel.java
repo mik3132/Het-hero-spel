@@ -64,7 +64,7 @@ public class ControlPanel extends JPanel
         jLabel2 = new JLabel("Points left");
         //jTextField1 = new JTextField(""+500);
         jTextField1 = new ScoresView(heroModel.scs);
-        jTextField2 = new JTextField(""+heroModel.scs.enemies);
+        jTextField2 = new JTextField("");
         jTextField1.setFocusable(false);
         jTextField2.setFocusable(false);
 		
@@ -176,7 +176,7 @@ public class ControlPanel extends JPanel
 	{
 		//jTextField1.setText(""+500);
 		jTextField1.update();
-		jTextField2.setText(""+heroModel.scs.enemies);
+		jTextField2.setText(""); // kan weg
 	}
 	
 

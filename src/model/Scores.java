@@ -31,8 +31,6 @@ public class Scores
 	public boolean won = false;
 	/** Boolean to check if the game is over */
 	public boolean gameover = false;
-	/** Count of the number of enemies */
-	public int enemies;
 	
 	/**the view of Scores() */
 	ScoresView scoresView;
@@ -223,10 +221,13 @@ public class Scores
 	 * public variables boolean game and won.
 	 */
 	private void setGameStatus()
-	{
-		//if there are no more enemies left the game is won
-		if(enemies <= 0) {
-			won = true;
+	{		
+		//check for won
+		for(String pointName : gameoverTerms)
+		{
+			Point point = points.get(pointName);
+			if(point.pointsLeft <= 0) 
+				won = true;			
 		}
 		
 		//If there are no more allowed moves are left.
@@ -241,21 +242,6 @@ public class Scores
 	public void update() {
 		// TODO Auto-generated method stub
 		
-	}	
-	
-	/**
-	 * Adds one enemy
-	 */
-	public void addEnemy() {
-		enemies++;
-	}
-	
-	/**
-	 * Removes one enemy
-	 */
-	public void removeEnemy() {
-		enemies--;
-		this.setGameStatus();
 	}
 	
 	/**
@@ -264,7 +250,6 @@ public class Scores
 	public void resetScores() {
 		won = false;
 		gameover = false;
-		enemies = 0;
 		for(String pointName : points.keySet())
 		{
 			points.get(pointName).resetPoint();

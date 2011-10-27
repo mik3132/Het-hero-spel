@@ -190,10 +190,10 @@ public class GameBoardModel
 	                    {
 	                    	// Add the SquareGrid to the ArrayList
 	                    	if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.ENEMY) {
-	                    		heroModel.scs.addEnemy();
+	                    		heroModel.scs.addGamePoints("Enemy left", 1);
 	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random, playPanel, 1) );
 	                    	} else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.SPECIALENEMY && bullets.getNodeValue() != null) {
-	                    		heroModel.scs.addEnemy();
+	                    		heroModel.scs.addGamePoints("Enemy left", 1);
 	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random, playPanel, Integer.parseInt( bullets.getNodeValue() )) );
 	                    	}  
 	                    	else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.WALL)
@@ -291,7 +291,7 @@ public class GameBoardModel
 			if( ((Enemy)sq).bullets <= 0)
 			{
 				heroModel.scs.addGamePoints("Stappen", 200);
-				heroModel.scs.removeEnemy();
+				heroModel.scs.removeActionPoints("ENEMY");
 				this.sglist.remove( this.getIndexFromBoard(x, y));
 				arrpm.add( new PlayerMessage( message ) );
 				this.updateGameArea();

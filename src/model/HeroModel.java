@@ -68,14 +68,20 @@ public class HeroModel
 		// add shoot actions to scs
 		actions = new HashMap<String, Integer>();
 		actions.put("SHOOT", 50);		
-		this.scs.addAction("Ammo", new Point("Ammo", actions, 500));
+		this.scs.addAction("Ammo", new Point("Ammo", actions, 700));
 		this.scs.setIfAction("Ammo", false);
 		
-		// add lives
+		// add lives scores
 		actions = new HashMap<String, Integer>();
 		actions.put("HEROHIT", 1);
 		this.scs.addAction("Levens", new Point("Levens", actions, 5));
 		this.scs.setIfAction("Levens", false);
+		
+		// add enemy scores
+		actions = new HashMap<String, Integer>();
+		actions.put("ENEMY", 1);
+		this.scs.addAction("Enemy left", new Point("Enemy left", actions, 0));
+		this.scs.setIfAction("Enemy left", true);
 
 		this.midX = (width/2);
 		this.midY = (height/2);
