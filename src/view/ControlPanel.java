@@ -28,7 +28,7 @@ import model.HeroModel;
 public class ControlPanel extends JPanel
 {
 	/** Buttons for the control panel */
-	public JButton bUp,bDown,bLeft,bRight,bShoot, newGame, bexit;
+	public JButton bUp,bDown,bLeft,bRight,bShoot, newGame, bExit;
 	/** Labels for the control panel */
 	public JLabel jLabel2;
 	
@@ -53,7 +53,7 @@ public class ControlPanel extends JPanel
 		bRight = new JButton(">");
 		bShoot = new JButton("FIRE");
 		newGame = new JButton("New game");
-		bexit = new JButton("Exit");
+		bExit = new JButton("Exit");
         
         jLabel2 = new JLabel("Points left");
         scoresView = new ScoresView(heroModel.scs);
@@ -122,7 +122,7 @@ public class ControlPanel extends JPanel
 		bRight.setFocusable(false);
 		bShoot.setFocusable(false);
 		newGame.setFocusable(false);
-		bexit.setFocusable(false);
+		bExit.setFocusable(false);
 
 		// Add the layout to the buttons
 		buttons.add(BorderLayout.NORTH, bUp);
@@ -131,7 +131,7 @@ public class ControlPanel extends JPanel
 		buttons.add(BorderLayout.WEST, bLeft);
 		buttons.add(BorderLayout.CENTER, bShoot);
 		pbuttonsNorth.add(BorderLayout.NORTH, newGame);
-		pbuttonsNorth.add(BorderLayout.SOUTH, bexit);
+		pbuttonsNorth.add(BorderLayout.SOUTH, bExit);
 		
 		this.add(BorderLayout.NORTH, pbuttonsNorth);
 		this.add(BorderLayout.CENTER, buttons);
@@ -151,7 +151,7 @@ public class ControlPanel extends JPanel
 		bRight.addActionListener(in);
 		bShoot.addActionListener(in);
 		newGame.addActionListener(in);
-		bexit.addActionListener(in);
+		bExit.addActionListener(in);
 	}
 	
 	/**
