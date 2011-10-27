@@ -5,17 +5,7 @@
 	
 		<!-- WALLS enter as input 1-->
 		<tile tileX="3" tileY="4" blocking="true">1</tile>
-		<tile tileX="4" tileY="4" blocking="true">1</tile>
-		<tile tileX="4" tileY="5" blocking="true">1</tile>
-		<tile tileX="2" tileY="5" blocking="true">1</tile>
-		<tile tileX="2" tileY="4" blocking="true">1</tile>
 		
-		<tile tileX="13" tileY="4" blocking="true">1</tile>
-		<tile tileX="14" tileY="4" blocking="true">1</tile>
-		
-		<tile tileX="3" tileY="14" blocking="true">1</tile>
-		<tile tileX="4" tileY="14" blocking="true">1</tile>
-		<tile tileX="2" tileY="15" blocking="true">1</tile>
 		
 		<!-- ENEMIES enter as input 2-->
 		<tile tileX="7" tileY="7" blocking="true">2</tile>
