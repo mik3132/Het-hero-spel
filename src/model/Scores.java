@@ -1,6 +1,11 @@
 package model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+
+import view.ScoresView;
 
 /**
  * 
@@ -14,21 +19,14 @@ import java.util.HashMap;
  */
 public class Scores
 {
-	/** The points that are left for the game */
-	public int movementPoints;
-	public int givenMovementPoints;	
-	/** The points that are left for shooting */
-	public int shootPoints;
-	public int givenShootpoints;
-
-	/** The lowest number of points that a action can cost */
-	private int lowestCost;
-	/** HashMap<String actionname, Integer how many points the action cost> */
-	private HashMap<String, Integer> actionspoints;
-	/** The cost of moving */
-	public int movementCost = 10;
-	/** The cost of shooting */
-	public int shotCost = 50;
+	/** The points for the game <Name, Point>*/
+	public HashMap<String, Point> points;
+	
+	/** when one of the actions = 0 the game is won, String is action*/
+	public ArrayList<String> wonTerms = new ArrayList<String>();
+	/**when one of the actions = 0 the game is lost, String is action */
+	public ArrayList<String> gameoverTerms = new ArrayList<String>();
+	
 	/** Boolean to check if the game is won */
 	public boolean won = false;
 	/** Boolean to check if the game is over */
@@ -36,39 +34,80 @@ public class Scores
 	/** Count of the number of enemies */
 	public int enemies;
 	
+	/**the view of Scores() */
+	ScoresView scoresView;
+	
 	/**
 	 * Constructor
 	 * 
 	 * @param int Max points of the game
 	 */
-	public Scores(int movementPoints, int shootPoints)
+	public Scores()
 	{
-		this.movementPoints = movementPoints;
-		this.shootPoints = shootPoints;
-		this.givenShootpoints = shootPoints;
-		this.givenMovementPoints = movementPoints;
-		this.actionspoints = new HashMap<String, Integer>();
-		this.lowestCost = shootPoints;
+		this.points = new HashMap<String, Point>();
 	}	
 	
 	/**
 	 * Associates the specified points with the specified action in this map. If the actionspoints previously 
 	 * contained a mapping for the action, the old action is replaced. 
 	 * 
-	 * @param String actionName The String representation of the action taken
-	 * @param int points The number of points the action costs
+	 * @param String pointName
+	 * @param Point point
+	 * @param int the given points for the actions
+	 * @param boolean can the game go on without the points?
 	 */
-	public void addAction(String actionName, int points)
+	public void addAction(String pointName, Point point)
 	{
-		// Add action
-		actionspoints.put(actionName, points);
-		
-		// If the action costs the lowest, save this in lowestCost;
-		if(points < lowestCost) {
-			lowestCost = points;
+		points.put(pointName, point);	
+	}
+	
+	/**
+	 * 
+	 * @param pointsName the name of the point
+	 * @param ifAction if zero the game is won (true) or the game is lost (false)
+	 */
+	public void setIfAction(String pointsName, Boolean ifAction)
+	{
+		try {
+			//Do we have any action set?
+			if(points.isEmpty()) 
+				throw(new Exception("No actions set in Scores->points setIfAction hashmap"));
+			
+			//Does the point exist?
+			if(points.containsValue(pointsName))
+				throw(new Exception("the Point does not exist in Scores->setIfAction String pointName. Given pointname:"+pointsName));
+			
+			if(ifAction)
+				wonTerms.add(pointsName);
+			else
+				gameoverTerms.add(pointsName);
+				
+		} catch(Exception e) {
+			System.out.println(e);
+			System.out.println(Arrays.asList(points).toString());
 		}
 	}
 	
+	/**
+	 * adds extra points to the point
+	 */
+	
+	public void addGamePoints(String pointsName, int gamePoints )
+	{		
+		try {
+			//Do we have any action set?
+			if(points.isEmpty()) 
+				throw(new Exception("No actions set in Scores->points hashmap"));
+			
+			//Does the point exist?
+			if(!points.containsKey(pointsName))
+				throw(new Exception("the Point does not exist in Scores->addGamePoints String pointName"));
+			
+			points.get(pointsName).pointsLeft += gamePoints;
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+	}
 	/**
 	 * Removes the mapping for the specified action from this map if present. 
 	 * 
@@ -76,7 +115,7 @@ public class Scores
 	 */
 	public void removeAction(String actionName)
 	{
-		actionspoints.remove(actionName);
+		//actionspoints.remove(actionName);
 		//TODO reset the lowestCost if lowestCost is removed
 	}
 	
@@ -88,31 +127,55 @@ public class Scores
 	 * @return Boolean True if the action was successful.
 	 */
 	public boolean removeActionPoints (String action) 
-	{		
+	{
+		
+		/*
+		if(movementPoints < 50)
+		{
+			gameover = true;
+			return false;
+		}*/
 		try {
-			//Do we have any action set?
-			if(actionspoints.isEmpty()) {
-				throw(new Exception("No actions set in Scores->actionspoints hashmap"));
+			//Do we have any points set?
+			if(points.isEmpty()) {
+				throw(new Exception("No actions set in Scores->points hashmap"));
 			}
 			
-			//Does the action exists?
-			if(!actionspoints.containsKey(action)) {
-				throw(new Exception("Action does not exist in Scores->actionspoints hashmap"));
+			//Does the action exists in any point?
+			boolean actionExist = false;			
+			
+			//get the current points
+			for(String pointName : points.keySet())
+			{
+				HashMap<String, Integer> actions = points.get(pointName).actions;
+				if (actions.containsKey(action)) {					
+					actionExist = true; //the action does exist
+					//Do i have enough points to perform this action
+					if(actions.get(action) <= points.get(pointName).pointsLeft) {
+						//Remove the points off
+						points.get(pointName).pointsLeft -= actions.get(action);						
+					}
+				}
+						
 			}
 			
-			//Do i have enough points to perform this action
-			if(actionspoints.get(action) <= points) {
-				//Remove the points off
-				points -= actionspoints.get(action);
-				return true;
-			}
+			//Throw error because no action was found;
+			if(!actionExist) 
+				throw(new Exception("Action does not exist in Scores->points hashmap"));
 			
-			//There where not enough points, show the allowed actions
-			String allowdActions = this.getAllowdActions();
-			if(allowdActions != "") {
-				System.out.println("Not enough points left for the actions. You can still do the following moves:\n"+allowdActions);
+			//check for gameover
+			for(String pointName : gameoverTerms)
+			{
+				Point point = points.get(pointName);
+				if (point.actions.containsKey(action)) {
+					if(point.actions.get(action) > point.pointsLeft)				{
+						gameover = true;
+						return false;
+					}
+				}
 			}
-			this.setGameStatus();
+			//this.setGameStatus();
+			return true;
 		} catch(Exception e) {
 			System.out.println(e);
 		}
@@ -132,15 +195,20 @@ public class Scores
 		try{
 			
 			//Do we have any action set?
-			if(actionspoints.isEmpty()) {
-				throw(new Exception("No actions set in Scores->actionspoints hashmap"));
+			if(points.isEmpty()) {
+				throw(new Exception("No actions set in Scores->points hashmap"));
 			}
 			
-			//Loop through the actionpoints hashmap
-			for(String action : actionspoints.keySet()) {			
-				//Do i have enough points to perform this action
-				if(actionspoints.get(action) <= points) 
-				allowdActions += action + " cost " + actionspoints.get(action) + " points \n";
+			//Loop through the points hashmap
+			for(String pointName : points.keySet())
+			{
+				HashMap<String, Integer> actions = points.get(pointName).actions;
+				for(String actionName : actions.keySet())
+				{
+					//Do i have enough points to perform this action
+					if( actions.get(actionName) <= points.get(pointName).pointsLeft)
+						allowdActions += actionName + " cost " + actions.get(actionName) + " points \n";
+				}
 			}
 			
 		}catch(Exception e) {
@@ -197,6 +265,18 @@ public class Scores
 		won = false;
 		gameover = false;
 		enemies = 0;
-		points = givenShootpoints;
+		for(String pointName : points.keySet())
+		{
+			points.get(pointName).resetPoint();
+		}
 	}
+	
+	/**
+	 * Set the view
+	 */
+	public void setView(ScoresView scoresView)
+	{
+		this.scoresView = scoresView;
+	}
+	
 }

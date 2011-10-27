@@ -15,7 +15,7 @@ public class Timing
 	/** Decides when you can fire the next bullet in ms */
 	public static final int bulletNext = 500;
 	/** in ms*/
-	public static final int bulletTime = 4;
+	public static final int bulletTime = 3;
 	/** in px */
 	public static final int bulletSkip = 0;
 }

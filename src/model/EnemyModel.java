@@ -1,5 +1,8 @@
 package model;
 
+import java.util.Random;
+
+import view.Enemy;
 import view.GameBoard;
 import view.PlayPanel;
 
@@ -24,8 +27,12 @@ public class EnemyModel
 	/** Static final integer for VIEWDOWN */
 	public final int VIEWDOWN = 3;
 	
+	int posibilityFire = 100;
+	
 	/** The GameBoardModel */
 	GameBoardModel gbm;
+	PlayPanel playPanel;
+	Random rdm;
 	
 	/** The position in px */
 	public int x, y;
@@ -42,8 +49,9 @@ public class EnemyModel
 	 * @param int x The x coordinate of the enemy
 	 * @param int y The y coordinate of the enemy
 	 */
-	protected EnemyModel(int x, int y, GameBoardModel gbm)
+	protected EnemyModel(int x, int y, GameBoardModel gbm, PlayPanel playPanel, Random rdm)
 	{
+		this.playPanel = playPanel;
 		this.x = x;
 		this.y = y;
 		this.midX = (GameBoard.squareSize*x);
@@ -51,6 +59,7 @@ public class EnemyModel
 		this.viewX = midX;
 		this.viewY = midY;
 		this.gbm = gbm;
+		this.rdm = rdm;
 	}
 	
 	protected void moveEnemy()
@@ -121,20 +130,31 @@ public class EnemyModel
 		this.viewX = midX;
 		this.viewY = midY;
 		
-		//System.out.println(""+midX+" : "+midY+" : "+viewX+" : "+viewY+"");
 		int heroTilePosX = gbm.heroModel.heroPosX;
 		int heroTilePosY = gbm.heroModel.heroPosY;
 		
 		if(heroTilePosX == x)
 			if(heroTilePosY < y)
+			{
 				this.viewY -= (GameBoard.squareSize/2);
-			else
+				if(rdm.nextInt(posibilityFire+1) == posibilityFire)
+					playPanel.setNewProjectile(x, y, HeroModel.VIEWUP, Enemy.fireBy);
+			} else {
 				this.viewY += (GameBoard.squareSize/2);
+				if(rdm.nextInt(posibilityFire+1) == posibilityFire)
+					playPanel.setNewProjectile(x, y, HeroModel.VIEWDOWN, Enemy.fireBy);
+			}
 		if(heroTilePosY == y)
 			if(heroTilePosX < x)
+			{
 				this.viewX -= (GameBoard.squareSize/2);
-			else
+				if(rdm.nextInt(posibilityFire+1) == posibilityFire)
+					playPanel.setNewProjectile(x, y, HeroModel.VIEWLEFT, Enemy.fireBy);
+			} else {
 				this.viewX += (GameBoard.squareSize/2);
+				if(rdm.nextInt(posibilityFire+1) == posibilityFire)
+					playPanel.setNewProjectile(x, y, HeroModel.VIEWRIGHT, Enemy.fireBy);
+			}
 	}
 	
 }

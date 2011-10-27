@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 
@@ -11,6 +12,7 @@ import controller.Input;
 
 import model.GameBoardModel;
 import model.HeroModel;
+import model.Point;
 import model.Timing;
 
 /**
@@ -38,7 +40,7 @@ public class PlayPanel extends JPanel
 	/** The Wall objects */
 	Wall wall;
 	/** */
-	long lastProjectile = 0;
+	long lastProjectile = 0, lastProjectileEnemy = 0;
 	/** The ArrayList containing all the projectiles */
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
@@ -63,14 +65,12 @@ public class PlayPanel extends JPanel
 		this.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 		this.setVisible(true);
 
-		// add action to Scores
-		hm.scs.addAction("SHOOT", hm.scs.shotCost);
 	}
 	
 	/**
 	 * Places a new projectile on the GameBoard
 	 */
-	public void setNewProjectile()
+	public void setNewProjectile(int firedBy)
 	{
 		//Remove the points that the action cost, return false if there are not enough points
 		if( hm.scs.removeActionPoints("SHOOT") )
@@ -78,9 +78,37 @@ public class PlayPanel extends JPanel
 			long timenow = System.currentTimeMillis();
 			if(lastProjectile == 0 || lastProjectile < timenow) {
 				lastProjectile = (timenow+Timing.bulletNext);
-				projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm ));
+				projectiles.add(new Projectile( hm.heroPosX, hm.heroPosY, hm.direction, gbm, firedBy ));
 			}
 		} 
+	}
+	
+	/**
+	 * Places a new projectile on the GameBoard
+	 */
+	public void setNewProjectile( int x,int y, int direction, int firedBy)
+	{
+		long timenow = System.currentTimeMillis();
+		if(lastProjectileEnemy == 0 || lastProjectileEnemy < timenow) {
+			lastProjectileEnemy = (timenow+Timing.bulletNext);
+			projectiles.add(new Projectile( x, y, direction, gbm, firedBy));
+		}
+	}
+	
+	public void update()
+	{
+		for(int f = 0; f < projectiles.size(); f++)
+		{
+			for(int s = 0; s < projectiles.size(); s++)
+				if(s!=f && projectiles.get(f).px == projectiles.get(s).px && projectiles.get(f).py == projectiles.get(s).py)
+				{
+					projectiles.get(f).pcmv.clear();
+					projectiles.get(s).pcmv.clear();
+					System.out.println("hoi");
+				}
+			if(projectiles.get(f).pcmv.size() < 1)
+				projectiles.remove(f);
+		}
 	}
 	
 	/**
