@@ -30,6 +30,7 @@ public class Enemy extends EnemyModel implements SquareGrid
 	long lasttime = System.nanoTime(); // timenow
 	int timeout = 1000000000; //nanoseconde
 	Random rdm;
+	GameBoardModel gbm;
 	public static final int fireBy = 1;
 
 	/**
@@ -46,6 +47,7 @@ public class Enemy extends EnemyModel implements SquareGrid
 		this.x = x;
 		this.y = y;
 		this.bullets = bullets;
+		this.gbm = gbm;
 	}
 	
 	public void update()
@@ -57,6 +59,7 @@ public class Enemy extends EnemyModel implements SquareGrid
 			super.moveEnemy();
 			lasttime = System.nanoTime();
 		}
+		gbm.sglist.add( new EmptySlot(x,y) );
 		this.x = super.x;
 		this.y = super.y;
 	}

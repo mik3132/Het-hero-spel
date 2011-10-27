@@ -100,7 +100,7 @@ public class PlayPanel extends JPanel
 		for(int f = 0; f < projectiles.size(); f++)
 		{
 			for(int s = 0; s < projectiles.size(); s++)
-				if(s!=f && projectiles.get(f).px == projectiles.get(s).px && projectiles.get(f).py == projectiles.get(s).py)
+				if(s!=f && projectiles.get(f).rct.intersects( projectiles.get(s).rct ))
 				{
 					projectiles.get(f).pcmv.clear();
 					projectiles.get(s).pcmv.clear();
