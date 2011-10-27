@@ -37,7 +37,7 @@ public class GameBoard
 	/** Integer representation for an enemy */
 	public static final int ENEMY = 3;
 	/** Integer representation for an enemy */
-	public static final int SPECIALENEMY = 4; 
+	public static final int SPECIAL_ENEMY = 4; 
 	
 	/**
 	 * Constructor method

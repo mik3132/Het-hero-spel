@@ -192,7 +192,7 @@ public class GameBoardModel
 	                    	if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.ENEMY) {
 	                    		heroModel.scs.addGamePoints("Enemy left", 1);
 	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random, playPanel, 1) );
-	                    	} else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.SPECIALENEMY && bullets.getNodeValue() != null) {
+	                    	} else if(Integer.parseInt( tile.getFirstChild().getNodeValue() ) == GameBoard.SPECIAL_ENEMY && bullets.getNodeValue() != null) {
 	                    		heroModel.scs.addGamePoints("Enemy left", 1);
 	                    		sglist.add( new Enemy( Integer.parseInt( tileX.getNodeValue() ), Integer.parseInt( tileY.getNodeValue() ), this, random, playPanel, Integer.parseInt( bullets.getNodeValue() )) );
 	                    	}  
