@@ -21,9 +21,11 @@ import model.SquareGrid;
 public class Enemy extends EnemyModel implements SquareGrid
 {
 	/** x and y coordinates for the enemy (tile format) */
-	int x, y, bullets; 
+	int x, y; 
 	/** the direction the enemy is facing*/
 	int direction;
+	
+	public int bullets;
 	
 	long lasttime = System.nanoTime(); // timenow
 	int timeout = 1000000000; //nanoseconde

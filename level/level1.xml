@@ -4,24 +4,31 @@
 	<gamearea sizeInTileX="20" sizeInTileY="20">
 	
 		<!-- WALLS enter as input 1-->
-		<tile tileX="3" tileY="4" blocking="true">1</tile>
-		<tile tileX="4" tileY="4" blocking="true">1</tile>
-		<tile tileX="4" tileY="5" blocking="true">1</tile>
-		<tile tileX="2" tileY="5" blocking="true">1</tile>
-		<tile tileX="2" tileY="4" blocking="true">1</tile>
+		<tile tileX="3" tileY="4">1</tile>
+		<tile tileX="4" tileY="4">1</tile>
+		<tile tileX="4" tileY="5">1</tile>
+		<tile tileX="2" tileY="5">1</tile>
+		<tile tileX="2" tileY="4">1</tile>
 		
-		<tile tileX="13" tileY="4" blocking="true">1</tile>
-		<tile tileX="14" tileY="4" blocking="true">1</tile>
+		<tile tileX="13" tileY="4">1</tile>
+		<tile tileX="14" tileY="4">1</tile>
 		
-		<tile tileX="3" tileY="14" blocking="true">1</tile>
-		<tile tileX="4" tileY="14" blocking="true">1</tile>
-		<tile tileX="2" tileY="15" blocking="true">1</tile>
+		<tile tileX="3" tileY="14">1</tile>
+		<tile tileX="4" tileY="14">1</tile>
+		<tile tileX="2" tileY="15">1</tile>
+		
+		<!-- WINDOWS enter as input 1-->
+		<tile tileX="7" tileY="7" vertical="1">2</tile>
+		<tile tileX="7" tileY="8" vertical="1">2</tile>
+		<tile tileX="7" tileY="9" vertical="1">2</tile>
+		<tile tileX="6" tileY="7" vertical="0">2</tile>
+		<tile tileX="5" tileY="7" vertical="0">2</tile>
 		
 		<!-- ENEMIES enter as input 2-->
-		<tile tileX="7" tileY="7" blocking="true">2</tile>
-		<tile tileX="3" tileY="3" blocking="true">2</tile>
-		<tile tileX="10" tileY="11" blocking="true">2</tile>
-		<tile tileX="15" tileY="19" blocking="true">2</tile>
+		<tile tileX="7" tileY="7" bullets="2">3</tile>
+		<tile tileX="3" tileY="3" bullets="2">3</tile>
+		<tile tileX="10" tileY="11" bullets="2">4</tile>
+		<tile tileX="15" tileY="19" bullets="2">4</tile>
 		
 	</gamearea>
 </body>

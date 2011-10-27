@@ -99,12 +99,12 @@ public class Projectile
 					
 					SquareGrid sg = gbm.getObjectFromPlayGround(tileXfromX, tileYfromY);
 					if(sg instanceof Enemy && this.firedBy == Hero.fireBy) {
-						gbm.removeFromPlayGround( gbm.getIndexFromBoard(tileXfromX, tileYfromY), "+ 200" );
-						gbm.heroModel.scs.points += 200;
-						gbm.heroModel.scs.removeEnemy();
+						if(((Enemy)sg).bullets > 1)
+							pcmv.clear();
+						gbm.removeFromPlayGround( tileXfromX, tileYfromY, "+ 200" );
 						return;
 					} else if(sg instanceof Window && this.firedBy == Hero.fireBy) {
-						gbm.removeFromPlayGround( gbm.getIndexFromBoard(tileXfromX, tileYfromY), "" );
+						gbm.removeFromPlayGround( tileXfromX, tileYfromY, "" );
 						pcmv.clear();
 						return;
 					} else if(sg instanceof Wall) {
