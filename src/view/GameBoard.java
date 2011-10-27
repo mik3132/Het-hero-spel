@@ -37,7 +37,7 @@ public class GameBoard
 	/** Integer representation for an enemy */
 	public static final int ENEMY = 3;
 	/** Integer representation for an enemy */
-	public static final int SPECIALENEMY = 4; 
+	public static final int SPECIAL_ENEMY = 4; 
 	
 	/**
 	 * Constructor method
@@ -90,8 +90,9 @@ public class GameBoard
 		// Loop through the list of object to add the object
 		for(int i = 0; i < gbm.sglist.size(); i++) {
 			gbm.sglist.get(i).update();
-			int x = (gbm.sglist.get(i).getX() * squareSize) + calPosX; // Iets extra voor het positioneren waar de Hero is
-			int y = (gbm.sglist.get(i).getY() * squareSize) + calPosY; // Iets extra voor het positioneren waar de Hero is
+			// A calculation to check the position of the hero
+			int x = (gbm.sglist.get(i).getX() * squareSize) + calPosX; 
+			int y = (gbm.sglist.get(i).getY() * squareSize) + calPosY; 
 			gbm.sglist.get(i).drawObject(g, x, y);
 		}
 				
